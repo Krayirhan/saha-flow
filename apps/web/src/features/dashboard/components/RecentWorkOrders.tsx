@@ -30,7 +30,7 @@ export function RecentWorkOrders({ workOrders, loading = false }: RecentWorkOrde
         </h3>
         <button
           onClick={() => router.push('/work-orders')}
-          className="flex items-center gap-1 rounded-lg px-2 py-1 text-xs font-medium transition-colors hover:bg-[#ebecf0]"
+          className="flex items-center gap-1 rounded-lg px-2 py-1 text-xs font-medium transition-colors hover:bg-[var(--sf-hover)]"
           style={{ color: 'var(--sf-accent)' }}
         >
           Tümünü Gör
@@ -53,7 +53,7 @@ export function RecentWorkOrders({ workOrders, loading = false }: RecentWorkOrde
             <button
               key={wo.id}
               onClick={() => router.push(`/work-orders/${wo.id}`)}
-              className="flex w-full items-center gap-3 px-5 py-3.5 text-left transition-colors hover:bg-[#f4f5f7]"
+              className="flex w-full items-center gap-3 px-5 py-3.5 text-left transition-colors hover:bg-[var(--sf-hover-soft)]"
               style={{ borderTop: idx === 0 ? undefined : '1px solid var(--sf-border)' }}
             >
               <span

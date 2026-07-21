@@ -37,7 +37,7 @@ export function Header({ onMenuToggle }: HeaderProps) {
       <div className="flex items-center gap-3">
         <button
           onClick={onMenuToggle}
-          className="rounded-lg p-1.5 transition-colors hover:bg-[#ebecf0] md:hidden"
+          className="rounded-lg p-1.5 transition-colors hover:bg-[var(--sf-hover)] md:hidden"
           style={{ color: 'var(--sf-text-muted)' }}
           aria-label="Menü"
         >
@@ -58,7 +58,7 @@ export function Header({ onMenuToggle }: HeaderProps) {
 
         {/* Bell */}
         <button
-          className="rounded-lg p-2 transition-colors hover:bg-[#ebecf0] dark-mode-hover disabled:opacity-30"
+          className="rounded-lg p-2 transition-colors hover:bg-[var(--sf-hover)] disabled:opacity-30"
           style={{ color: 'var(--sf-text-muted)' }}
           aria-label="Bildirimler"
           disabled
@@ -74,7 +74,7 @@ export function Header({ onMenuToggle }: HeaderProps) {
         <div className="relative">
           <button
             onClick={() => setUserMenuOpen(!userMenuOpen)}
-            className="flex items-center gap-2 rounded-lg px-2 py-1.5 transition-colors hover:bg-[#ebecf0]"
+            className="flex items-center gap-2 rounded-lg px-2 py-1.5 transition-colors hover:bg-[var(--sf-hover)]"
           >
             <div
               className="flex h-7 w-7 items-center justify-center rounded-full text-xs font-bold"
@@ -111,7 +111,7 @@ export function Header({ onMenuToggle }: HeaderProps) {
                 {/* Logout */}
                 <button
                   onClick={async () => { setUserMenuOpen(false); await logout(); }}
-                  className="flex w-full items-center gap-2.5 px-4 py-2.5 text-sm transition-colors hover:bg-[#fff0ee]"
+                  className="flex w-full items-center gap-2.5 px-4 py-2.5 text-sm transition-colors hover:bg-[var(--sf-danger-hover)]"
                   style={{ color: 'var(--sf-sla-risk)' }}
                 >
                   <LogOut className="h-4 w-4" />

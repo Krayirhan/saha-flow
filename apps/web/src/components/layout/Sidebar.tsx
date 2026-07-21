@@ -47,7 +47,7 @@ export function Sidebar() {
             <BrandLogo href="/dashboard" className="h-8 max-w-[130px] rounded-lg" />
             <button
               onClick={() => setCollapsed(true)}
-              className="rounded-md p-1 transition-colors hover:bg-[#ebecf0]"
+              className="rounded-md p-1 transition-colors hover:bg-[var(--sf-hover)]"
               style={{ color: 'var(--sf-text-muted)' }}
               aria-label="Menüyü daralt"
             >
@@ -61,7 +61,7 @@ export function Sidebar() {
       {collapsed && (
         <button
           onClick={() => setCollapsed(false)}
-          className="mx-auto mt-2 rounded-md p-1.5 transition-colors hover:bg-[#ebecf0]"
+          className="mx-auto mt-2 rounded-md p-1.5 transition-colors hover:bg-[var(--sf-hover)]"
           style={{ color: 'var(--sf-text-muted)' }}
           aria-label="Menüyü genişlet"
         >
@@ -79,13 +79,12 @@ export function Sidebar() {
               href={item.href}
               title={collapsed ? item.label : undefined}
               className={cn(
-                'relative flex items-center rounded px-3 py-2.5 text-sm font-medium transition-all duration-200 hover:bg-[#ebecf0]',
+                'relative flex items-center rounded px-3 py-2.5 text-sm font-medium transition-all duration-200 hover:bg-[var(--sf-hover)]',
                 collapsed ? 'justify-center' : 'gap-3',
-                active && 'sf-nav-active',
               )}
               style={
                 active
-                  ? { background: '#deebff', color: 'var(--sf-accent)' }
+                  ? { background: 'var(--sf-nav-active)', color: 'var(--sf-accent)' }
                   : { color: 'var(--sf-text-2)' }
               }
             >

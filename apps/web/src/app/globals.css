@@ -71,6 +71,11 @@
     --sf-accent:      #60a5fa;
     --sf-accent-bg:   rgba(96, 165, 250, 0.1);
     --sf-accent-dim:  #2563eb;
+
+    --sf-hover:       rgba(255, 255, 255, 0.06);
+    --sf-hover-soft:  rgba(255, 255, 255, 0.03);
+    --sf-nav-active:  rgba(96, 165, 250, 0.1);
+    --sf-danger-hover: rgba(255, 95, 109, 0.08);
   }
 
   /* Flow Line state CSS custom properties — DESIGN.md §5 */
@@ -99,6 +104,11 @@
     --sf-accent:      #0052cc;
     --sf-accent-bg:   rgba(0, 82, 204, 0.08);
     --sf-accent-dim:  #0065ff;
+
+    --sf-hover:       #ebecf0;
+    --sf-hover-soft:  #f4f5f7;
+    --sf-nav-active:  #deebff;
+    --sf-danger-hover: rgba(222, 53, 11, 0.06);
   }
 
   /* DESIGN.md §11 — Reduced motion support.
@@ -297,21 +307,6 @@
   color: #4f8cff;
 }
 
-/* Dark mode overrides — hardcoded light colors */
-[data-theme="dark"] .dark-mode-hover:hover,
-[data-theme="dark"] .hover\:bg-\[\#ebecf0\]:hover {
-  background: rgba(255, 255, 255, 0.06) !important;
-}
-[data-theme="dark"] .hover\:bg-\[\#f4f5f7\]:hover {
-  background: rgba(255, 255, 255, 0.03) !important;
-}
-[data-theme="dark"] .hover\:bg-\[\#fff0ee\]:hover {
-  background: rgba(255, 95, 109, 0.08) !important;
-}
-/* Sidebar active item */
-[data-theme="dark"] .sf-nav-active {
-  background: var(--sf-accent-bg) !important;
-}
 
 @layer utilities {
   .scrollbar-thin {

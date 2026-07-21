@@ -25,7 +25,7 @@ export function ThemeToggle() {
   return (
     <button
       onClick={toggle}
-      className="rounded-lg p-2 transition-colors hover:bg-[#ebecf0] dark-mode-hover"
+      className="rounded-lg p-2 transition-colors hover:bg-[var(--sf-hover)]"
       style={{ color: 'var(--sf-text-muted)' }}
       aria-label={dark ? 'Açık temaya geç' : 'Koyu temaya geç'}
       title={dark ? 'Açık tema' : 'Koyu tema'}

@@ -56,7 +56,7 @@ export function Modal({ open, onClose, title, children, size = 'md', className }
             <h2 className="text-base font-semibold" style={{ color: 'var(--sf-text)' }}>{title}</h2>
             <button
               onClick={onClose}
-              className="rounded-lg p-1 transition-colors hover:bg-[#ebecf0]"
+              className="rounded-lg p-1 transition-colors hover:bg-[var(--sf-hover)]"
               style={{ color: 'var(--sf-text-muted)' }}
               aria-label="Kapat"
             >
