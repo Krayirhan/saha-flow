@@ -81,6 +81,7 @@ export function TrustAndSecuritySection() {
     <section
       id="security"
       className="mkt-section"
+      style={{ background: 'var(--sf-bg)' }}
       aria-labelledby="security-heading"
     >
       <div className="mkt-container">

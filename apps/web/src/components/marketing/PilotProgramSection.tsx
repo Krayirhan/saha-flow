@@ -28,6 +28,7 @@ export function PilotProgramSection() {
   return (
     <section
       className="mkt-section"
+      style={{ background: 'var(--sf-bg-2)' }}
       aria-labelledby="pilot-heading"
     >
       <div className="mkt-container">

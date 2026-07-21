@@ -42,6 +42,7 @@ export function SinglePlanPricing() {
     <section
       id="pricing"
       className="mkt-section"
+      style={{ background: 'var(--sf-bg)' }}
       aria-labelledby="pricing-heading"
     >
       <div className="mkt-container">

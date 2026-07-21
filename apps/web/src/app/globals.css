@@ -120,6 +120,7 @@
   /* Marketing section vertical rhythm — DESIGN.md §7 */
   .mkt-section {
     @apply py-[72px] sm:py-[96px] lg:py-[120px];
+    border-top: 1px solid rgba(255,255,255,0.05);
   }
 
   /* Flow Line node base — consistent across sections */

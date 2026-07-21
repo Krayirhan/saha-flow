@@ -103,6 +103,7 @@ export function OperationsBeforeAfter() {
     <section
       id="before-after"
       className="mkt-section"
+      style={{ background: 'var(--sf-bg-2)' }}
       aria-labelledby="before-after-heading"
     >
       <div className="mkt-container">
