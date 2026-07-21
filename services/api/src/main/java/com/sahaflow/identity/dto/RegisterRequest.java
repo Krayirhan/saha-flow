@@ -1,0 +1,15 @@
+package com.sahaflow.identity.dto;
+
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+
+public record RegisterRequest(
+    @NotBlank @Size(min = 3, max = 30) String tenantSlug,
+    @NotBlank @Size(min = 1, max = 100) String tenantName,
+    @NotBlank @Size(max = 255) @Email String email,
+    @NotBlank @Size(min = 8, max = 100) String password,
+    @NotBlank @Size(max = 100) String firstName,
+    @NotBlank @Size(max = 100) String lastName,
+    @Size(max = 20) String phone
+) {}

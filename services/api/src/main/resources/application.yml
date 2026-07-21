@@ -1,0 +1,83 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /
+  tomcat:
+    max-swallow-size: 10MB
+
+spring:
+  application:
+    name: saha-flow-api
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/sahaflow
+    username: sahaflow
+    password: ${DB_PASSWORD:changeme}
+    hikari:
+      maximum-pool-size: 20
+      minimum-idle: 5
+      idle-timeout: 300000
+      connection-timeout: 20000
+      max-lifetime: 1200000
+
+  jpa:
+    open-in-view: false
+    properties:
+      hibernate:
+        default_schema: public
+        jdbc:
+          batch_size: 25
+          fetch_size: 25
+    show-sql: false
+
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+    locations: classpath:db/migration
+    out-of-order: false
+
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 10MB
+      max-request-size: 15MB
+
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+    default-property-inclusion: non_null
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operationsSorter: method
+    tagsSorter: alpha
+  show-actuator: false
+
+sahaflow:
+  jwt:
+    access-secret: ${JWT_ACCESS_SECRET:Y2hhbmdlbWV0aGlzc2VjcmV0a2V5Zm9yYWNjZXNzdG9rZW5zMTIzNDU2Nzg5MA==}
+    refresh-secret: ${JWT_REFRESH_SECRET:Y2hhbmdlbWV0aGlzc2VjcmV0a2V5Zm9ycmVmcmVzaHRva2VuczEyMzQ1Njc4OTBBQkNERUY=}
+    access-expiration: 900
+    refresh-expiration: 86400
+  files:
+    upload-dir: ./uploads
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: when-authorized
+
+logging:
+  level:
+    root: INFO
+    com.sahaflow: DEBUG
+    org.springframework.security: INFO
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} [%X{correlationId}] - %msg%n"

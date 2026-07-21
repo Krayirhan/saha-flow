@@ -1,0 +1,23 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/sahaflow_dev
+    username: sahaflow
+    password: ${DB_PASSWORD:devpassword}
+
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+logging:
+  level:
+    root: INFO
+    com.sahaflow: TRACE
+    org.springframework.security: DEBUG
+    org.springframework.jdbc: DEBUG
+
+sahaflow:
+  jwt:
+    access-expiration: 3600
+    refresh-expiration: 604800

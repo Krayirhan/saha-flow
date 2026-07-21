@@ -1,0 +1,16 @@
+{
+  "extends": "next/core-web-vitals",
+  "plugins": [],
+  "rules": {
+    "no-console": ["warn", { "allow": ["warn", "error"] }],
+    "@next/next/no-img-element": "off",
+    "import/order": [
+      "warn",
+      {
+        "groups": ["builtin", "external", "internal", "parent", "sibling", "index"],
+        "newlines-between": "always"
+      }
+    ]
+  },
+  "ignorePatterns": ["node_modules/", ".next/", "out/"]
+}

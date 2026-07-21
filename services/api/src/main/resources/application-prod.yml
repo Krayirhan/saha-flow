@@ -1,0 +1,25 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://${DB_HOST:postgres}:5432/${DB_NAME:sahaflow}
+    username: ${DB_USER:sahaflow}
+    password: ${DB_PASSWORD}
+
+  jpa:
+    show-sql: false
+
+logging:
+  level:
+    root: WARN
+    com.sahaflow: INFO
+
+sahaflow:
+  jwt:
+    access-expiration: 900
+    refresh-expiration: 86400
+
+server:
+  tomcat:
+    max-connections: 500
+    threads:
+      max: 200
+      min-spare: 10

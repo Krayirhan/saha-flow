@@ -1,0 +1,128 @@
+version: "3.9"
+
+# ============================================================
+# Saha Flow - Development Docker Compose
+# ============================================================
+# Usage: docker compose up -d
+#
+# This file defines all services needed for local development.
+# Passwords are intentionally weak (development_only) and
+# MUST NOT be used in production.
+# ============================================================
+
+services:
+  # --- PostgreSQL 16 ---
+  postgres:
+    image: postgres:16-alpine
+    container_name: sahaflow-postgres
+    restart: unless-stopped
+    ports:
+      - "${DB_PORT:-5432}:5432"
+    environment:
+      POSTGRES_DB: ${DB_NAME:-sahaflow}
+      POSTGRES_USER: ${DB_USER:-sahaflow}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-development_only}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./postgres/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    networks:
+      - sahaflow-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-sahaflow} -d ${DB_NAME:-sahaflow}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  # --- Spring Boot Backend (optional for docker-only workflow) ---
+  backend:
+    build:
+      context: ..
+      dockerfile: ./infra/Dockerfile.backend
+    container_name: sahaflow-backend
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: ${SPRING_PROFILES_ACTIVE:-dev}
+      DB_HOST: postgres
+      DB_PORT: "5432"
+      DB_NAME: ${DB_NAME:-sahaflow}
+      DB_USER: ${DB_USER:-sahaflow}
+      DB_PASSWORD: ${DB_PASSWORD:-development_only}
+      JWT_SECRET: ${JWT_SECRET:-change-me-to-a-random-256-bit-secret}
+      JWT_EXPIRATION: ${JWT_EXPIRATION:-3600}
+      S3_ENDPOINT: ${S3_ENDPOINT:-http://minio:9000}
+      S3_ACCESS_KEY: ${S3_ACCESS_KEY:-minioadmin}
+      S3_SECRET_KEY: ${S3_SECRET_KEY:-change-me}
+      S3_BUCKET: ${S3_BUCKET:-sahaflow-media}
+      CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost:3000}
+      LOG_LEVEL: ${LOG_LEVEL:-DEBUG}
+      SERVER_PORT: "8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - sahaflow-network
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:8080/actuator/health || exit 1"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 60s
+
+  # --- Next.js Web Frontend (optional for docker-only workflow) ---
+  web:
+    build:
+      context: ..
+      dockerfile: ./infra/Dockerfile.web
+    container_name: sahaflow-web
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:8080/api}
+      NEXT_PUBLIC_MAPBOX_TOKEN: ${NEXT_PUBLIC_MAPBOX_TOKEN:-placeholder-mapbox-token}
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks:
+      - sahaflow-network
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:3000 || exit 1"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  # --- Nginx Reverse Proxy (optional) ---
+  nginx:
+    image: nginx:1.27-alpine
+    container_name: sahaflow-nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      web:
+        condition: service_healthy
+      backend:
+        condition: service_healthy
+    networks:
+      - sahaflow-network
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:80/health || exit 1"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+
+networks:
+  sahaflow-network:
+    name: sahaflow-network
+    driver: bridge
+
+volumes:
+  pgdata:
+    name: sahaflow-pgdata

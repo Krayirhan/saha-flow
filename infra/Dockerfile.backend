@@ -1,0 +1,65 @@
+# ============================================================
+# Saha Flow - Backend Dockerfile (Spring Boot 3.4 / Java 21)
+# ============================================================
+# Multi-stage build: compile with Gradle, run on minimal JRE.
+# ============================================================
+
+# --- Stage 1: Build ---
+FROM eclipse-temurin:21-jdk-alpine AS builder
+
+RUN apk add --no-cache findutils
+
+WORKDIR /workspace
+
+# Copy Gradle wrapper and config first (layer caching)
+COPY gradlew .
+COPY gradle/ gradle/
+COPY build.gradle.kts .
+COPY settings.gradle.kts .
+COPY gradle.properties .
+
+# Download dependencies (cacheable layer)
+RUN chmod +x gradlew && ./gradlew --no-daemon --parallel dependencies || true
+
+# Copy source code
+COPY services/api/src/ services/api/src/
+
+# Build the application
+RUN ./gradlew --no-daemon :services:api:bootJar -x test
+
+# Extract the layered JAR for efficient image layering
+RUN java -Djarmode=layertools \
+  -jar services/api/build/libs/*.jar extract \
+  --destination /workspace/extracted
+
+# --- Stage 2: Runtime ---
+FROM eclipse-temurin:21-jre-alpine AS runtime
+
+# Create non-root user
+RUN addgroup -g 1001 sahaflow && \
+    adduser -u 1001 -G sahaflow -s /bin/sh -D sahaflow
+
+WORKDIR /app
+
+# Copy extracted layers (ordered from least to most frequently changed)
+COPY --from=builder /workspace/extracted/dependencies/ ./
+COPY --from=builder /workspace/extracted/spring-boot-loader/ ./
+COPY --from=builder /workspace/extracted/snapshot-dependencies/ ./
+COPY --from=builder /workspace/extracted/application/ ./
+
+# Copy health check tool
+RUN apk add --no-cache wget
+
+# Use non-root user
+USER sahaflow:1001
+
+EXPOSE 8080
+
+HEALTHCHECK --interval=30s --timeout=5s --retries=3 --start-period=60s \
+  CMD wget -qO- http://localhost:8080/actuator/health || exit 1
+
+ENTRYPOINT ["java", \
+  "-XX:+UseZGC", \
+  "-XX:MaxRAMPercentage=75", \
+  "-Djava.security.egd=file:/dev/./urandom", \
+  "org.springframework.boot.loader.launch.JarLauncher"]

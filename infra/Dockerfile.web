@@ -1,0 +1,66 @@
+# ============================================================
+# Saha Flow - Web Frontend Dockerfile (Next.js 14 / Node 20)
+# ============================================================
+# Multi-stage build: compile with dependencies, run standalone.
+# ============================================================
+
+# --- Stage 1: Build ---
+FROM node:20-alpine AS builder
+
+RUN apk add --no-cache libc6-compat
+
+WORKDIR /app
+
+# Copy package files first (layer caching)
+COPY web/package.json web/package-lock.json* web/.npmrc* ./
+
+# Install all dependencies (including dev)
+RUN npm ci --ignore-scripts
+
+# Copy source code
+COPY web/ ./
+
+# Build arguments for build-time env vars
+ARG NEXT_PUBLIC_API_URL=http://localhost:8080/api
+ARG NEXT_PUBLIC_MAPBOX_TOKEN=placeholder-mapbox-token
+
+ENV NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
+ENV NEXT_PUBLIC_MAPBOX_TOKEN=${NEXT_PUBLIC_MAPBOX_TOKEN}
+
+# Build Next.js with standalone output
+RUN npm run build
+
+# --- Stage 2: Runtime ---
+FROM node:20-alpine AS runtime
+
+# Create non-root user
+RUN addgroup -g 1001 sahaflow && \
+    adduser -u 1001 -G sahaflow -s /bin/sh -D sahaflow
+
+WORKDIR /app
+
+# Copy standalone output and static assets
+COPY --from=builder --chown=sahaflow:sahaflow /app/.next/standalone ./
+COPY --from=builder --chown=sahaflow:sahaflow /app/.next/static ./.next/static
+COPY --from=builder --chown=sahaflow:sahaflow /app/public ./public
+
+# Copy package.json for optional runtime needs
+COPY --from=builder --chown=sahaflow:sahaflow /app/package.json ./
+
+# Install only production deps (if any are left)
+RUN npm ci --omit=dev --ignore-scripts 2>/dev/null || true
+
+# Add wget for health check
+RUN apk add --no-cache wget
+
+USER sahaflow:1001
+
+EXPOSE 3000
+
+ENV NODE_ENV=production
+ENV PORT=3000
+
+HEALTHCHECK --interval=30s --timeout=5s --retries=3 --start-period=30s \
+  CMD wget -qO- http://localhost:3000 || exit 1
+
+CMD ["node", "server.js"]

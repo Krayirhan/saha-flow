@@ -1,0 +1,91 @@
+version: "3.9"
+
+# ============================================================
+# Saha Flow - Production Docker Compose Override
+# ============================================================
+# Usage: docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+#
+# This file contains production-specific overrides.
+# Fill in actual secrets via environment or Docker secrets manager.
+# ============================================================
+
+services:
+  postgres:
+    # In production, prefer a managed database service (RDS, Cloud SQL).
+    # If self-hosting, uncomment the lines below.
+    # deploy:
+    #   resources:
+    #     limits:
+    #       cpus: "2"
+    #       memory: "4G"
+    #     reservations:
+    #       cpus: "0.5"
+    #       memory: "1G"
+    environment:
+      # Override with real secrets via .env (NEVER commit the .env file).
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    # Mount an external volume for production data
+    # volumes:
+    #   - sahaflow-prod-pgdata:/var/lib/postgresql/data
+
+  backend:
+    # build:
+    #   args:
+    #     BUILD_ENV: production
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      LOG_LEVEL: INFO
+      # Production DB credentials passed via env/secret manager
+      DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT}
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      JWT_SECRET: ${JWT_SECRET}
+      JWT_EXPIRATION: ${JWT_EXPIRATION}
+    deploy:
+      replicas: 2
+      resources:
+        limits:
+          cpus: "1"
+          memory: "1G"
+        reservations:
+          cpus: "0.25"
+          memory: "512M"
+
+  web:
+    # build:
+    #   args:
+    #     NEXT_PUBLIC_API_URL: https://api.sahaflow.example.com/api
+    environment:
+      NODE_ENV: production
+    deploy:
+      replicas: 2
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: "512M"
+        reservations:
+          cpus: "0.1"
+          memory: "256M"
+
+  nginx:
+    # In production, uncomment SSL-related volumes and port 443.
+    ports:
+      - "80:80"
+      # - "443:443"
+    # volumes:
+    #   - ./nginx/nginx.prod.conf:/etc/nginx/nginx.conf:ro
+    #   - ./nginx/ssl/cert.pem:/etc/nginx/ssl/cert.pem:ro
+    #   - ./nginx/ssl/key.pem:/etc/nginx/ssl/key.pem:ro
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          cpus: "0.25"
+          memory: "256M"
+
+# Uncomment for production volume (must be created externally).
+# volumes:
+#   sahaflow-prod-pgdata:
+#     name: sahaflow-prod-pgdata
