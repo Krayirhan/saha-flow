@@ -1,6 +1,7 @@
 'use client';
 
 import { LogOut, Bell, Menu, ChevronDown } from 'lucide-react';
+import { ThemeToggle } from '@/components/ui/ThemeToggle';
 import { useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { useAuth } from '@/features/auth/hooks/useAuth';
@@ -52,9 +53,12 @@ export function Header({ onMenuToggle }: HeaderProps) {
 
       {/* Right */}
       <div className="flex items-center gap-1">
+        {/* Theme toggle */}
+        <ThemeToggle />
+
         {/* Bell */}
         <button
-          className="rounded-lg p-2 transition-colors hover:bg-[#ebecf0] disabled:opacity-30"
+          className="rounded-lg p-2 transition-colors hover:bg-[#ebecf0] dark-mode-hover disabled:opacity-30"
           style={{ color: 'var(--sf-text-muted)' }}
           aria-label="Bildirimler"
           disabled

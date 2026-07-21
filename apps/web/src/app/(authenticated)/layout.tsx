@@ -8,7 +8,7 @@ export default function AuthenticatedLayout({ children }: { children: React.Reac
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
-    <div className="flex h-full text-white" style={{ background: 'var(--sf-bg)' }}>
+    <div className="flex h-full" style={{ background: 'var(--sf-bg)', color: 'var(--sf-text)' }}>
       <div className="hidden md:block md:flex-shrink-0">
         <Sidebar />
       </div>

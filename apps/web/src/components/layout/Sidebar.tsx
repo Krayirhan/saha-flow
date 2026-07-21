@@ -81,6 +81,7 @@ export function Sidebar() {
               className={cn(
                 'relative flex items-center rounded px-3 py-2.5 text-sm font-medium transition-all duration-200 hover:bg-[#ebecf0]',
                 collapsed ? 'justify-center' : 'gap-3',
+                active && 'sf-nav-active',
               )}
               style={
                 active

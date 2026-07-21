@@ -45,6 +45,34 @@
     color: var(--sf-text);
   }
 
+  /* Dark theme override — toggled via data-theme="dark" on <html> */
+  :root[data-theme="dark"] {
+    --sf-open:        #4f8cff;
+    --sf-assigned:    #7d6cff;
+    --sf-on-the-way:  #74b8ff;
+    --sf-in-progress: #ffaa4c;
+    --sf-completed:   #38d996;
+    --sf-sla-risk:    #ff5f6d;
+    --sf-offline:     #747d8d;
+    --sf-synced:      #3dd6d0;
+
+    --sf-bg:          #0f1117;
+    --sf-bg-2:        #131820;
+    --sf-surface:     #161c27;
+    --sf-surface-2:   #1d2535;
+
+    --sf-text:        #e2e8f0;
+    --sf-text-2:      #94a3b8;
+    --sf-text-muted:  #64748b;
+
+    --sf-border:      #1e2737;
+    --sf-border-strong: #263044;
+
+    --sf-accent:      #60a5fa;
+    --sf-accent-bg:   rgba(96, 165, 250, 0.1);
+    --sf-accent-dim:  #2563eb;
+  }
+
   /* Flow Line state CSS custom properties — DESIGN.md §5 */
   :root {
     --sf-open:        #0052cc;
@@ -267,6 +295,22 @@
 }
 .sf-gradient-text-blue {
   color: #4f8cff;
+}
+
+/* Dark mode overrides — hardcoded light colors */
+[data-theme="dark"] .dark-mode-hover:hover,
+[data-theme="dark"] .hover\:bg-\[\#ebecf0\]:hover {
+  background: rgba(255, 255, 255, 0.06) !important;
+}
+[data-theme="dark"] .hover\:bg-\[\#f4f5f7\]:hover {
+  background: rgba(255, 255, 255, 0.03) !important;
+}
+[data-theme="dark"] .hover\:bg-\[\#fff0ee\]:hover {
+  background: rgba(255, 95, 109, 0.08) !important;
+}
+/* Sidebar active item */
+[data-theme="dark"] .sf-nav-active {
+  background: var(--sf-accent-bg) !important;
 }
 
 @layer utilities {
