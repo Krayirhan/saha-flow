@@ -15,6 +15,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -34,25 +35,29 @@ public class TenantFilter extends OncePerRequestFilter {
                                      HttpServletResponse response,
                                      FilterChain filterChain) throws ServletException, IOException {
         try {
-            String tenantId = extractTenantId(request);
+            String tenantId = null;
             String userId = null;
             String role = null;
 
             String token = extractToken(request);
-            if (token != null && jwtService.validateToken(token)) {
+            if (token != null && jwtService.validateAccessToken(token)) {
                 userId = jwtService.extractUserId(token);
                 role = jwtService.extractRole(token);
-                if (tenantId == null) {
-                    tenantId = jwtService.extractTenantId(token);
-                }
+                // JWT tenant always takes priority — never allow header to override
+                tenantId = jwtService.extractTenantId(token);
 
-                var authorities = jwtService.extractPermissions(token).stream()
-                    .map(p -> new SimpleGrantedAuthority("ROLE_" + role))
-                    .toList();
+                var authorities = new ArrayList<SimpleGrantedAuthority>();
+                authorities.add(new SimpleGrantedAuthority("ROLE_" + role));
+                jwtService.extractPermissions(token).stream()
+                    .map(SimpleGrantedAuthority::new)
+                    .forEach(authorities::add);
 
                 var auth = new UsernamePasswordAuthenticationToken(
                     userId, null, authorities);
                 SecurityContextHolder.getContext().setAuthentication(auth);
+            } else if (token == null) {
+                // No token: fall back to subdomain/header for tenant (unauthenticated public paths)
+                tenantId = extractTenantId(request);
             }
 
             if (tenantId != null && userId != null) {

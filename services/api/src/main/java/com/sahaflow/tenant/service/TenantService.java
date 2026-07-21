@@ -1,5 +1,6 @@
 package com.sahaflow.tenant.service;
 
+import com.sahaflow.shared.error.ResourceNotFoundException;
 import com.sahaflow.tenant.domain.Tenant;
 import com.sahaflow.tenant.repository.TenantRepository;
 import org.springframework.stereotype.Service;
@@ -27,13 +28,13 @@ public class TenantService {
     @Transactional(readOnly = true)
     public Tenant findById(String tenantId) {
         return tenantRepository.findByIdAndActiveTrue(tenantId)
-            .orElseThrow(() -> new IllegalArgumentException("Tenant not found: " + tenantId));
+            .orElseThrow(() -> ResourceNotFoundException.of("Tenant", tenantId));
     }
 
     @Transactional(readOnly = true)
     public Tenant findBySlug(String slug) {
         return tenantRepository.findBySlug(slug)
-            .orElseThrow(() -> new IllegalArgumentException("Tenant not found for slug: " + slug));
+            .orElseThrow(() -> new ResourceNotFoundException("Tenant not found for slug: " + slug));
     }
 
     @Transactional(readOnly = true)

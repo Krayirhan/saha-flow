@@ -1,6 +1,7 @@
 package com.sahaflow.workorder.service;
 
 import com.sahaflow.customer.service.CustomerService;
+import com.sahaflow.shared.error.ResourceNotFoundException;
 import com.sahaflow.shared.tenant.TenantContextHolder;
 import com.sahaflow.shared.pagination.PageRequest;
 import com.sahaflow.workorder.domain.WorkOrder;
@@ -67,7 +68,7 @@ public class WorkOrderService {
     @Transactional(readOnly = true)
     public WorkOrderResponse findById(String tenantId, String id) {
         var wo = workOrderRepository.findByTenantIdAndId(tenantId, id)
-            .orElseThrow(() -> new IllegalArgumentException("Work order not found: " + id));
+            .orElseThrow(() -> ResourceNotFoundException.of("Work order", id));
         return toResponse(wo);
     }
 
@@ -94,7 +95,7 @@ public class WorkOrderService {
     @Transactional
     public WorkOrderResponse update(String tenantId, String id, WorkOrderUpdateRequest request) {
         var wo = workOrderRepository.findByTenantIdAndId(tenantId, id)
-            .orElseThrow(() -> new IllegalArgumentException("Work order not found: " + id));
+            .orElseThrow(() -> ResourceNotFoundException.of("Work order", id));
 
         if (request.title() != null) wo.setTitle(request.title());
         if (request.description() != null) wo.setDescription(request.description());
@@ -113,7 +114,7 @@ public class WorkOrderService {
     @Transactional
     public WorkOrderResponse assign(String tenantId, String id, String assignedUserId) {
         var wo = workOrderRepository.findByTenantIdAndId(tenantId, id)
-            .orElseThrow(() -> new IllegalArgumentException("Work order not found: " + id));
+            .orElseThrow(() -> ResourceNotFoundException.of("Work order", id));
 
         transitionStatus(wo, WorkOrderStatus.ASSIGNED,
             "Assigned to user " + assignedUserId, tenantId);
@@ -126,7 +127,7 @@ public class WorkOrderService {
     @Transactional
     public WorkOrderResponse startProgress(String tenantId, String id) {
         var wo = workOrderRepository.findByTenantIdAndId(tenantId, id)
-            .orElseThrow(() -> new IllegalArgumentException("Work order not found: " + id));
+            .orElseThrow(() -> ResourceNotFoundException.of("Work order", id));
 
         transitionStatus(wo, WorkOrderStatus.IN_PROGRESS,
             "Work started by field technician", tenantId);
@@ -139,7 +140,7 @@ public class WorkOrderService {
     @Transactional
     public WorkOrderResponse complete(String tenantId, String id, String note) {
         var wo = workOrderRepository.findByTenantIdAndId(tenantId, id)
-            .orElseThrow(() -> new IllegalArgumentException("Work order not found: " + id));
+            .orElseThrow(() -> ResourceNotFoundException.of("Work order", id));
 
         transitionStatus(wo, WorkOrderStatus.COMPLETED,
             note != null ? note : "Work completed", tenantId);
@@ -152,7 +153,7 @@ public class WorkOrderService {
     @Transactional
     public WorkOrderResponse approve(String tenantId, String id) {
         var wo = workOrderRepository.findByTenantIdAndId(tenantId, id)
-            .orElseThrow(() -> new IllegalArgumentException("Work order not found: " + id));
+            .orElseThrow(() -> ResourceNotFoundException.of("Work order", id));
 
         transitionStatus(wo, WorkOrderStatus.APPROVED,
             "Approved by customer", tenantId);
@@ -165,7 +166,7 @@ public class WorkOrderService {
     public WorkOrderResponse invoice(String tenantId, String id, BigDecimal actualCost,
                                       Integer actualDurationMinutes) {
         var wo = workOrderRepository.findByTenantIdAndId(tenantId, id)
-            .orElseThrow(() -> new IllegalArgumentException("Work order not found: " + id));
+            .orElseThrow(() -> ResourceNotFoundException.of("Work order", id));
 
         transitionStatus(wo, WorkOrderStatus.INVOICED,
             "Invoice generated", tenantId);
@@ -180,7 +181,7 @@ public class WorkOrderService {
     @Transactional
     public WorkOrderResponse markPaid(String tenantId, String id) {
         var wo = workOrderRepository.findByTenantIdAndId(tenantId, id)
-            .orElseThrow(() -> new IllegalArgumentException("Work order not found: " + id));
+            .orElseThrow(() -> ResourceNotFoundException.of("Work order", id));
 
         transitionStatus(wo, WorkOrderStatus.PAID,
             "Payment received", tenantId);
@@ -192,7 +193,7 @@ public class WorkOrderService {
     @Transactional
     public WorkOrderResponse cancel(String tenantId, String id, String reason) {
         var wo = workOrderRepository.findByTenantIdAndId(tenantId, id)
-            .orElseThrow(() -> new IllegalArgumentException("Work order not found: " + id));
+            .orElseThrow(() -> ResourceNotFoundException.of("Work order", id));
 
         if (!stateMachine.canCancel(wo.getStatus())) {
             throw new IllegalStateException(

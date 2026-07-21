@@ -2,6 +2,7 @@ package com.sahaflow.identity.service;
 
 import com.sahaflow.identity.domain.User;
 import com.sahaflow.identity.repository.UserRepository;
+import com.sahaflow.shared.error.ResourceNotFoundException;
 import com.sahaflow.shared.pagination.PageRequest;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
@@ -19,7 +20,7 @@ public class UserService {
     @Transactional(readOnly = true)
     public User findById(String tenantId, String userId) {
         return userRepository.findByTenantIdAndId(tenantId, userId)
-            .orElseThrow(() -> new IllegalArgumentException("User not found: " + userId));
+            .orElseThrow(() -> ResourceNotFoundException.of("User", userId));
     }
 
     @Transactional(readOnly = true)
@@ -30,7 +31,7 @@ public class UserService {
     @Transactional(readOnly = true)
     public User findByEmail(String tenantId, String email) {
         return userRepository.findByTenantIdAndEmailIgnoreCase(tenantId, email)
-            .orElseThrow(() -> new IllegalArgumentException("User not found with email: " + email));
+            .orElseThrow(() -> new ResourceNotFoundException("User not found with email: " + email));
     }
 
     @Transactional

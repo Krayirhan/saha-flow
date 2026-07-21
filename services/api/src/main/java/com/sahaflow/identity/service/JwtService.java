@@ -81,17 +81,21 @@ public class JwtService {
             .compact();
     }
 
-    public boolean validateToken(String token) {
+    public boolean validateAccessToken(String token) {
         try {
             parseToken(token, accessSecretKey);
             return true;
         } catch (JwtException e) {
-            try {
-                parseToken(token, refreshSecretKey);
-                return true;
-            } catch (JwtException ex) {
-                return false;
-            }
+            return false;
+        }
+    }
+
+    public boolean validateRefreshToken(String token) {
+        try {
+            parseToken(token, refreshSecretKey);
+            return true;
+        } catch (JwtException e) {
+            return false;
         }
     }
 

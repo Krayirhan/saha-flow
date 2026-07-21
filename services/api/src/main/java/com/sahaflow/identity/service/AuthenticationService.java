@@ -58,6 +58,12 @@ public class AuthenticationService {
         var accessToken = jwtService.generateAccessToken(user, tenant.getId());
         var refreshToken = jwtService.generateRefreshToken(user, tenant.getId());
 
+        String roleName = user.getMemberships().stream()
+            .findFirst()
+            .map(Membership::getRole)
+            .map(Role::getName)
+            .orElse("ADMIN");
+
         return new LoginResponse(
             accessToken,
             refreshToken,
@@ -65,7 +71,7 @@ public class AuthenticationService {
             jwtService.getAccessTokenExpiration(),
             user.getId(),
             tenant.getId(),
-            "ADMIN",
+            roleName,
             user.getFirstName() + " " + user.getLastName()
         );
     }
@@ -114,7 +120,7 @@ public class AuthenticationService {
 
     @Transactional(readOnly = true)
     public LoginResponse refresh(TokenRefreshRequest request) {
-        if (!jwtService.validateToken(request.refreshToken())) {
+        if (!jwtService.validateRefreshToken(request.refreshToken())) {
             throw new BadCredentialsException("Invalid or expired refresh token");
         }
 

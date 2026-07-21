@@ -5,6 +5,7 @@ import com.sahaflow.customer.domain.CustomerAddress;
 import com.sahaflow.customer.dto.CustomerRequest;
 import com.sahaflow.customer.dto.CustomerResponse;
 import com.sahaflow.customer.repository.CustomerRepository;
+import com.sahaflow.shared.error.ResourceNotFoundException;
 import com.sahaflow.shared.pagination.PageRequest;
 import com.sahaflow.shared.tenant.TenantContextHolder;
 import org.springframework.data.domain.Page;
@@ -58,7 +59,7 @@ public class CustomerService {
     @Transactional(readOnly = true)
     public CustomerResponse findById(String tenantId, String id) {
         var customer = customerRepository.findByTenantIdAndId(tenantId, id)
-            .orElseThrow(() -> new IllegalArgumentException("Customer not found: " + id));
+            .orElseThrow(() -> ResourceNotFoundException.of("Customer", id));
         return toResponse(customer);
     }
 
@@ -77,7 +78,7 @@ public class CustomerService {
     @Transactional
     public CustomerResponse update(String tenantId, String id, CustomerRequest request) {
         var customer = customerRepository.findByTenantIdAndId(tenantId, id)
-            .orElseThrow(() -> new IllegalArgumentException("Customer not found: " + id));
+            .orElseThrow(() -> ResourceNotFoundException.of("Customer", id));
 
         customer.setName(request.name());
         customer.setEmail(request.email());
@@ -112,7 +113,7 @@ public class CustomerService {
     @Transactional
     public void deactivate(String tenantId, String id) {
         var customer = customerRepository.findByTenantIdAndId(tenantId, id)
-            .orElseThrow(() -> new IllegalArgumentException("Customer not found: " + id));
+            .orElseThrow(() -> ResourceNotFoundException.of("Customer", id));
         customer.setActive(false);
         customerRepository.save(customer);
     }
@@ -120,7 +121,7 @@ public class CustomerService {
     @Transactional
     public void delete(String tenantId, String id) {
         var customer = customerRepository.findByTenantIdAndId(tenantId, id)
-            .orElseThrow(() -> new IllegalArgumentException("Customer not found: " + id));
+            .orElseThrow(() -> ResourceNotFoundException.of("Customer", id));
         customerRepository.delete(customer);
     }
 

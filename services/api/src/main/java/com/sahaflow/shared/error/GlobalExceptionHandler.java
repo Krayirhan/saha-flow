@@ -1,7 +1,8 @@
 package com.sahaflow.shared.error;
 
-import com.sahaflow.shared.tenant.TenantContextHolder;
+import com.sahaflow.shared.error.ResourceNotFoundException;
 import com.sahaflow.shared.idempotency.IdempotencyFilter;
+import com.sahaflow.shared.tenant.TenantContextHolder;
 import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -64,6 +65,12 @@ public class GlobalExceptionHandler {
     public ProblemDetail handleMissingHeader(MissingRequestHeaderException ex, HttpServletRequest request) {
         return ProblemDetailBuilder.build(HttpStatus.BAD_REQUEST, ErrorCode.VALIDATION_ERROR,
             "Required header '" + ex.getHeaderName() + "' is missing", request.getRequestURI());
+    }
+
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ProblemDetail handleResourceNotFound(ResourceNotFoundException ex, HttpServletRequest request) {
+        return ProblemDetailBuilder.build(HttpStatus.NOT_FOUND, ErrorCode.RESOURCE_NOT_FOUND,
+            ex.getMessage(), request.getRequestURI());
     }
 
     @ExceptionHandler(IllegalArgumentException.class)
