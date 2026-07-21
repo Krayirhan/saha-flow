@@ -8,6 +8,8 @@
 
 import Link from 'next/link';
 
+import { BrandLogo } from '@/components/brand/BrandLogo';
+
 const FOOTER_LINKS = {
   Ürün: [
     { label: 'Özellikler', href: '#product' },
@@ -35,38 +37,6 @@ const FOOTER_LINKS = {
   ],
 } as const;
 
-function SahaFlowLogo() {
-  return (
-    <Link
-      href="/"
-      className="mkt-focus group inline-flex items-center gap-2.5 rounded-lg"
-      aria-label="Saha Flow — Ana sayfa"
-    >
-      <div
-        className="flex h-8 w-8 items-center justify-center rounded-[10px] transition-transform duration-200 group-hover:scale-105"
-        style={{
-          background: 'linear-gradient(135deg, #4f8cff 0%, #7d6cff 100%)',
-          boxShadow: '0 2px 12px rgba(79,140,255,0.3)',
-        }}
-        aria-hidden="true"
-      >
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-          <path
-            d="M2 12 C4 12 4 4 8 4 C12 4 12 12 14 12"
-            stroke="white"
-            strokeWidth="2"
-            strokeLinecap="round"
-            fill="none"
-          />
-        </svg>
-      </div>
-      <span className="text-sm font-bold tracking-tight" style={{ color: 'var(--sf-text)' }}>
-        Saha Flow
-      </span>
-    </Link>
-  );
-}
-
 export function MarketingFooter() {
   return (
     <footer
@@ -79,7 +49,7 @@ export function MarketingFooter() {
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-[200px,1fr,1fr,1fr,1fr]">
           {/* Brand */}
           <div className="sm:col-span-2 lg:col-span-1">
-            <SahaFlowLogo />
+            <BrandLogo className="mkt-focus rounded-lg" />
             <p className="mt-3 max-w-[220px] text-sm leading-relaxed" style={{ color: 'var(--sf-text-muted)' }}>
               Teknik servis ekipleri için uçtan uca saha operasyonu yönetimi.
             </p>
@@ -117,7 +87,7 @@ export function MarketingFooter() {
           style={{ borderColor: 'var(--sf-border)' }}
         >
           <p className="text-xs" style={{ color: 'var(--sf-text-muted)' }}>
-            &copy; 2026 Saha Flow. Tüm hakları saklıdır.
+            &copy; 2026 İşAkış. Tüm hakları saklıdır.
           </p>
           <div className="flex items-center gap-1 text-xs" style={{ color: 'var(--sf-text-muted)' }}>
             <span>Türkiye</span>

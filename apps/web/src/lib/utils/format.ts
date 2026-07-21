@@ -11,14 +11,16 @@ const STATUS_LABELS: Record<string, string> = {
   rejected: 'Reddedildi',
 };
 
-const STATUS_COLORS: Record<string, string> = {
-  pending: 'bg-yellow-500/10 text-yellow-400 border-yellow-500/20',
-  assigned: 'bg-blue-500/10 text-blue-400 border-blue-500/20',
-  in_progress: 'bg-indigo-500/10 text-indigo-400 border-indigo-500/20',
-  completed: 'bg-green-500/10 text-green-400 border-green-500/20',
-  cancelled: 'bg-white/10 text-white/60 border-white/10',
-  approved: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20',
-  rejected: 'bg-red-500/10 text-red-400 border-red-500/20',
+type StatusStyle = { bg: string; color: string; border: string };
+
+const STATUS_STYLES: Record<string, StatusStyle> = {
+  pending:     { bg: 'rgba(255,170,76,0.1)',  color: 'var(--sf-in-progress)', border: 'rgba(255,170,76,0.25)' },
+  assigned:    { bg: 'rgba(125,108,255,0.1)', color: 'var(--sf-assigned)',    border: 'rgba(125,108,255,0.25)' },
+  in_progress: { bg: 'rgba(79,140,255,0.1)',  color: 'var(--sf-open)',        border: 'rgba(79,140,255,0.25)' },
+  completed:   { bg: 'rgba(56,217,150,0.1)',  color: 'var(--sf-completed)',   border: 'rgba(56,217,150,0.25)' },
+  cancelled:   { bg: 'rgba(116,125,141,0.1)', color: 'var(--sf-offline)',     border: 'rgba(116,125,141,0.25)' },
+  approved:    { bg: 'rgba(56,217,150,0.1)',  color: 'var(--sf-completed)',   border: 'rgba(56,217,150,0.25)' },
+  rejected:    { bg: 'rgba(255,95,109,0.1)',  color: 'var(--sf-sla-risk)',    border: 'rgba(255,95,109,0.25)' },
 };
 
 export function formatDate(date: string | Date | null | undefined, fmt: string = 'dd.MM.yyyy'): string {
@@ -55,8 +57,13 @@ export function getStatusLabel(status: string): string {
   return STATUS_LABELS[status] ?? status;
 }
 
+export function getStatusStyle(status: string): StatusStyle {
+  return STATUS_STYLES[status] ?? { bg: 'rgba(255,255,255,0.06)', color: 'var(--sf-text-2)', border: 'rgba(255,255,255,0.1)' };
+}
+
 export function getStatusColor(status: string): string {
-  return STATUS_COLORS[status] ?? 'bg-white/10 text-white/80 border-white/10';
+  const s = getStatusStyle(status);
+  return `bg-[${s.bg}] text-[${s.color}] border-[${s.border}]`;
 }
 
 export function truncateText(text: string, maxLength: number = 50): string {

@@ -97,52 +97,34 @@ interface OperationTimelineProps {
 export function OperationTimeline({ animated = true, className }: OperationTimelineProps) {
   const reducedMotion = useReducedMotion();
   const shouldAnimate = animated && !reducedMotion;
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const timerRef = useRef<number | null>(null);
 
-  // Reveal steps one-by-one with a small delay
-  const [visibleCount, setVisibleCount] = useState(shouldAnimate ? 0 : TIMELINE_EVENTS.length);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const hasStarted = useRef(false);
-
-  useEffect(() => {
-    if (!shouldAnimate || hasStarted.current) return;
-
-    const el = containerRef.current;
-    if (!el) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !hasStarted.current) {
-          hasStarted.current = true;
-
-          // Reveal each step with staggered delay
-          TIMELINE_EVENTS.forEach((_, i) => {
-            const delay = i === 0 ? 200 : 200 + i * 420;
-            setTimeout(() => {
-              setVisibleCount((prev) => Math.min(prev + 1, TIMELINE_EVENTS.length));
-            }, delay);
-          });
-        }
-      },
-      { threshold: 0.2 },
-    );
-
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, [shouldAnimate]);
-
-  // If not animated, show all immediately
   useEffect(() => {
     if (!shouldAnimate) {
-      setVisibleCount(TIMELINE_EVENTS.length);
+      setCurrentIndex(TIMELINE_EVENTS.length - 1);
+      return;
     }
+
+    const advance = (idx: number) => {
+      const isLast = idx === TIMELINE_EVENTS.length - 1;
+      timerRef.current = window.setTimeout(() => {
+        const next = isLast ? 0 : idx + 1;
+        setCurrentIndex(next);
+        advance(next);
+      }, isLast ? 1800 : 750);
+    };
+
+    advance(0);
+    return () => {
+      if (timerRef.current !== null) window.clearTimeout(timerRef.current);
+    };
   }, [shouldAnimate]);
 
-  // Determine which state each step is in relative to visibleCount
-  const currentVisibleIndex = visibleCount - 1;
+  const isCompleted = currentIndex === TIMELINE_EVENTS.length - 1;
 
   return (
     <div
-      ref={containerRef}
       className={className}
       aria-label="İş emri #SF-1842 operasyon akışı"
       role="list"
@@ -155,37 +137,25 @@ export function OperationTimeline({ animated = true, className }: OperationTimel
           </p>
           <p className="mt-0.5 text-sm font-semibold text-white/90">Klima Arızası — ABC Plaza</p>
         </div>
-        <StateChip
-          state={
-            visibleCount >= TIMELINE_EVENTS.length
-              ? 'completed'
-              : visibleCount >= 5
-                ? 'in-progress'
-                : visibleCount >= 3
-                  ? 'on-the-way'
-                  : visibleCount >= 2
-                    ? 'assigned'
-                    : 'open'
-          }
+          <StateChip
+          state={isCompleted ? 'completed' : TIMELINE_EVENTS[currentIndex].state ?? 'open'}
         />
       </div>
 
       {/* Timeline steps */}
       <div className="space-y-0" role="list">
         {TIMELINE_EVENTS.map((event, i) => {
-          const isVisible = i < visibleCount;
-          const isCurrent = i === currentVisibleIndex && visibleCount < TIMELINE_EVENTS.length;
-          const isPast = i < currentVisibleIndex;
-          const isCompleted = visibleCount >= TIMELINE_EVENTS.length;
+          const isCurrent = i === currentIndex;
+          const isPast = i < currentIndex;
 
           return (
             <div
               key={i}
               role="listitem"
               style={{
-                opacity: isVisible ? 1 : 0,
-                transform: isVisible ? 'translateY(0)' : 'translateY(6px)',
-                transition: shouldAnimate ? 'opacity 0.35s ease, transform 0.35s ease' : 'none',
+                opacity: isCurrent || isPast || isCompleted ? 1 : 0.42,
+                transform: 'translateY(0)',
+                transition: shouldAnimate ? 'opacity 0.35s ease' : 'none',
               }}
             >
               <div className="flex gap-3">
@@ -207,7 +177,7 @@ export function OperationTimeline({ animated = true, className }: OperationTimel
                   {/* Timestamp */}
                   <p
                     className="mb-0.5 font-mono text-[10px] font-semibold tracking-wider"
-                    style={{ color: isVisible ? 'rgba(255,255,255,0.35)' : 'transparent' }}
+                    style={{ color: 'rgba(255,255,255,0.35)' }}
                   >
                     {event.time}
                   </p>
@@ -226,7 +196,7 @@ export function OperationTimeline({ animated = true, className }: OperationTimel
                     {event.label}
                   </p>
                   {/* Detail */}
-                  {event.detail && isVisible && (
+                  {event.detail && (
                     <p className="mt-0.5 text-xs leading-relaxed" style={{ color: 'rgba(255,255,255,0.3)' }}>
                       {event.detail}
                     </p>

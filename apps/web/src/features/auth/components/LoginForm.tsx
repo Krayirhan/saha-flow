@@ -87,7 +87,7 @@ export function LoginForm() {
         <div className="absolute inset-0 flex items-center">
           <div className="w-full border-t border-white/10" />
         </div>
-        <span className="relative bg-white/[0.03] px-3 text-xs text-white/40">veya</span>
+        <span className="relative px-3 text-xs" style={{ background: 'var(--sf-surface)', color: 'var(--sf-text-muted)' }}>veya</span>
       </div>
 
       <Button

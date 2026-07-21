@@ -1,7 +1,7 @@
-# Saha Flow Web Design System
+# İşAkış Web Design System
 
 > Scope: `apps/web` landing page and shared marketing-facing web components  
-> Product: Saha Flow — technical service and field operations management  
+> Product: İşAkış — technical service and field operations management  
 > Status: Design direction approved for implementation  
 > Core direction: **Operational dark interface with editorial clarity**
 
@@ -9,7 +9,7 @@
 
 ## 1. Brand Purpose
 
-Saha Flow helps technical service companies manage the complete field-operation lifecycle:
+İşAkış helps technical service companies manage the complete field-operation lifecycle:
 
 `customer request → work order → technician assignment → field execution → checklist/photo/signature → PDF service report`
 
@@ -74,7 +74,7 @@ The page should feel composed, not crowded. Use strong headings, clear sections,
 
 ### 2.4 Operational density
 
-Do not over-simplify the product into empty black sections. Saha Flow is an operations platform. The page should include enough meaningful detail to feel credible.
+Do not over-simplify the product into empty black sections. İşAkış is an operations platform. The page should include enough meaningful detail to feel credible.
 
 ### 2.5 Evidence before claims
 
@@ -166,7 +166,7 @@ Do not use:
 - decorative shaders
 - continuous animated gradient backgrounds
 
-Adapt the behavior to Saha Flow tokens. Do not paste a component unchanged.
+Adapt the behavior to İşAkış tokens. Do not paste a component unchanged.
 
 ### SuperDesign
 

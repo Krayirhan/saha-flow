@@ -8,7 +8,10 @@ export default function WorkOrdersPage() {
   return (
     <PermissionGuard permission={PERMISSIONS.WORK_ORDER_READ}>
       <div className="space-y-6">
-        <h1 className="text-2xl font-bold text-white">İş Emirleri</h1>
+        <div>
+          <h1 className="text-xl font-bold tracking-tight" style={{ color: 'var(--sf-text)' }}>İş Emirleri</h1>
+          <p className="mt-0.5 text-sm" style={{ color: 'var(--sf-text-muted)' }}>Tüm iş emirlerini takip edin</p>
+        </div>
         <WorkOrderList />
       </div>
     </PermissionGuard>

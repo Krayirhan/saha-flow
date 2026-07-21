@@ -8,7 +8,10 @@ export default function CustomersPage() {
   return (
     <PermissionGuard permission={PERMISSIONS.CUSTOMER_READ}>
       <div className="space-y-6">
-        <h1 className="text-2xl font-bold text-white">Müşteriler</h1>
+        <div>
+          <h1 className="text-xl font-bold tracking-tight" style={{ color: 'var(--sf-text)' }}>Müşteriler</h1>
+          <p className="mt-0.5 text-sm" style={{ color: 'var(--sf-text-muted)' }}>Tüm müşterileri yönetin</p>
+        </div>
         <CustomerList />
       </div>
     </PermissionGuard>

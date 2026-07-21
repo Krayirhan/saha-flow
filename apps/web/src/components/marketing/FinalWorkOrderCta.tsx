@@ -40,7 +40,7 @@ export function FinalWorkOrderCta() {
                 className="text-[clamp(26px,3vw,38px)] font-bold leading-tight tracking-tight"
                 style={{ color: 'var(--sf-text)' }}
               >
-                Bir sonraki iş emrinizi WhatsApp&apos;tan değil, Saha Flow&apos;dan yönetin.
+                Bir sonraki iş emrinizi WhatsApp&apos;tan değil, İşAkış&apos;dan yönetin.
               </h2>
               <p className="mt-4 text-base leading-relaxed" style={{ color: 'var(--sf-text-muted)' }}>
                 Ekibinizi oluşturun, ilk müşterinizi ekleyin ve saha operasyonunuzu tek panelden takip etmeye başlayın.

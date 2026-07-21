@@ -1,5 +1,5 @@
 /**
- * Landing Page — Saha Flow
+ * Landing Page — İşAkış
  *
  * Faz durumu:
  *   [x] Faz 1 — Temel: MarketingNavbar, HeroOperationsFlow, FlowLine, WorkflowNode, OperationTimeline
@@ -19,8 +19,6 @@ import { TrustStrip } from '@/components/marketing/TrustStrip';
 import { OperationsBeforeAfter } from '@/components/marketing/OperationsBeforeAfter';
 import { LifecycleStickySection } from '@/components/marketing/LifecycleStickySection';
 import { OperationalFeatureBento } from '@/components/marketing/OperationalFeatureBento';
-import { TrustAndSecuritySection } from '@/components/marketing/TrustAndSecuritySection';
-import { PilotProgramSection } from '@/components/marketing/PilotProgramSection';
 import { SinglePlanPricing } from '@/components/marketing/SinglePlanPricing';
 import { LandingFaq } from '@/components/marketing/LandingFaq';
 import { FinalWorkOrderCta } from '@/components/marketing/FinalWorkOrderCta';
@@ -40,10 +38,7 @@ export default function LandingPage() {
 
       {/* Faz 3 */}
       <OperationalFeatureBento />
-      <TrustAndSecuritySection />
-
       {/* Faz 4 */}
-      <PilotProgramSection />
       <SinglePlanPricing />
       <LandingFaq />
       <FinalWorkOrderCta />

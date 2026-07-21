@@ -8,7 +8,7 @@ export default function AuthenticatedLayout({ children }: { children: React.Reac
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
-    <div className="flex h-full bg-[#0A0A0B] text-white">
+    <div className="flex h-full text-white" style={{ background: 'var(--sf-bg)' }}>
       <div className="hidden md:block md:flex-shrink-0">
         <Sidebar />
       </div>
@@ -27,7 +27,7 @@ export default function AuthenticatedLayout({ children }: { children: React.Reac
 
       <div className="flex flex-1 flex-col overflow-hidden">
         <Header onMenuToggle={() => setSidebarOpen(!sidebarOpen)} />
-        <main className="flex-1 overflow-y-auto bg-[#0A0A0B] p-4 md:p-6 lg:p-8 scrollbar-thin">
+        <main className="flex-1 overflow-y-auto p-4 md:p-6 lg:p-8 scrollbar-thin" style={{ background: 'var(--sf-bg)' }}>
           {children}
         </main>
       </div>

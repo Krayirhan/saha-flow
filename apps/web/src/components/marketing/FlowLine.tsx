@@ -1,5 +1,5 @@
 /**
- * FlowLine — Saha Flow design primitive
+ * FlowLine — İşAkış design primitive
  *
  * A reusable system representing the operational lifecycle of a work order.
  * DESIGN.md §4: The Flow Line must always communicate a real workflow.

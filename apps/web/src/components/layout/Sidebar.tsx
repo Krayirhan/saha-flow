@@ -1,10 +1,11 @@
 'use client';
 
 import { cn } from '@/lib/utils/cn';
-import { ClipboardList, Users, Settings, Wrench, ChevronLeft, LayoutDashboard } from 'lucide-react';
+import { Users, Settings, Wrench, LayoutDashboard, ChevronLeft } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
+import { BrandLogo } from '@/components/brand/BrandLogo';
 
 const navItems = [
   { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
@@ -17,65 +18,96 @@ export function Sidebar() {
   const pathname = usePathname();
   const [collapsed, setCollapsed] = useState(false);
 
-  const isActive = (href: string) => {
-    if (href === '/dashboard') return pathname === '/dashboard';
-    return pathname.startsWith(href);
-  };
+  const isActive = (href: string) =>
+    href === '/dashboard' ? pathname === '/dashboard' : pathname.startsWith(href);
 
   return (
     <aside
       className={cn(
-        'flex h-full flex-col border-r border-white/10 bg-[#0A0A0B] transition-all duration-300',
-        collapsed ? 'w-16' : 'w-64',
+        'flex h-full flex-col transition-all duration-300',
+        collapsed ? 'w-[60px]' : 'w-[220px]',
       )}
+      style={{
+        background: 'var(--sf-bg)',
+        borderRight: '1px solid var(--sf-border)',
+      }}
     >
-      <div className="flex h-16 items-center justify-between border-b border-white/10 px-4">
-        {!collapsed && (
-          <Link href="/dashboard" className="flex items-center gap-2">
-            <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-gradient-to-br from-primary-400 to-primary-600 shadow-lg shadow-primary-500/25">
-              <ClipboardList className="h-4 w-4 text-white" />
-            </div>
-            <span className="text-lg font-bold tracking-tight text-white">Saha Flow</span>
-          </Link>
+      {/* Logo */}
+      <div
+        className={cn(
+          'flex h-14 items-center px-3',
+          collapsed ? 'justify-center' : 'justify-between',
         )}
-        {collapsed && (
-          <Link href="/dashboard" className="mx-auto">
-            <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-gradient-to-br from-primary-400 to-primary-600">
-              <ClipboardList className="h-4 w-4 text-white" />
-            </div>
-          </Link>
+        style={{ borderBottom: '1px solid var(--sf-border)' }}
+      >
+        {collapsed ? (
+          <BrandLogo href="/dashboard" compact />
+        ) : (
+          <>
+            <BrandLogo href="/dashboard" className="h-8 max-w-[130px] rounded-lg" />
+            <button
+              onClick={() => setCollapsed(true)}
+              className="rounded-md p-1 transition-colors hover:bg-white/5"
+              style={{ color: 'var(--sf-text-muted)' }}
+              aria-label="Menüyü daralt"
+            >
+              <ChevronLeft className="h-4 w-4" />
+            </button>
+          </>
         )}
-        <button
-          onClick={() => setCollapsed(!collapsed)}
-          className="hidden rounded-lg p-1 text-white/40 hover:bg-white/10 hover:text-white md:block"
-          aria-label={collapsed ? 'Menüyü genişlet' : 'Menüyü daralt'}
-        >
-          <ChevronLeft className={cn('h-5 w-5 transition-transform', collapsed && 'rotate-180')} />
-        </button>
       </div>
 
-      <nav className="flex-1 space-y-1 px-2 py-4">
-        {navItems.map((item) => (
-          <Link
-            key={item.href}
-            href={item.href}
-            className={cn(
-              'flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors',
-              isActive(item.href)
-                ? 'bg-white/10 text-primary-400'
-                : 'text-white/60 hover:bg-white/10 hover:text-white',
-            )}
-            title={collapsed ? item.label : undefined}
-          >
-            <item.icon className="h-5 w-5 flex-shrink-0" />
-            {!collapsed && <span>{item.label}</span>}
-          </Link>
-        ))}
+      {/* Expand button when collapsed */}
+      {collapsed && (
+        <button
+          onClick={() => setCollapsed(false)}
+          className="mx-auto mt-2 rounded-md p-1.5 transition-colors hover:bg-white/5"
+          style={{ color: 'var(--sf-text-muted)' }}
+          aria-label="Menüyü genişlet"
+        >
+          <ChevronLeft className="h-4 w-4 rotate-180" />
+        </button>
+      )}
+
+      {/* Nav */}
+      <nav className="flex-1 space-y-0.5 px-2 py-3">
+        {navItems.map((item) => {
+          const active = isActive(item.href);
+          return (
+            <Link
+              key={item.href}
+              href={item.href}
+              title={collapsed ? item.label : undefined}
+              className={cn(
+                'relative flex items-center rounded-lg px-3 py-2.5 text-sm font-medium transition-all duration-200',
+                collapsed ? 'justify-center' : 'gap-3',
+              )}
+              style={
+                active
+                  ? { background: 'rgba(79,140,255,0.08)', color: 'var(--sf-accent)' }
+                  : { color: 'var(--sf-text-2)' }
+              }
+            >
+              {/* Left accent bar */}
+              {active && !collapsed && (
+                <span
+                  className="absolute left-0 top-1/2 h-5 w-[3px] -translate-y-1/2 rounded-r"
+                  style={{ background: 'var(--sf-accent)' }}
+                />
+              )}
+              <item.icon className="h-4 w-4 flex-shrink-0" />
+              {!collapsed && <span>{item.label}</span>}
+            </Link>
+          );
+        })}
       </nav>
 
+      {/* Footer */}
       {!collapsed && (
-        <div className="border-t border-white/10 px-4 py-3">
-          <p className="text-xs text-white/30">v0.1.0</p>
+        <div className="px-4 py-3" style={{ borderTop: '1px solid var(--sf-border)' }}>
+          <p className="font-mono text-[10px]" style={{ color: 'var(--sf-text-muted)' }}>
+            v0.1.0
+          </p>
         </div>
       )}
     </aside>

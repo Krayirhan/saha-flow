@@ -21,12 +21,13 @@ export function PermissionGuard({ permission, children, fallback }: PermissionGu
   if (!user || !hasPermission(user.permissions, permission)) {
     if (fallback) return <>{fallback}</>;
     return (
-      <div className="flex min-h-[60vh] items-center justify-center text-white">
+      <div className="flex min-h-[60vh] items-center justify-center">
         <div className="text-center">
           <ErrorState message="Bu sayfaya erişim yetkiniz bulunmamaktadır." />
           <Link
             href="/dashboard"
-            className="mt-4 inline-block text-sm text-primary-400 hover:text-primary-300"
+            className="mt-4 inline-block text-sm hover:underline"
+            style={{ color: 'var(--sf-accent)' }}
           >
             Dashboard&apos;a dön
           </Link>

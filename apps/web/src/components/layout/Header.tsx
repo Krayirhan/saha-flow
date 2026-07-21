@@ -1,7 +1,6 @@
 'use client';
 
-import { cn } from '@/lib/utils/cn';
-import { LogOut, User, Bell, Menu } from 'lucide-react';
+import { LogOut, Bell, Menu, ChevronDown } from 'lucide-react';
 import { useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { useAuth } from '@/features/auth/hooks/useAuth';
@@ -23,66 +22,93 @@ export function Header({ onMenuToggle }: HeaderProps) {
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const pathname = usePathname();
 
-  const title = titleMap[pathname] || (pathname.startsWith('/work-orders/') ? 'İş Emri Detayı' : 'Saha Flow');
-
-  const handleLogout = async () => {
-    await logout();
-  };
+  const title = titleMap[pathname] ?? (pathname.startsWith('/work-orders/') ? 'İş Emri Detayı' : 'İşAkış');
 
   return (
-    <header className="flex h-16 items-center justify-between border-b border-white/10 bg-[#0A0A0B]/80 px-4 backdrop-blur-xl lg:px-6">
+    <header
+      className="flex h-14 flex-shrink-0 items-center justify-between px-5 backdrop-blur-xl"
+      style={{
+        background: 'rgba(8,10,15,0.85)',
+        borderBottom: '1px solid var(--sf-border)',
+      }}
+    >
+      {/* Left */}
       <div className="flex items-center gap-3">
         <button
           onClick={onMenuToggle}
-          className="rounded-lg p-1.5 text-white/60 hover:bg-white/10 hover:text-white md:hidden"
+          className="rounded-lg p-1.5 transition-colors hover:bg-white/5 md:hidden"
+          style={{ color: 'var(--sf-text-muted)' }}
           aria-label="Menü"
         >
-          <Menu className="h-5 w-5" />
+          <Menu className="h-4 w-4" />
         </button>
-        <h1 className="hidden text-lg font-semibold text-white md:block">{title}</h1>
+        <h1
+          className="hidden text-sm font-semibold tracking-tight md:block"
+          style={{ color: 'var(--sf-text)' }}
+        >
+          {title}
+        </h1>
       </div>
 
-      <div className="flex items-center gap-3">
+      {/* Right */}
+      <div className="flex items-center gap-1">
+        {/* Bell */}
         <button
-          className="relative rounded-lg p-2 text-white/60 hover:bg-white/10 hover:text-white disabled:opacity-50"
+          className="rounded-lg p-2 transition-colors hover:bg-white/5 disabled:opacity-30"
+          style={{ color: 'var(--sf-text-muted)' }}
           aria-label="Bildirimler"
           disabled
           title="Çok yakında"
         >
-          <Bell className="h-5 w-5" />
+          <Bell className="h-4 w-4" />
         </button>
 
+        {/* Divider */}
+        <div className="mx-1 h-5 w-px" style={{ background: 'var(--sf-border)' }} />
+
+        {/* User menu */}
         <div className="relative">
           <button
             onClick={() => setUserMenuOpen(!userMenuOpen)}
-            className={cn(
-              'flex items-center gap-2 rounded-lg p-1.5 text-sm text-white/80 hover:bg-white/10 hover:text-white',
-            )}
+            className="flex items-center gap-2 rounded-lg px-2 py-1.5 transition-colors hover:bg-white/5"
           >
-            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-primary-400 to-primary-600 text-sm font-semibold text-white">
+            <div
+              className="flex h-7 w-7 items-center justify-center rounded-full text-xs font-bold"
+              style={{ background: 'var(--sf-accent-bg)', color: 'var(--sf-accent)' }}
+            >
               {user?.name?.charAt(0).toUpperCase() ?? '?'}
             </div>
-            <span className="hidden md:block">{user?.name ?? 'Kullanıcı'}</span>
+            <span className="hidden text-sm font-medium md:block" style={{ color: 'var(--sf-text-2)' }}>
+              {user?.name ?? 'Kullanıcı'}
+            </span>
+            <ChevronDown className="hidden h-3 w-3 md:block" style={{ color: 'var(--sf-text-muted)' }} />
           </button>
 
           {userMenuOpen && (
             <>
               <div className="fixed inset-0 z-10" onClick={() => setUserMenuOpen(false)} />
-              <div className="absolute right-0 z-20 mt-1 w-48 rounded-lg border border-white/10 bg-[#0A0A0B] py-1 shadow-2xl backdrop-blur-sm">
-                <div className="border-b border-white/10 px-4 py-2">
-                  <p className="text-sm font-medium text-white">{user?.name}</p>
-                  <p className="text-xs text-white/50">{user?.email}</p>
+              <div
+                className="absolute right-0 z-20 mt-1 w-52 overflow-hidden rounded-xl shadow-2xl"
+                style={{
+                  background: 'var(--sf-surface)',
+                  border: '1px solid var(--sf-border-strong)',
+                }}
+              >
+                {/* User info */}
+                <div className="px-4 py-3" style={{ borderBottom: '1px solid var(--sf-border)' }}>
+                  <p className="text-sm font-semibold" style={{ color: 'var(--sf-text)' }}>
+                    {user?.name}
+                  </p>
+                  <p className="mt-0.5 truncate text-xs" style={{ color: 'var(--sf-text-muted)' }}>
+                    {user?.email}
+                  </p>
                 </div>
+
+                {/* Logout */}
                 <button
-                  onClick={() => setUserMenuOpen(false)}
-                  className="flex w-full items-center gap-2 px-4 py-2 text-sm text-white/70 hover:bg-white/10 hover:text-white"
-                >
-                  <User className="h-4 w-4" />
-                  Profil
-                </button>
-                <button
-                  onClick={handleLogout}
-                  className="flex w-full items-center gap-2 px-4 py-2 text-sm text-danger-500 hover:bg-white/10"
+                  onClick={async () => { setUserMenuOpen(false); await logout(); }}
+                  className="flex w-full items-center gap-2.5 px-4 py-2.5 text-sm transition-colors hover:bg-white/5"
+                  style={{ color: 'var(--sf-sla-risk)' }}
                 >
                   <LogOut className="h-4 w-4" />
                   Çıkış Yap

@@ -2,18 +2,42 @@
 
 import { PermissionGuard } from '@/components/guard/PermissionGuard';
 import { PERMISSIONS } from '@/lib/validation/formats';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useAuth } from '@/features/auth/hooks/useAuth';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
-import {
-  User,
-  Shield,
-  Bell,
-  Building,
-  Globe,
-  Save,
-} from 'lucide-react';
+import { CardSpotlight } from '@/components/ui/CardSpotlight';
+import { User, Shield, Bell, Building, Save, CheckCheck } from 'lucide-react';
+
+function SettingSection({
+  icon: Icon,
+  title,
+  accentColor = 'var(--sf-accent)',
+  children,
+}: {
+  icon: React.ElementType;
+  title: string;
+  accentColor?: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <CardSpotlight
+      className="sf-gradient-card p-6"
+      spotlightColor={`${accentColor}10`}
+    >
+      <div className="mb-5 flex items-center gap-3">
+        <div
+          className="flex h-8 w-8 items-center justify-center rounded-xl"
+          style={{ background: `${accentColor}18`, boxShadow: `0 0 12px ${accentColor}25` }}
+        >
+          <Icon className="h-4 w-4" style={{ color: accentColor }} />
+        </div>
+        <h2 className="text-sm font-semibold" style={{ color: 'var(--sf-text)' }}>{title}</h2>
+      </div>
+      {children}
+    </CardSpotlight>
+  );
+}
 
 export default function SettingsPage() {
   const { user } = useAuth();
@@ -26,30 +50,21 @@ export default function SettingsPage() {
 
   return (
     <PermissionGuard permission={PERMISSIONS.SETTINGS_READ}>
-      <div className="mx-auto max-w-3xl space-y-6">
-        <h1 className="text-2xl font-bold text-white">Ayarlar</h1>
+      <div className="mx-auto max-w-3xl space-y-5 sf-fade-up">
+        <div>
+          <h1 className="text-xl font-bold tracking-tight sf-gradient-text">Ayarlar</h1>
+          <p className="mt-0.5 text-sm" style={{ color: 'var(--sf-text-muted)' }}>Hesap ve uygulama tercihleri</p>
+        </div>
 
-        <div className="rounded-xl border border-white/10 bg-white/[0.03] p-6 backdrop-blur-sm">
-          <div className="mb-4 flex items-center gap-3">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/5">
-              <User className="h-4 w-4 text-primary-400" />
-            </div>
-            <h2 className="text-lg font-semibold text-white">Profil Bilgileri</h2>
-          </div>
+        <SettingSection icon={User} title="Profil Bilgileri" accentColor="var(--sf-accent)">
           <div className="grid gap-4 sm:grid-cols-2">
             <Input label="Ad Soyad" defaultValue={user?.name ?? ''} readOnly />
             <Input label="E-posta" defaultValue={user?.email ?? ''} readOnly />
             <Input label="Rol" defaultValue={user?.role ?? ''} readOnly />
           </div>
-        </div>
+        </SettingSection>
 
-        <div className="rounded-xl border border-white/10 bg-white/[0.03] p-6 backdrop-blur-sm">
-          <div className="mb-4 flex items-center gap-3">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/5">
-              <Bell className="h-4 w-4 text-primary-400" />
-            </div>
-            <h2 className="text-lg font-semibold text-white">Bildirim Tercihleri</h2>
-          </div>
+        <SettingSection icon={Bell} title="Bildirim Tercihleri" accentColor="#ffaa4c">
           <div className="space-y-3">
             {[
               { id: 'email_notify', label: 'E-posta bildirimleri' },
@@ -60,58 +75,43 @@ export default function SettingsPage() {
                 <input
                   type="checkbox"
                   id={item.id}
-                  className="h-4 w-4 rounded border-white/20 bg-white/5 text-primary-500 focus:ring-primary-500 focus:ring-offset-0"
+                  className="h-4 w-4 rounded"
+                  style={{ accentColor: 'var(--sf-accent)' }}
                 />
-                <span className="text-sm text-white/70">{item.label}</span>
+                <span className="text-sm" style={{ color: 'var(--sf-text-2)' }}>{item.label}</span>
               </label>
             ))}
           </div>
-        </div>
+        </SettingSection>
 
-        <div className="rounded-xl border border-white/10 bg-white/[0.03] p-6 backdrop-blur-sm">
-          <div className="mb-4 flex items-center gap-3">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/5">
-              <Building className="h-4 w-4 text-primary-400" />
-            </div>
-            <h2 className="text-lg font-semibold text-white">Firma Bilgileri</h2>
-          </div>
+        <SettingSection icon={Building} title="Firma Bilgileri" accentColor="#7d6cff">
           <div className="grid gap-4 sm:grid-cols-2">
-            <Input label="Firma Adı" defaultValue="" placeholder="Firma adınız" />
-            <Input label="Vergi Numarası" defaultValue="" placeholder="Vergi numaranız" />
-            <Input label="Vergi Dairesi" defaultValue="" placeholder="Vergi dairesi" />
-            <Input label="Telefon" defaultValue="" placeholder="Firma telefonu" />
+            <Input label="Firma Adı" placeholder="Firma adınız" />
+            <Input label="Vergi Numarası" placeholder="Vergi numaranız" />
+            <Input label="Vergi Dairesi" placeholder="Vergi dairesi" />
+            <Input label="Telefon" placeholder="Firma telefonu" />
           </div>
-        </div>
+        </SettingSection>
 
-        <div className="rounded-xl border border-white/10 bg-white/[0.03] p-6 backdrop-blur-sm">
-          <div className="mb-4 flex items-center gap-3">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/5">
-              <Shield className="h-4 w-4 text-primary-400" />
-            </div>
-            <h2 className="text-lg font-semibold text-white">Yetkiler</h2>
-          </div>
+        <SettingSection icon={Shield} title="Yetkiler" accentColor="#38d996">
           <div className="flex flex-wrap gap-2">
             {user?.permissions.map((perm) => (
               <span
                 key={perm}
-                className="inline-flex items-center rounded-full bg-primary-500/10 px-3 py-1 text-xs font-medium text-primary-400"
+                className="inline-flex items-center rounded-full px-2.5 py-1 text-xs font-medium"
+                style={{ background: 'var(--sf-accent-bg)', color: 'var(--sf-accent)', border: '1px solid rgba(96,165,250,0.2)' }}
               >
                 {perm}
               </span>
-            )) ?? <p className="text-sm text-white/50">Yetki listesi yüklenemedi.</p>}
+            )) ?? <p className="text-sm" style={{ color: 'var(--sf-text-muted)' }}>Yetki listesi yüklenemedi.</p>}
           </div>
-        </div>
+        </SettingSection>
 
         <div className="flex justify-end">
           <Button onClick={handleSave} disabled>
-            {saved ? (
-              <>Kaydedildi (demo)</>
-            ) : (
-              <>
-                <Save className="h-4 w-4" />
-                Kaydet (API entegrasyonu bekleniyor)
-              </>
-            )}
+            {saved
+              ? <><CheckCheck className="h-4 w-4" />Kaydedildi</>
+              : <><Save className="h-4 w-4" />Kaydet (API bekleniyor)</>}
           </Button>
         </div>
       </div>

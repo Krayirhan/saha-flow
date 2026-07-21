@@ -12,23 +12,19 @@ interface EmptyStateProps {
   className?: string;
 }
 
-export function EmptyState({
-  icon,
-  title,
-  message,
-  actionLabel,
-  onAction,
-  className,
-}: EmptyStateProps) {
+export function EmptyState({ icon, title, message, actionLabel, onAction, className }: EmptyStateProps) {
   return (
-    <div className={cn('flex flex-col items-center justify-center rounded-xl border border-white/10 bg-white/[0.03] py-16 text-center backdrop-blur-sm', className)}>
-      <div className="mb-4 text-white/20">
-        {icon ?? <Inbox className="h-16 w-16" />}
+    <div
+      className={cn('flex flex-col items-center justify-center rounded-2xl py-16 text-center', className)}
+      style={{ background: 'var(--sf-surface)', border: '1px solid var(--sf-border)' }}
+    >
+      <div className="mb-4" style={{ color: 'var(--sf-text-muted)', opacity: 0.4 }}>
+        {icon ?? <Inbox className="h-14 w-14" />}
       </div>
-      <h3 className="text-lg font-semibold text-white">{title}</h3>
-      {message && <p className="mt-1 max-w-sm text-sm text-white/50">{message}</p>}
+      <h3 className="text-base font-semibold" style={{ color: 'var(--sf-text)' }}>{title}</h3>
+      {message && <p className="mt-1 max-w-sm text-sm" style={{ color: 'var(--sf-text-muted)' }}>{message}</p>}
       {actionLabel && onAction && (
-        <Button variant="primary" size="sm" className="mt-4" onClick={onAction}>
+        <Button variant="secondary" size="sm" className="mt-5" onClick={onAction}>
           {actionLabel}
         </Button>
       )}

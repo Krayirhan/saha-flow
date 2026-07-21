@@ -1,7 +1,7 @@
 import { cn } from '@/lib/utils/cn';
-import { ClipboardList } from 'lucide-react';
-import Link from 'next/link';
 import { type ReactNode } from 'react';
+
+import { BrandLogo } from '@/components/brand/BrandLogo';
 
 interface AuthLayoutProps {
   children: ReactNode;
@@ -20,12 +20,7 @@ export function AuthLayout({ children, title, subtitle, className }: AuthLayoutP
       </div>
 
       <div className="relative z-10 mb-8 flex flex-col items-center">
-        <Link href="/" className="flex items-center gap-2">
-          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-primary-400 to-primary-600 shadow-lg shadow-primary-500/25">
-            <ClipboardList className="h-5 w-5 text-white" />
-          </div>
-          <span className="text-2xl font-bold tracking-tight text-white">Saha Flow</span>
-        </Link>
+        <BrandLogo className="h-14 rounded-xl" />
         <h2 className="mt-6 text-center text-2xl font-bold tracking-tight text-white">
           {title}
         </h2>
@@ -42,7 +37,7 @@ export function AuthLayout({ children, title, subtitle, className }: AuthLayoutP
         {children}
       </div>
       <p className="relative z-10 mt-8 text-center text-xs text-white/30">
-        &copy; {new Date().getFullYear()} Saha Flow. Tüm hakları saklıdır.
+        &copy; {new Date().getFullYear()} İşAkış. Tüm hakları saklıdır.
       </p>
     </div>
   );

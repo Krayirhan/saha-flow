@@ -53,7 +53,7 @@ function WebPanelMock() {
           <div className="h-2.5 w-2.5 rounded-full" style={{ background: '#38d996' }} />
         </div>
         <p className="text-[10px] font-medium" style={{ color: 'var(--sf-text-muted)' }}>
-          Saha Flow — Operasyon Paneli
+          İşAkış — Operasyon Paneli
         </p>
         <div className="w-12" />
       </div>

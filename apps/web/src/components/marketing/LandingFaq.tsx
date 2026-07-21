@@ -1,12 +1,3 @@
-/**
- * LandingFaq — Faz 4
- * LANDING_REDESIGN_PLAN.md §4.11
- * LANDING_CONTENT.md §12
- *
- * 10 soru. Cevaplar LANDING_CONTENT.md §12'den.
- * TODO: Cevaplar yayın öncesi doğrulanmalı.
- */
-
 'use client';
 
 import { useState } from 'react';
@@ -38,7 +29,6 @@ const FAQS = [
   },
   {
     q: 'Ücretsiz deneme için kredi kartı gerekiyor mu?',
-    // TODO: Verify commercial policy
     a: 'Deneme koşulları yakında netleştirilecektir. Güncel bilgiler için iletişime geçebilirsiniz.',
   },
   {
@@ -51,33 +41,12 @@ const FAQS = [
   },
   {
     q: 'Destek pakete dahil mi?',
-    // TODO: Define support channels and SLA
     a: 'Profesyonel planda e-posta desteği planlanmaktadır. Destek kanalları ve yanıt süreleri yakında açıklanacaktır.',
   },
 ];
 
-function ChevronIcon({ open }: { open: boolean }) {
-  return (
-    <svg
-      width="18"
-      height="18"
-      viewBox="0 0 18 18"
-      fill="none"
-      aria-hidden="true"
-      style={{
-        transform: open ? 'rotate(180deg)' : 'rotate(0deg)',
-        transition: 'transform 0.25s ease',
-        flexShrink: 0,
-        color: 'var(--sf-text-muted)',
-      }}
-    >
-      <path d="M4.5 6.75L9 11.25l4.5-4.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
-
 export function LandingFaq() {
-  const [open, setOpen] = useState<number | null>(null);
+  const [active, setActive] = useState(0);
 
   return (
     <section
@@ -87,8 +56,9 @@ export function LandingFaq() {
       aria-labelledby="faq-heading"
     >
       <div className="mkt-container">
-        <div className="mx-auto max-w-2xl">
-          <div className="text-center">
+        {/* Header */}
+        <div className="mb-12 flex flex-col gap-2 lg:flex-row lg:items-end lg:justify-between">
+          <div>
             <span
               className="text-xs font-semibold uppercase tracking-[0.18em]"
               style={{ color: '#4f8cff' }}
@@ -103,52 +73,156 @@ export function LandingFaq() {
               Sıkça sorulanlar
             </h2>
           </div>
+          <p className="max-w-xs text-sm leading-relaxed lg:text-right" style={{ color: 'var(--sf-text-muted)' }}>
+            Başka sorunuz varsa iletişime geçin, yanıtlayalım.
+          </p>
+        </div>
 
-          <dl className="mt-10 space-y-2">
-            {FAQS.map((faq, i) => (
+        {/* Desktop: 2-col */}
+        <div className="hidden lg:grid lg:grid-cols-[1fr,1fr] lg:gap-8">
+          {/* Left — soru listesi */}
+          <div
+            className="overflow-hidden rounded-2xl border"
+            style={{ background: 'var(--sf-surface)', borderColor: 'var(--sf-border)' }}
+          >
+            {FAQS.map((faq, i) => {
+              const isActive = i === active;
+              return (
+                <button
+                  key={i}
+                  type="button"
+                  onClick={() => setActive(i)}
+                  className="flex w-full items-start gap-4 border-b px-6 py-4 text-left transition-colors duration-150"
+                  style={{
+                    borderColor: 'var(--sf-border)',
+                    background: isActive ? 'rgba(79,140,255,0.06)' : 'transparent',
+                    borderBottom: i === FAQS.length - 1 ? 'none' : undefined,
+                  }}
+                  aria-pressed={isActive}
+                >
+                  <span
+                    className="mt-0.5 font-mono text-[11px] font-bold tabular-nums"
+                    style={{ color: isActive ? '#4f8cff' : 'var(--sf-text-muted)' }}
+                  >
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                  <span
+                    className="text-sm leading-snug"
+                    style={{
+                      color: isActive ? 'var(--sf-text)' : 'var(--sf-text-2)',
+                      fontWeight: isActive ? 600 : 400,
+                    }}
+                  >
+                    {faq.q}
+                  </span>
+                  {isActive && (
+                    <svg
+                      width="14"
+                      height="14"
+                      viewBox="0 0 14 14"
+                      fill="none"
+                      className="ml-auto mt-0.5 flex-shrink-0"
+                      aria-hidden="true"
+                    >
+                      <path d="M2 7h10M8 3l4 4-4 4" stroke="#4f8cff" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  )}
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Right — cevap paneli */}
+          <div className="sticky top-28 self-start">
+            <div
+              key={active}
+              className="faq-panel-enter overflow-hidden rounded-2xl border p-8"
+              style={{
+                background: 'var(--sf-surface)',
+                borderColor: 'rgba(79,140,255,0.2)',
+                minHeight: '220px',
+              }}
+            >
+              <span
+                className="font-mono text-[11px] font-bold"
+                style={{ color: '#4f8cff' }}
+              >
+                {String(active + 1).padStart(2, '0')} / {FAQS.length}
+              </span>
+              <h3
+                className="mt-4 text-xl font-bold leading-snug tracking-tight"
+                style={{ color: 'var(--sf-text)' }}
+              >
+                {FAQS[active].q}
+              </h3>
+              <p
+                className="mt-5 text-base leading-relaxed"
+                style={{ color: 'var(--sf-text-muted)' }}
+              >
+                {FAQS[active].a}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Mobile: accordion */}
+        <dl className="space-y-2 lg:hidden">
+          {FAQS.map((faq, i) => {
+            const isOpen = i === active;
+            return (
               <div
                 key={i}
-                className="rounded-2xl border transition-colors"
+                className="overflow-hidden rounded-2xl border transition-colors"
                 style={{
                   background: 'var(--sf-surface)',
-                  borderColor: open === i ? 'rgba(79,140,255,0.2)' : 'var(--sf-border)',
+                  borderColor: isOpen ? 'rgba(79,140,255,0.2)' : 'var(--sf-border)',
                 }}
               >
                 <dt>
                   <button
                     type="button"
-                    className="mkt-focus flex w-full items-center justify-between gap-4 px-6 py-5 text-left"
-                    aria-expanded={open === i}
-                    aria-controls={`faq-answer-${i}`}
-                    onClick={() => setOpen(open === i ? null : i)}
+                    className="flex w-full items-center gap-4 px-5 py-4 text-left"
+                    aria-expanded={isOpen}
+                    onClick={() => setActive(isOpen ? -1 : i)}
                   >
-                    <span className="text-sm font-semibold" style={{ color: 'var(--sf-text)' }}>
+                    <span
+                      className="font-mono text-[11px] font-bold"
+                      style={{ color: isOpen ? '#4f8cff' : 'var(--sf-text-muted)' }}
+                    >
+                      {String(i + 1).padStart(2, '0')}
+                    </span>
+                    <span
+                      className="flex-1 text-sm font-medium leading-snug"
+                      style={{ color: 'var(--sf-text)' }}
+                    >
                       {faq.q}
                     </span>
-                    <ChevronIcon open={open === i} />
+                    <span
+                      className="flex-shrink-0 text-lg leading-none transition-transform duration-200"
+                      style={{
+                        color: 'var(--sf-text-muted)',
+                        transform: isOpen ? 'rotate(45deg)' : 'rotate(0deg)',
+                      }}
+                    >
+                      +
+                    </span>
                   </button>
                 </dt>
                 <dd
-                  id={`faq-answer-${i}`}
-                  role="region"
-                  aria-labelledby={`faq-question-${i}`}
-                  className="overflow-hidden"
                   style={{
-                    maxHeight: open === i ? '1000px' : '0',
+                    maxHeight: isOpen ? '500px' : '0',
+                    overflow: 'hidden',
                     transition: 'max-height 0.3s ease',
                   }}
                 >
-                  <p
-                    className="px-6 pb-5 text-sm leading-relaxed"
-                    style={{ color: 'var(--sf-text-muted)' }}
-                  >
+                  <p className="px-5 pb-5 pt-1 text-sm leading-relaxed" style={{ color: 'var(--sf-text-muted)' }}>
                     {faq.a}
                   </p>
                 </dd>
               </div>
-            ))}
-          </dl>
-        </div>
+            );
+          })}
+        </dl>
       </div>
     </section>
   );

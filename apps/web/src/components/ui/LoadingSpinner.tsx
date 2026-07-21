@@ -16,8 +16,8 @@ const sizeClasses = {
 export function LoadingSpinner({ size = 'md', text, className }: LoadingSpinnerProps) {
   return (
     <div className={cn('flex flex-col items-center justify-center gap-3 py-12', className)}>
-      <Loader2 className={cn('animate-spin text-primary-400', sizeClasses[size])} />
-      {text && <p className="text-sm text-white/50">{text}</p>}
+      <Loader2 className={cn('animate-spin', sizeClasses[size])} style={{ color: 'var(--sf-accent)' }} />
+      {text && <p className="text-sm" style={{ color: 'var(--sf-text-muted)' }}>{text}</p>}
     </div>
   );
 }

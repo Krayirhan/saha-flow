@@ -13,44 +13,59 @@ export default function DashboardPage() {
 
   if (isLoading && !stats) return <LoadingSpinner text="Dashboard yükleniyor..." />;
   if (error)
-    return (
-      <ErrorState
-        message="Dashboard verileri yüklenirken bir hata oluştu."
-        onRetry={() => mutate()}
-      />
-    );
+    return <ErrorState message="Dashboard verileri yüklenirken bir hata oluştu." onRetry={() => mutate()} />;
 
   return (
-    <div className="space-y-6">
-      <h1 className="text-2xl font-bold text-white">Dashboard</h1>
+    <div className="space-y-6 sf-fade-up">
+      {/* Page heading */}
+      <div>
+        <h1 className="text-xl font-bold tracking-tight sf-gradient-text">Dashboard</h1>
+        <p className="mt-0.5 text-sm" style={{ color: 'var(--sf-text-muted)' }}>
+          Genel bakış ve son aktiviteler
+        </p>
+      </div>
 
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      {/* Stats bento grid */}
+      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
         <StatsCard
           title="Bugünkü İşler"
           value={stats?.totalToday ?? 0}
-          subtitle="Bugün oluşturulan iş emirleri"
+          subtitle="Bugün oluşturulan"
           icon={<Wrench className="h-5 w-5" />}
+          accentColor="#60a5fa"
+          gradientClass="sf-gradient-card"
         />
         <StatsCard
           title="Bekleyen"
           value={stats?.pending ?? 0}
-          subtitle="Bekleyen iş emirleri"
+          subtitle="Atanmayı bekliyor"
           icon={<Clock className="h-5 w-5" />}
+          accentColor="#ffaa4c"
+          gradientClass="sf-gradient-card-amber"
         />
         <StatsCard
-          title="Tamamlanan (Bu Ay)"
+          title="Tamamlanan"
           value={stats?.completedThisMonth ?? 0}
-          subtitle="Bu ay tamamlanan işler"
+          subtitle="Bu ay tamamlanan"
           icon={<CheckCircle className="h-5 w-5" />}
+          accentColor="#38d996"
+          gradientClass="sf-gradient-card-green"
         />
         <StatsCard
-          title="Tahsilat (Bu Ay)"
-          value={stats?.totalCollection != null ? formatCurrency(stats.totalCollection, stats.collectionCurrency) : '₺0,00'}
-          subtitle="Bu ay toplam tahsilat"
+          title="Tahsilat"
+          value={
+            stats?.totalCollection != null
+              ? formatCurrency(stats.totalCollection, stats.collectionCurrency)
+              : '₺0,00'
+          }
+          subtitle="Bu ay toplam"
           icon={<Banknote className="h-5 w-5" />}
+          accentColor="#7d6cff"
+          gradientClass="sf-gradient-card-purple"
         />
       </div>
 
+      {/* Recent work orders */}
       <RecentWorkOrders workOrders={recentWorkOrders} loading={isLoading} />
     </div>
   );

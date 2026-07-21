@@ -56,7 +56,7 @@ export function PilotProgramSection() {
                 İlk pilot ekiplerden biri olun
               </h2>
               <p className="mt-4 text-base leading-relaxed" style={{ color: 'var(--sf-text-muted)' }}>
-                Saha Flow&apos;u gerçek operasyonunuzda deneyin. Kurulum, veri taşıma ve ilk iş emri akışı için ürün ekibiyle birlikte ilerleyin.
+                İşAkış&apos;u gerçek operasyonunuzda deneyin. Kurulum, veri taşıma ve ilk iş emri akışı için ürün ekibiyle birlikte ilerleyin.
               </p>
 
               {/* TODO: Update href when pilot form is ready */}

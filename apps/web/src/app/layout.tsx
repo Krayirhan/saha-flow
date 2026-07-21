@@ -5,8 +5,8 @@ import './globals.css';
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
 export const metadata: Metadata = {
-  title: 'Saha Flow - Saha Yönetim Sistemi',
-  description: 'Saha Flow ile iş emirlerinizi ve müşterilerinizi kolayca yönetin.',
+  title: 'İşAkış - Saha Yönetim Sistemi',
+  description: 'İşAkış ile iş emirlerinizi ve müşterilerinizi kolayca yönetin.',
   robots: { index: false, follow: false },
 };
 

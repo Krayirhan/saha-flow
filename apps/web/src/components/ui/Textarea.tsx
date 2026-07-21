@@ -13,34 +13,27 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
     return (
       <div className="w-full">
         {label && (
-          <label htmlFor={textareaId} className="mb-1 block text-sm font-medium text-white/70">
+          <label htmlFor={textareaId} className="sf-label">
             {label}
-            {props.required && <span className="ml-0.5 text-danger-500">*</span>}
+            {props.required && <span className="ml-0.5" style={{ color: 'var(--sf-sla-risk)' }}>*</span>}
           </label>
         )}
         <textarea
           ref={ref}
           id={textareaId}
           rows={rows}
-          className={cn(
-            'block w-full rounded-lg border bg-white/5 px-3 py-2 text-sm text-white shadow-sm transition-colors placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-offset-0',
-            error
-              ? 'border-danger-500 focus:border-danger-500 focus:ring-danger-500'
-              : 'border-white/10 focus:border-primary-500 focus:ring-primary-500',
-            props.disabled && 'cursor-not-allowed bg-white/5 text-white/40',
-            className,
-          )}
+          className={cn('sf-field resize-none', error && 'sf-field-error', className)}
           aria-invalid={error ? 'true' : undefined}
           aria-describedby={error ? `${textareaId}-error` : hint ? `${textareaId}-hint` : undefined}
           {...props}
         />
         {hint && !error && (
-          <p id={`${textareaId}-hint`} className="mt-1 text-xs text-white/40">
+          <p id={`${textareaId}-hint`} className="mt-1 text-xs" style={{ color: 'var(--sf-text-muted)' }}>
             {hint}
           </p>
         )}
         {error && (
-          <p id={`${textareaId}-error`} className="mt-1 text-xs text-danger-400">
+          <p id={`${textareaId}-error`} className="mt-1 text-xs" style={{ color: 'var(--sf-sla-risk)' }}>
             {error}
           </p>
         )}

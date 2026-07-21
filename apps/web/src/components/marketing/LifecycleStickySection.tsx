@@ -69,34 +69,36 @@ function useReducedMotion() {
 
 export function LifecycleStickySection() {
   const [activeStep, setActiveStep] = useState(0);
-  const sectionRef = useRef<HTMLElement>(null);
+  const stepRefs = useRef<(HTMLDivElement | null)[]>([]);
   const reducedMotion = useReducedMotion();
 
   useEffect(() => {
-    if (reducedMotion) return;
-
     const onScroll = () => {
-      const el = sectionRef.current;
-      if (!el) return;
-      const rect = el.getBoundingClientRect();
-      const scrollable = rect.height - window.innerHeight;
-      if (scrollable <= 0) return;
-      // progress: 0 when section top hits viewport top → 1 when section bottom hits viewport bottom
-      const progress = Math.max(0, Math.min(1, -rect.top / scrollable));
-      const idx = Math.min(Math.floor(progress * STEPS.length), STEPS.length - 1);
-      setActiveStep(idx);
+      // Viewport'ta hangi step içeriği en yakın? → onu aktif yap
+      const focal = window.innerHeight * 0.42; // viewport'un üst yarısına yakın nokta
+      let best = 0;
+      let bestDist = Infinity;
+      stepRefs.current.forEach((el, i) => {
+        if (!el) return;
+        const rect = el.getBoundingClientRect();
+        const dist = Math.abs(rect.top - focal);
+        if (dist < bestDist) { bestDist = dist; best = i; }
+      });
+      setActiveStep(best);
     };
 
     window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
-    return () => window.removeEventListener('scroll', onScroll);
-  }, [reducedMotion]);
+    const raf = requestAnimationFrame(onScroll);
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      cancelAnimationFrame(raf);
+    };
+  }, []);
 
   const currentStep = STEPS[activeStep];
 
   return (
     <section
-      ref={sectionRef}
       id="how-it-works"
       className="mkt-section"
       aria-labelledby="lifecycle-heading"
@@ -174,13 +176,31 @@ export function LifecycleStickySection() {
             </div>
           </div>
 
-          {/* Right: scrollable steps — py-14 gives ~220px scroll room per step */}
+          {/* Right: scrollable steps */}
           <div className="space-y-0">
             {STEPS.map((step, i) => (
-              <div key={step.number}>
+              <div
+                key={step.number}
+                ref={(el) => { stepRefs.current[i] = el; }}
+              >
                 <div
-                  className="flex gap-5 py-20 transition-opacity duration-300"
-                  style={{ opacity: reducedMotion ? 1 : i === activeStep ? 1 : 0.4 }}
+                  role="button"
+                  tabIndex={0}
+                  aria-current={i === activeStep ? 'step' : undefined}
+                  onClick={() => {
+                    stepRefs.current[i]?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                  }}
+                  onKeyDown={(event) => {
+                    if (event.key === 'Enter' || event.key === ' ') {
+                      event.preventDefault();
+                      stepRefs.current[i]?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                  }}
+                  className="flex gap-5 py-24 transition-opacity duration-300"
+                  style={{
+                    opacity: reducedMotion ? 1 : i === activeStep ? 1 : 0.35,
+                    cursor: 'pointer',
+                  }}
                 >
                   {/* Flow node + connector */}
                   <div className="flex flex-col items-center">

@@ -36,7 +36,7 @@ export function HeroOperationsFlow() {
     <section
       id="product"
       className="relative overflow-hidden bg-[#080a0f] pt-[96px] lg:pt-[112px]"
-      aria-label="Saha Flow — Saha operasyonu yönetimi"
+      aria-label="İşAkış — Saha operasyonu yönetimi"
     >
       {/* Minimal background — single subtle grid, no radial blobs */}
       <div

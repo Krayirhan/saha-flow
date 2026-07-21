@@ -2,12 +2,31 @@
 @tailwind components;
 @tailwind utilities;
 
+@keyframes tickerLeft {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.ticker-track {
+  animation: tickerLeft 28s linear infinite;
+}
+.ticker-track:hover {
+  animation-play-state: paused;
+}
+
 @keyframes lcPanelIn {
   from { opacity: 0; transform: translateY(10px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 .lc-panel-enter {
   animation: lcPanelIn 0.28s ease;
+}
+
+@keyframes faqPanelIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.faq-panel-enter {
+  animation: faqPanelIn 0.22s ease;
 }
 
 @layer base {
@@ -36,17 +55,21 @@
     --sf-offline:     #747d8d;
     --sf-synced:      #3dd6d0;
 
-    --sf-bg:          #080a0f;
-    --sf-bg-2:        #0d1118;
-    --sf-surface:     #111722;
-    --sf-surface-2:   #151d2a;
+    --sf-bg:          #0f1117;
+    --sf-bg-2:        #131820;
+    --sf-surface:     #161c27;
+    --sf-surface-2:   #1d2535;
 
-    --sf-text:        #f5f7fa;
-    --sf-text-2:      #a8b0bf;
-    --sf-text-muted:  #747d8d;
+    --sf-text:        #e2e8f0;
+    --sf-text-2:      #94a3b8;
+    --sf-text-muted:  #64748b;
 
-    --sf-border:      rgba(255, 255, 255, 0.08);
-    --sf-border-strong: rgba(255, 255, 255, 0.14);
+    --sf-border:      #1e2737;
+    --sf-border-strong: #263044;
+
+    --sf-accent:      #60a5fa;
+    --sf-accent-bg:   rgba(96, 165, 250, 0.1);
+    --sf-accent-dim:  #2563eb;
   }
 
   /* DESIGN.md §11 — Reduced motion support.
@@ -75,25 +98,72 @@
 }
 
 @layer components {
-  /* Glass cards used across the app */
+  /* App panel */
   .sf-card {
-    @apply rounded-xl border border-white/10 bg-white/[0.03] p-6 backdrop-blur-sm;
+    background: var(--sf-surface);
+    border: 1px solid var(--sf-border);
+    border-radius: 10px;
+    padding: 1.5rem;
   }
 
   .sf-card-hover {
-    @apply transition-all duration-200 hover:border-white/20 hover:bg-white/[0.05];
+    @apply transition-colors duration-150;
+  }
+  .sf-card-hover:hover {
+    border-color: var(--sf-border-strong);
   }
 
+  /* Shared field base — Input / Textarea / Select */
+  .sf-field {
+    display: block;
+    width: 100%;
+    border-radius: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+    background: var(--sf-surface-2);
+    border: 1px solid var(--sf-border);
+    color: var(--sf-text);
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  .sf-field::placeholder {
+    color: var(--sf-text-muted);
+    opacity: 1;
+  }
+  .sf-field:focus {
+    outline: none;
+    border-color: var(--sf-accent);
+    box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.12);
+  }
+  .sf-field:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+  .sf-field-error {
+    border-color: var(--sf-sla-risk) !important;
+  }
+  .sf-field-error:focus {
+    box-shadow: 0 0 0 3px rgba(255, 95, 109, 0.15) !important;
+  }
+
+  /* Keep .sf-input as alias for backwards compat */
   .sf-input {
-    @apply block w-full rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-sm text-white shadow-sm transition-colors placeholder:text-white/30 focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-0;
+    @apply sf-field;
   }
 
   .sf-label {
-    @apply mb-1 block text-sm font-medium text-white/70;
+    display: block;
+    margin-bottom: 0.25rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--sf-text-2);
+  }
+
+  .sf-hint {
+    color: var(--sf-text-muted);
   }
 
   .sf-select {
-    @apply block w-full rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-sm text-white shadow-sm transition-colors focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-0;
+    @apply sf-field;
   }
 
   .sf-button-primary {
@@ -101,15 +171,31 @@
   }
 
   .sf-button-secondary {
-    @apply inline-flex items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-sm font-medium text-white/80 transition-all hover:border-white/20 hover:bg-white/10 hover:text-white disabled:cursor-not-allowed disabled:opacity-60;
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-medium transition-all disabled:cursor-not-allowed disabled:opacity-60;
+    background: var(--sf-surface-2);
+    border: 1px solid var(--sf-border);
+    color: var(--sf-text-2);
+  }
+  .sf-button-secondary:hover {
+    border-color: var(--sf-border-strong);
+    color: var(--sf-text);
   }
 
   .sf-button-ghost {
-    @apply inline-flex items-center justify-center gap-2 rounded-xl px-3 py-2 text-sm font-medium text-white/70 transition-all hover:bg-white/10 hover:text-white;
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-3 py-2 text-sm font-medium transition-all;
+    color: var(--sf-text-muted);
+  }
+  .sf-button-ghost:hover {
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--sf-text);
   }
 
   .sf-button-danger {
-    @apply inline-flex items-center justify-center gap-2 rounded-xl bg-danger-500 px-4 py-2.5 text-sm font-medium text-white transition-all hover:bg-danger-700 disabled:cursor-not-allowed disabled:opacity-60;
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-medium text-white transition-all disabled:cursor-not-allowed disabled:opacity-60;
+    background: var(--sf-sla-risk);
+  }
+  .sf-button-danger:hover {
+    opacity: 0.88;
   }
 
   /* Marketing section container — DESIGN.md §7 */
@@ -135,8 +221,46 @@
 
   /* Focus visible for all interactive elements — DESIGN.md §12 */
   .mkt-focus {
-    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--sf-open)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--sf-bg)];
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--sf-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--sf-bg)];
   }
+}
+
+/* ── Plain card variants (all gradient/glow classes now render as simple bordered cards) */
+.sf-gradient-card,
+.sf-gradient-card-amber,
+.sf-gradient-card-green,
+.sf-gradient-card-purple {
+  background: var(--sf-surface);
+  border: 1px solid var(--sf-border);
+  border-radius: 10px;
+}
+
+/* Solid primary button */
+.sf-btn-shimmer {
+  background: var(--sf-accent-dim);
+  color: #ffffff;
+}
+.sf-btn-shimmer:hover:not(:disabled) {
+  background: var(--sf-accent);
+}
+
+/* Fade-up: instant, no motion */
+.sf-fade-up { }
+
+/* Dot-grid: disabled */
+.sf-dot-bg { }
+
+/* Glow: simple border highlight */
+.sf-glow-blue:hover {
+  border-color: var(--sf-border-strong);
+}
+
+/* Gradient text → plain */
+.sf-gradient-text {
+  color: var(--sf-text);
+}
+.sf-gradient-text-blue {
+  color: #4f8cff;
 }
 
 @layer utilities {

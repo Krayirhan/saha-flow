@@ -1,5 +1,5 @@
 /**
- * MarketingNavbar — Saha Flow marketing navigation
+ * MarketingNavbar — İşAkış marketing navigation
  *
  * LANDING_REDESIGN_PLAN.md §4.1:
  * - transparent at page top
@@ -18,6 +18,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 
+import { BrandLogo } from '@/components/brand/BrandLogo';
 import { cn } from '@/lib/utils/cn';
 
 // ── Navigation links ──────────────────────────────────────────────────────────
@@ -31,39 +32,6 @@ const NAV_LINKS = [
 ] as const;
 
 // ── Logo ──────────────────────────────────────────────────────────────────────
-
-function SahaFlowLogo({ className }: { className?: string }) {
-  return (
-    <Link
-      href="/"
-      className={cn('group flex items-center gap-2.5 mkt-focus rounded-lg', className)}
-      aria-label="Saha Flow — Ana sayfa"
-    >
-      {/* Icon mark */}
-      <div
-        className="flex h-8 w-8 items-center justify-center rounded-[10px] transition-transform duration-200 group-hover:scale-105"
-        style={{
-          background: 'linear-gradient(135deg, #4f8cff 0%, #7d6cff 100%)',
-          boxShadow: '0 2px 12px rgba(79,140,255,0.35)',
-        }}
-        aria-hidden="true"
-      >
-        {/* Flow symbol — simplified wave/route */}
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-          <path
-            d="M2 12 C4 12 4 4 8 4 C12 4 12 12 14 12"
-            stroke="white"
-            strokeWidth="2"
-            strokeLinecap="round"
-            fill="none"
-          />
-        </svg>
-      </div>
-      {/* Wordmark */}
-      <span className="text-sm font-bold tracking-tight text-white/95">Saha Flow</span>
-    </Link>
-  );
-}
 
 // ── Mobile menu button ────────────────────────────────────────────────────────
 
@@ -155,7 +123,7 @@ export function MarketingNavbar() {
           role="navigation"
         >
           {/* Logo */}
-          <SahaFlowLogo />
+          <BrandLogo className="mkt-focus rounded-lg transition-transform duration-200 hover:scale-105" />
 
           {/* Desktop links */}
           <ul

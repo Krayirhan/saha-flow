@@ -1,5 +1,5 @@
 /**
- * WorkflowNode — Saha Flow Flow Line node primitive
+ * WorkflowNode — İşAkış Flow Line node primitive
  *
  * Displays a single work-order state as a visual node.
  * Use with FlowConnector to build a flow timeline.

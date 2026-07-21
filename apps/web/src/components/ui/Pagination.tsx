@@ -22,9 +22,7 @@ export function Pagination({ page, totalPages, onPageChange, total, limit, class
     }
     pages.push(1);
     if (page > 3) pages.push('...');
-    for (let i = Math.max(2, page - 1); i <= Math.min(totalPages - 1, page + 1); i++) {
-      pages.push(i);
-    }
+    for (let i = Math.max(2, page - 1); i <= Math.min(totalPages - 1, page + 1); i++) pages.push(i);
     if (page < totalPages - 2) pages.push('...');
     pages.push(totalPages);
     return pages;
@@ -37,8 +35,8 @@ export function Pagination({ page, totalPages, onPageChange, total, limit, class
   return (
     <div className={cn('flex flex-col items-center gap-3', className)}>
       {total != null && (
-        <p className="text-xs text-white/40">
-          Toplam {total} kayıttan {start}-{end} arası gösteriliyor
+        <p className="text-xs" style={{ color: 'var(--sf-text-muted)' }}>
+          Toplam {total} kayıttan {start}–{end} arası gösteriliyor
         </p>
       )}
       <nav className="flex items-center gap-1" aria-label="Sayfalama">
@@ -53,19 +51,19 @@ export function Pagination({ page, totalPages, onPageChange, total, limit, class
         </Button>
         {pageNumbers.map((p, idx) =>
           p === '...' ? (
-            <span key={`ellipsis-${idx}`} className="px-2 text-sm text-white/40">
-              ...
+            <span key={`ellipsis-${idx}`} className="px-2 text-sm" style={{ color: 'var(--sf-text-muted)' }}>
+              …
             </span>
           ) : (
             <button
               key={p}
               onClick={() => onPageChange(p)}
-              className={cn(
-                'min-w-[2rem] rounded-lg px-2 py-1 text-sm font-medium transition-colors',
+              className="min-w-[2rem] rounded-lg px-2 py-1 text-sm font-medium transition-colors"
+              style={
                 p === page
-                  ? 'bg-primary-500 text-white'
-                  : 'text-white/70 hover:bg-white/10 hover:text-white',
-              )}
+                  ? { background: 'var(--sf-accent)', color: '#fff' }
+                  : { color: 'var(--sf-text-2)' }
+              }
               aria-label={`Sayfa ${p}`}
               aria-current={p === page ? 'page' : undefined}
             >
