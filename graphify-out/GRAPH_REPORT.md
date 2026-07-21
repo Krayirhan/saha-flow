@@ -1,13 +1,18 @@
-# Graph Report - D:/saha-flow  (2026-07-21)
+# Graph Report - saha-flow  (2026-07-21)
 
 ## Corpus Check
-- 238 files · ~125,628 words
+- 236 files · ~125,944 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 2227 nodes · 3805 edges · 135 communities (120 shown, 15 thin omitted)
+- 2237 nodes · 3841 edges · 134 communities (118 shown, 16 thin omitted)
 - Extraction: 95% EXTRACTED · 5% INFERRED · 0% AMBIGUOUS · INFERRED: 196 edges (avg confidence: 0.81)
 - Token cost: 0 input · 0 output
+
+## Graph Freshness
+- Built from commit: `ac4e43c4`
+- Run `git rev-parse HEAD` and compare to check if the graph is stale.
+- Run `graphify update .` after code changes (no API cost).
 
 ## Community Hubs (Navigation)
 - REST API Controllers
@@ -132,7 +137,6 @@
 - Module 119
 - Module 120
 - Module 121
-- Module 122
 - Module 123
 - Module 131
 
@@ -171,11 +175,11 @@
 - **Offline-First Mobile Architecture** — 20_project_structure_offline_first, apps_mobile_pubspec_yaml_sembast_dep, 19_traceability_matrix_offline_mobile_req, 20_project_structure_clean_architecture_mobile [INFERRED 0.85]
 - **CI/CD Security Scanning Pipeline** — infra_ci_github_actions_ci_pipeline, infra_ci_github_actions_security_scan_job, docs_security_owasp_sast_sca, 19_traceability_matrix_secure_sdlc_req [INFERRED 0.85]
 
-## Communities (135 total, 15 thin omitted)
+## Communities (134 total, 16 thin omitted)
 
 ### Community 0 - "REST API Controllers"
-Cohesion: 0.05
-Nodes (36): Map, GetMapping, PostMapping, PreAuthorize, PutMapping, RequestMapping, ResponseEntity, RestController (+28 more)
+Cohesion: 0.08
+Nodes (24): ResourceNotFoundException, PageRequest, WorkOrderCreateRequest, WorkOrderResponse, WorkOrderUpdateRequest, Page, Pageable, Query (+16 more)
 
 ### Community 1 - "Spring Security & Auth"
 Cohesion: 0.05
@@ -183,7 +187,7 @@ Nodes (45): EnableMethodSecurity, EnableWebSecurity, HttpSecurity, OncePerReques
 
 ### Community 2 - "JPA Repositories & HTTP"
 Cohesion: 0.07
-Nodes (20): HttpStatus, JpaRepository, Entity, PrePersist, PreUpdate, Table, Tenant, Repository (+12 more)
+Nodes (19): JpaRepository, Entity, PrePersist, PreUpdate, Table, Tenant, Repository, TenantRepository (+11 more)
 
 ### Community 3 - "API Constants & Config"
 Cohesion: 0.04
@@ -191,7 +195,7 @@ Nodes (49): accessTokenKey, apiDateFormat, appBuildNumber, AppConstants, appName
 
 ### Community 4 - "Work Order Domain"
 Cohesion: 0.04
-Nodes (3): Entity, Table, WorkOrder
+Nodes (5): Entity, PreUpdate, Table, WorkOrder, work_order_status_history
 
 ### Community 5 - "Customer Frontend Hooks"
 Cohesion: 0.10
@@ -206,20 +210,20 @@ Cohesion: 0.07
 Nodes (13): Async, EventListener, AuditEvent, Entity, PrePersist, Table, AuditEventListener, Component (+5 more)
 
 ### Community 8 - "CORS & OpenAPI Config"
-Cohesion: 0.06
-Nodes (11): CorsFilter, OpenAPI, CorsConfig, Bean, Configuration, Bean, Configuration, OpenApiConfig (+3 more)
+Cohesion: 0.08
+Nodes (3): ErrorResponse, JsonInclude, ValidationError
 
 ### Community 9 - "Exception Handling"
-Cohesion: 0.17
-Nodes (17): AccessDeniedException, AuthenticationException, DataIntegrityViolationException, HttpMessageNotReadableException, MaxUploadSizeExceededException, MethodArgumentNotValidException, MissingRequestHeaderException, MissingServletRequestParameterException (+9 more)
+Cohesion: 0.16
+Nodes (18): AccessDeniedException, AuthenticationException, DataIntegrityViolationException, HttpMessageNotReadableException, HttpStatus, MaxUploadSizeExceededException, MethodArgumentNotValidException, MissingRequestHeaderException (+10 more)
 
 ### Community 10 - "Customer API DTOs"
 Cohesion: 0.15
 Nodes (16): DeleteMapping, CustomerRequest, AddressResponse, CustomerResponse, CustomerService, Page, Service, Transactional (+8 more)
 
 ### Community 11 - "JPA Audit Entities"
-Cohesion: 0.08
-Nodes (5): Entity, PrePersist, PreUpdate, Table, User
+Cohesion: 0.05
+Nodes (9): Entity, PrePersist, Table, Membership, Entity, PrePersist, PreUpdate, Table (+1 more)
 
 ### Community 12 - "Mobile API Endpoints"
 Cohesion: 0.06
@@ -243,7 +247,7 @@ Nodes (27): ScaffoldWithNavBar, PhotoCapture, WorkOrderCard, action, build, Empt
 
 ### Community 17 - "Job Execution Provider"
 Cohesion: 0.07
-Nodes (28): addPhoto, canSubmit, ChecklistItem, checklistItems, copyWith, error, fromJson, id (+20 more)
+Nodes (30): addPhoto, canSubmit, ChecklistItem, checklistItems, copyWith, error, fromJson, id (+22 more)
 
 ### Community 18 - "Customer Detail Pages"
 Cohesion: 0.14
@@ -258,12 +262,12 @@ Cohesion: 0.07
 Nodes (27): accent, accentLight, AppColors, background, disabled, divider, error, errorLight (+19 more)
 
 ### Community 21 - "Module 21"
-Cohesion: 0.08
-Nodes (27): build, _clear, color, createState, existingPath, _hasDrawn, _onPanEnd, _onPanStart (+19 more)
+Cohesion: 0.10
+Nodes (20): build, _clear, color, createState, existingPath, _hasDrawn, _onPanEnd, _onPanStart (+12 more)
 
 ### Community 22 - "Module 22"
-Cohesion: 0.14
-Nodes (13): Claims, SecretKey, Logger, Service, JwtService, Component, FilterChain, HttpServletRequest (+5 more)
+Cohesion: 0.11
+Nodes (15): BadCredentialsException, Claims, SecretKey, Transactional, Logger, Service, JwtService, Component (+7 more)
 
 ### Community 23 - "Module 23"
 Cohesion: 0.07
@@ -294,8 +298,8 @@ Cohesion: 0.11
 Nodes (18): ConstraintValidator, ConstraintValidatorContext, Override, TenantIdValidator, Constraint, Documented, Retention, Target (+10 more)
 
 ### Community 30 - "Module 30"
-Cohesion: 0.12
-Nodes (18): main, AppTheme, build, LoginScreen, main, setPreferredOrientations, main, main (+10 more)
+Cohesion: 0.08
+Nodes (26): main, AppTheme, build, _capturePhoto, onPhotoAdded, onPhotoRemoved, photoPaths, build (+18 more)
 
 ### Community 31 - "Module 31"
 Cohesion: 0.09
@@ -303,11 +307,11 @@ Nodes (21): build, onTap, workOrder, build, _buildActionButtons, _buildCustomerS
 
 ### Community 32 - "Module 32"
 Cohesion: 0.09
-Nodes (22): apiClient, clearError, client, connectivity, connectivityService, copyWith, db, error (+14 more)
+Nodes (22): SyncQueue, apiClient, clearError, client, connectivity, connectivityService, copyWith, db (+14 more)
 
 ### Community 33 - "Module 33"
 Cohesion: 0.09
-Nodes (23): devDependencies, eslint, jsdom, msw, @playwright/test, prettier, @testing-library/jest-dom, @testing-library/react (+15 more)
+Nodes (23): devDependencies, autoprefixer, eslint, jsdom, msw, @playwright/test, prettier, @testing-library/react (+15 more)
 
 ### Community 34 - "Module 34"
 Cohesion: 0.12
@@ -322,12 +326,12 @@ Cohesion: 0.15
 Nodes (17): login(), logout(), refreshToken(), apiClient(), ApiClientError, ApiError, apiPatch(), apiPost() (+9 more)
 
 ### Community 37 - "Module 37"
-Cohesion: 0.12
-Nodes (20): SahaFlowApp, authStateProvider, build, _buildBody, _buildPendingAlert, _buildQuickActions, _buildStatCard, _buildStatsGrid (+12 more)
+Cohesion: 0.13
+Nodes (19): SahaFlowApp, authStateProvider, build, _buildBody, _buildPendingAlert, _buildQuickActions, _buildStatCard, _buildStatsGrid (+11 more)
 
 ### Community 38 - "Module 38"
-Cohesion: 0.10
-Nodes (20): _calculateBackoff, _connectivityService, _createAuthInterceptor, _createConnectivityInterceptor, _createCorrelationIdInterceptor, _createErrorInterceptor, _createRetryInterceptor, delete (+12 more)
+Cohesion: 0.06
+Nodes (38): _calculateBackoff, _connectivityService, _createAuthInterceptor, _createConnectivityInterceptor, _createCorrelationIdInterceptor, _createErrorInterceptor, _createRetryInterceptor, delete (+30 more)
 
 ### Community 39 - "Module 39"
 Cohesion: 0.10
@@ -342,28 +346,28 @@ Cohesion: 0.12
 Nodes (19): Traceability Matrix, Audit Log Requirement (FR-DASH-02), Secure Authentication Requirement (FR-AUTH-02), KVKK Compliance Requirement (NFR-SEC-01), Automatic PDF Service Report Requirement (FR-RPT-01), Push Notification Requirement (FR-MOB-02, FCM), Secure SDLC Requirement (NFR-SEC-03, OWASP ASVS L2), SLA Tracking Requirement (FR-WO-02) (+11 more)
 
 ### Community 42 - "Module 42"
-Cohesion: 0.18
-Nodes (8): AfterEach, List, AddressRequest, CustomerServiceTest, BeforeEach, DisplayName, ExtendWith, Test
+Cohesion: 0.24
+Nodes (6): AfterEach, CustomerServiceTest, BeforeEach, DisplayName, ExtendWith, Test
 
 ### Community 43 - "Module 43"
-Cohesion: 0.11
-Nodes (17): clearAll, getAccessToken, getRefreshToken, getUserEmail, getUserId, hasTokens, saveTokens, saveUserEmail (+9 more)
+Cohesion: 0.15
+Nodes (12): clearAll, getAccessToken, getRefreshToken, getUserEmail, getUserId, hasTokens, saveTokens, saveUserEmail (+4 more)
 
 ### Community 44 - "Module 44"
-Cohesion: 0.20
-Nodes (11): TokenRefreshRequest, AuthController, ExceptionHandler, HttpServletRequest, Logger, PostMapping, ProblemDetail, RequestMapping (+3 more)
+Cohesion: 0.21
+Nodes (12): LoginResponse, TokenRefreshRequest, AuthController, ExceptionHandler, HttpServletRequest, Logger, PostMapping, ProblemDetail (+4 more)
 
 ### Community 45 - "Module 45"
 Cohesion: 0.11
 Nodes (4): Entity, PrePersist, Table, WorkOrderAssignment
 
 ### Community 46 - "Module 46"
-Cohesion: 0.12
-Nodes (17): ApiClient, _apiClient, completedJobs, copyWith, DashboardNotifier, DashboardState, DashboardSummary, error (+9 more)
+Cohesion: 0.10
+Nodes (20): ApiClient, AuthNotifier, _apiClient, completedJobs, copyWith, DashboardNotifier, DashboardState, DashboardSummary (+12 more)
 
 ### Community 47 - "Module 47"
-Cohesion: 0.10
-Nodes (16): build, _capturePhoto, onPhotoAdded, onPhotoRemoved, photoPaths, build, fontSize, _getBackgroundColor (+8 more)
+Cohesion: 0.22
+Nodes (8): build, fontSize, _getBackgroundColor, _getLabel, padding, status, StatusChip, EdgeInsets
 
 ### Community 48 - "Module 48"
 Cohesion: 0.12
@@ -382,8 +386,8 @@ Cohesion: 0.12
 Nodes (16): _apiClient, _cacheWorkOrder, _cacheWorkOrders, completeChecklistItem, completeWorkOrder, _getCachedWorkOrder, _getCachedWorkOrders, getWorkOrderDetail (+8 more)
 
 ### Community 52 - "Module 52"
-Cohesion: 0.12
-Nodes (16): apiClient, copyWith, error, _initialLoaded, isLoading, loadWorkOrders, localDb, refresh (+8 more)
+Cohesion: 0.13
+Nodes (15): apiClient, copyWith, error, _initialLoaded, isLoading, loadWorkOrders, localDb, refresh (+7 more)
 
 ### Community 53 - "Module 53"
 Cohesion: 0.12
@@ -394,8 +398,8 @@ Cohesion: 0.18
 Nodes (10): AuthLayout(), AuthLayoutProps, LoginForm(), customerSchema, LoginInput, loginSchema, searchParamsSchema, workOrderCreateSchema (+2 more)
 
 ### Community 55 - "Module 55"
-Cohesion: 0.26
-Nodes (6): Bucket, Configuration, RateLimitConfig, DisplayName, Test, RateLimitTest
+Cohesion: 0.14
+Nodes (13): Bucket, Map, HealthController, GetMapping, JdbcClient, RequestMapping, ResponseEntity, RestController (+5 more)
 
 ### Community 56 - "Module 56"
 Cohesion: 0.20
@@ -410,8 +414,8 @@ Cohesion: 0.14
 Nodes (16): Offline Mobile Requirement (FR-MOB-01), Clean Architecture Mobile (presentation/domain/data), Feature-First Structure Web (Next.js), Hexagonal Architecture Backend (port-adapter), Monorepo Project Structure Decision, Monorepo Rationale (2-person team, atomic changes), Offline-First Mobile Strategy (SQLite + sync queue), Riverpod State Management (Flutter) (+8 more)
 
 ### Community 59 - "Module 59"
-Cohesion: 0.13
-Nodes (14): AnimatedWidget, AnimationController, AnimatedBuilder, _animationController, build, connectivityService, _connectivitySub, createState (+6 more)
+Cohesion: 0.10
+Nodes (20): AnimatedWidget, AnimationController, SignaturePad, _SignaturePadState, AnimatedBuilder, _animationController, build, connectivityService (+12 more)
 
 ### Community 60 - "Module 60"
 Cohesion: 0.16
@@ -425,12 +429,8 @@ Nodes (14): actionError, completeWorkOrder, copyWith, error, isActionLoading, is
 Cohesion: 0.13
 Nodes (15): compilerOptions, allowJs, baseUrl, esModuleInterop, incremental, isolatedModules, jsx, module (+7 more)
 
-### Community 63 - "Module 63"
-Cohesion: 0.30
-Nodes (6): BadCredentialsException, LoginResponse, AuthenticationService, PasswordEncoder, Service, Transactional
-
 ### Community 64 - "Module 64"
-Cohesion: 0.28
+Cohesion: 0.35
 Nodes (7): CustomerRepository, Page, Pageable, Query, Repository, customer, customer_address
 
 ### Community 65 - "Module 65"
@@ -442,12 +442,12 @@ Cohesion: 0.28
 Nodes (8): LoginRequest, RegisterRequest, AuthControllerTest, AutoConfigureMockMvc, DisplayName, MockMvc, ObjectMapper, Test
 
 ### Community 67 - "Module 67"
-Cohesion: 0.20
-Nodes (8): AutoConfigureMockMvc, BeforeEach, DisplayName, MockMvc, ObjectMapper, Test, WorkOrderControllerIntegrationTest, WithMockUser
+Cohesion: 0.13
+Nodes (15): AbstractIntegrationTest, DynamicPropertyRegistry, DynamicPropertySource, Logger, PostgreSQLContainer, SpringBootTest, Testcontainers, AutoConfigureMockMvc (+7 more)
 
 ### Community 68 - "Module 68"
-Cohesion: 0.24
-Nodes (10): AbstractIntegrationTest, DynamicPropertyRegistry, DynamicPropertySource, Logger, PostgreSQLContainer, SpringBootTest, Testcontainers, DisplayName (+2 more)
+Cohesion: 0.29
+Nodes (5): List, AddressRequest, DisplayName, Test, TenantIsolationTest
 
 ### Community 69 - "Module 69"
 Cohesion: 0.27
@@ -458,20 +458,20 @@ Cohesion: 0.14
 Nodes (13): ApiException, data, _extractMessage, fromDioError, isConflict, isConnectionError, isUnauthorized, message (+5 more)
 
 ### Community 71 - "Module 71"
-Cohesion: 0.14
-Nodes (13): AuthService, _dio, login, logout, _ref, refreshAccessToken, _tokenStorage, tryAutoLogin (+5 more)
+Cohesion: 0.53
+Nodes (4): CorsFilter, CorsConfig, Bean, Configuration
 
 ### Community 72 - "Module 72"
-Cohesion: 0.14
-Nodes (4): Entity, PrePersist, Table, Membership
+Cohesion: 0.53
+Nodes (4): OpenAPI, Bean, Configuration, OpenApiConfig
 
 ### Community 73 - "Module 73"
-Cohesion: 0.17
-Nodes (11): _connectivity, _connectivityController, ConnectivityService, connectivityStream, dispose, _init, _isConnected, Connectivity (+3 more)
+Cohesion: 0.15
+Nodes (12): _connectivity, _connectivityController, ConnectivityService, connectivityStream, dispose, _init, _isConnected, Connectivity (+4 more)
 
 ### Community 74 - "Module 74"
-Cohesion: 0.26
-Nodes (5): EnumSource, ParameterizedTest, Component, WorkOrderStateMachine, BeforeEach
+Cohesion: 0.33
+Nodes (3): Component, WorkOrderStateMachine, BeforeEach
 
 ### Community 75 - "Module 75"
 Cohesion: 0.23
@@ -482,8 +482,8 @@ Cohesion: 0.35
 Nodes (5): BeforeEach, DisplayName, ExtendWith, Test, UserServiceTest
 
 ### Community 77 - "Module 77"
-Cohesion: 0.33
-Nodes (4): Page, Service, Transactional, UserService
+Cohesion: 0.16
+Nodes (13): Page, Service, Transactional, UserService, GetMapping, PostMapping, PreAuthorize, PutMapping (+5 more)
 
 ### Community 78 - "Module 78"
 Cohesion: 0.20
@@ -498,8 +498,8 @@ Cohesion: 0.20
 Nodes (10): User Personas (Ahmet owner / Ayşe dispatcher / Mehmet technician), Work Order Lifecycle (BEKLIYOR→TAMAMLANDI/IPTAL), 12 Bounded Contexts (DDD), WorkOrder State Machine (BEKLIYOR→ATANDI→YOLDA→BASLADI→TAMAMLANDI/IPTAL), WorkOrder Entity (core aggregate with @Version optimistic lock), S3 Presigned URL Upload/Download (15min TTL, never through backend), Zod Schema Client-Side Validation (workOrderCreateSchema example), Idempotency-Key Filter (POST /work-orders, /assign, /check-in, idempotency_store table) (+2 more)
 
 ### Community 81 - "Module 81"
-Cohesion: 0.31
-Nodes (9): build, _buildList, _buildStatusFilter, createState, initState, WorkOrderListScreen, _WorkOrderListScreenState, workOrderListProvider (+1 more)
+Cohesion: 0.24
+Nodes (11): build, _buildList, _buildStatusFilter, createState, initState, WorkOrderListScreen, _WorkOrderListScreenState, workOrderListProvider (+3 more)
 
 ### Community 82 - "Module 82"
 Cohesion: 0.20
@@ -509,13 +509,13 @@ Nodes (10): scripts, build, dev, format, lint, start, test, test:e2e (+2 more)
 Cohesion: 0.33
 Nodes (7): FileInfo, FileStorageService, JdbcClient, Logger, MultipartFile, Service, Transactional
 
-### Community 84 - "Module 84"
-Cohesion: 0.38
-Nodes (6): HealthController, GetMapping, JdbcClient, RequestMapping, ResponseEntity, RestController
+### Community 85 - "Module 85"
+Cohesion: 0.17
+Nodes (5): Repository, UserRepository, AuthenticationService, PasswordEncoder, Service
 
 ### Community 86 - "Module 86"
-Cohesion: 0.53
-Nodes (3): DisplayName, Test, WorkOrderServiceTest
+Cohesion: 0.33
+Nodes (5): EnumSource, ParameterizedTest, DisplayName, Test, WorkOrderServiceTest
 
 ### Community 87 - "Module 87"
 Cohesion: 0.22
@@ -593,10 +593,6 @@ Nodes (5): membership, role, role_permission, tenant, user_account
 Cohesion: 0.40
 Nodes (5): JWT Auth Assumption V-011 (access 15min, refresh 7day), BFF Pattern (Next.js proxies all API calls via /api/proxy), HttpOnly Secure SameSite=Strict Cookie (JWT transport), JWT Authentication (access 15min, refresh 7day, rotation + reuse detection), ADR-003: Next.js BFF + HttpOnly Cookie Auth (Accepted)
 
-### Community 107 - "Module 107"
-Cohesion: 0.40
-Nodes (5): AuthNotifier, JobExecutionNotifier, JobExecutionState, AuthState, StateNotifier
-
 ### Community 108 - "Module 108"
 Cohesion: 0.60
 Nodes (4): config, isPublicPath(), middleware(), PUBLIC_PATHS
@@ -614,9 +610,9 @@ Cohesion: 0.83
 Nodes (3): Auditable, Retention, Target
 
 ## Knowledge Gaps
-- **675 isolated node(s):** `main`, `_rootNavigatorKey`, `_shellNavigatorKey`, `authState`, `child` (+670 more)
+- **677 isolated node(s):** `main`, `_rootNavigatorKey`, `_shellNavigatorKey`, `authState`, `child` (+672 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **15 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **16 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
@@ -630,8 +626,8 @@ _Questions this graph is uniquely positioned to answer:_
 - **Are the 5 inferred relationships involving `Customer` (e.g. with `.create_shouldCreateCustomer()` and `.deactivate_shouldSetActiveToFalse()`) actually correct?**
   _`Customer` has 5 INFERRED edges - model-reasoned connections that need verification._
 - **What connects `main`, `_rootNavigatorKey`, `_shellNavigatorKey` to the rest of the system?**
-  _675 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _677 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `REST API Controllers` be split into smaller, more focused modules?**
-  _Cohesion score 0.0509683995922528 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.07911392405063292 - nodes in this community are weakly interconnected._
 - **Should `Spring Security & Auth` be split into smaller, more focused modules?**
   _Cohesion score 0.05300207039337474 - nodes in this community are weakly interconnected._
