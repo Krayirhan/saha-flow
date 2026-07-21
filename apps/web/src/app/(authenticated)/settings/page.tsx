@@ -28,7 +28,7 @@ function SettingSection({
       <div className="mb-5 flex items-center gap-3">
         <div
           className="flex h-8 w-8 items-center justify-center rounded-xl"
-          style={{ background: `${accentColor}18`, boxShadow: `0 0 12px ${accentColor}25` }}
+          style={{ background: `${accentColor}15` }}
         >
           <Icon className="h-4 w-4" style={{ color: accentColor }} />
         </div>

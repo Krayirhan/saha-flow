@@ -52,10 +52,10 @@ export function Table<T>({
   return (
     <CardSpotlight
       className="sf-gradient-card overflow-x-auto shadow-sm"
-      spotlightColor="rgba(79,140,255,0.05)"
+      spotlightColor="rgba(0,82,204,0.03)"
     >
       <table className="min-w-full text-sm">
-        <thead style={{ borderBottom: '1px solid var(--sf-border)' }}>
+        <thead style={{ borderBottom: '1px solid var(--sf-border)', background: 'var(--sf-bg-2)' }}>
           <tr>
             {columns.map((col) => (
               <th
@@ -63,7 +63,7 @@ export function Table<T>({
                 scope="col"
                 className={cn(
                   `px-4 ${cellPy} text-left text-xs font-semibold uppercase tracking-wider`,
-                  col.sortable && 'cursor-pointer select-none hover:bg-white/[0.03]',
+                  col.sortable && 'cursor-pointer select-none',
                   col.className,
                 )}
                 style={{ color: 'var(--sf-text-muted)' }}
@@ -92,8 +92,11 @@ export function Table<T>({
             data.map((item, idx) => (
               <tr
                 key={keyExtractor(item)}
-                className={cn('transition-colors hover:bg-white/[0.03]', rowClassName)}
-                style={{ borderTop: idx === 0 ? undefined : '1px solid var(--sf-border)' }}
+                className={cn('transition-colors', rowClassName)}
+                style={{
+                  background: idx % 2 === 0 ? 'var(--sf-surface)' : 'var(--sf-bg)',
+                  borderTop: idx === 0 ? undefined : '1px solid var(--sf-border)',
+                }}
               >
                 {columns.map((col) => (
                   <td key={col.key} className={cn(`px-4 ${cellPy}`, col.className)} style={{ color: 'var(--sf-text-2)' }}>

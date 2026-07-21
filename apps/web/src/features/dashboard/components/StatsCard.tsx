@@ -14,10 +14,10 @@ interface StatsCardProps {
 }
 
 const spotlightColors: Record<string, string> = {
-  '#60a5fa': 'rgba(96,165,250,0.1)',
-  '#ffaa4c': 'rgba(255,170,76,0.12)',
-  '#38d996': 'rgba(56,217,150,0.12)',
-  '#7d6cff': 'rgba(125,108,255,0.12)',
+  '#0052cc': 'rgba(0,82,204,0.06)',
+  '#ff8b00': 'rgba(255,139,0,0.08)',
+  '#00875a': 'rgba(0,135,90,0.08)',
+  '#5243aa': 'rgba(82,67,170,0.08)',
 };
 
 export function StatsCard({
@@ -25,11 +25,11 @@ export function StatsCard({
   value,
   subtitle,
   icon,
-  accentColor = '#60a5fa',
+  accentColor = '#0052cc',
   gradientClass = 'sf-gradient-card',
   trend,
 }: StatsCardProps) {
-  const spotlight = spotlightColors[accentColor] ?? 'rgba(79,140,255,0.1)';
+  const spotlight = spotlightColors[accentColor] ?? 'rgba(0,82,204,0.06)';
 
   return (
     <CardSpotlight

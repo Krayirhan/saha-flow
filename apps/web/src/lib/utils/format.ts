@@ -14,13 +14,22 @@ const STATUS_LABELS: Record<string, string> = {
 type StatusStyle = { bg: string; color: string; border: string };
 
 const STATUS_STYLES: Record<string, StatusStyle> = {
-  pending:     { bg: 'rgba(255,170,76,0.1)',  color: 'var(--sf-in-progress)', border: 'rgba(255,170,76,0.25)' },
-  assigned:    { bg: 'rgba(125,108,255,0.1)', color: 'var(--sf-assigned)',    border: 'rgba(125,108,255,0.25)' },
-  in_progress: { bg: 'rgba(79,140,255,0.1)',  color: 'var(--sf-open)',        border: 'rgba(79,140,255,0.25)' },
-  completed:   { bg: 'rgba(56,217,150,0.1)',  color: 'var(--sf-completed)',   border: 'rgba(56,217,150,0.25)' },
-  cancelled:   { bg: 'rgba(116,125,141,0.1)', color: 'var(--sf-offline)',     border: 'rgba(116,125,141,0.25)' },
-  approved:    { bg: 'rgba(56,217,150,0.1)',  color: 'var(--sf-completed)',   border: 'rgba(56,217,150,0.25)' },
-  rejected:    { bg: 'rgba(255,95,109,0.1)',  color: 'var(--sf-sla-risk)',    border: 'rgba(255,95,109,0.25)' },
+  OPEN:        { bg: 'rgba(0,82,204,0.1)',    color: 'var(--sf-open)',        border: 'rgba(0,82,204,0.3)' },
+  ASSIGNED:    { bg: 'rgba(82,67,170,0.1)',   color: 'var(--sf-assigned)',    border: 'rgba(82,67,170,0.3)' },
+  IN_PROGRESS: { bg: 'rgba(255,139,0,0.1)',   color: 'var(--sf-in-progress)', border: 'rgba(255,139,0,0.3)' },
+  COMPLETED:   { bg: 'rgba(0,135,90,0.1)',    color: 'var(--sf-completed)',   border: 'rgba(0,135,90,0.3)' },
+  APPROVED:    { bg: 'rgba(0,135,90,0.1)',    color: 'var(--sf-completed)',   border: 'rgba(0,135,90,0.3)' },
+  INVOICED:    { bg: 'rgba(0,178,217,0.1)',   color: 'var(--sf-synced)',      border: 'rgba(0,178,217,0.3)' },
+  PAID:        { bg: 'rgba(0,82,204,0.1)',    color: 'var(--sf-open)',        border: 'rgba(0,82,204,0.3)' },
+  CANCELLED:   { bg: 'rgba(94,108,132,0.1)',  color: 'var(--sf-offline)',     border: 'rgba(94,108,132,0.3)' },
+  /* lowercase aliases for backward compat */
+  pending:     { bg: 'rgba(255,139,0,0.1)',   color: 'var(--sf-in-progress)', border: 'rgba(255,139,0,0.3)' },
+  assigned:    { bg: 'rgba(82,67,170,0.1)',   color: 'var(--sf-assigned)',    border: 'rgba(82,67,170,0.3)' },
+  in_progress: { bg: 'rgba(255,139,0,0.1)',   color: 'var(--sf-in-progress)', border: 'rgba(255,139,0,0.3)' },
+  completed:   { bg: 'rgba(0,135,90,0.1)',    color: 'var(--sf-completed)',   border: 'rgba(0,135,90,0.3)' },
+  cancelled:   { bg: 'rgba(94,108,132,0.1)',  color: 'var(--sf-offline)',     border: 'rgba(94,108,132,0.3)' },
+  approved:    { bg: 'rgba(0,135,90,0.1)',    color: 'var(--sf-completed)',   border: 'rgba(0,135,90,0.3)' },
+  rejected:    { bg: 'rgba(222,53,11,0.1)',   color: 'var(--sf-sla-risk)',    border: 'rgba(222,53,11,0.3)' },
 };
 
 export function formatDate(date: string | Date | null | undefined, fmt: string = 'dd.MM.yyyy'): string {
@@ -58,7 +67,7 @@ export function getStatusLabel(status: string): string {
 }
 
 export function getStatusStyle(status: string): StatusStyle {
-  return STATUS_STYLES[status] ?? { bg: 'rgba(255,255,255,0.06)', color: 'var(--sf-text-2)', border: 'rgba(255,255,255,0.1)' };
+  return STATUS_STYLES[status] ?? { bg: 'var(--sf-bg-2)', color: 'var(--sf-text-2)', border: 'var(--sf-border)' };
 }
 
 export function getStatusColor(status: string): string {

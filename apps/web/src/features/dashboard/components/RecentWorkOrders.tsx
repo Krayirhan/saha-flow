@@ -18,7 +18,7 @@ export function RecentWorkOrders({ workOrders, loading = false }: RecentWorkOrde
   return (
     <CardSpotlight
       className="sf-gradient-card overflow-hidden"
-      spotlightColor="rgba(79,140,255,0.06)"
+      spotlightColor="rgba(0,82,204,0.04)"
     >
       {/* Header */}
       <div
@@ -30,7 +30,7 @@ export function RecentWorkOrders({ workOrders, loading = false }: RecentWorkOrde
         </h3>
         <button
           onClick={() => router.push('/work-orders')}
-          className="flex items-center gap-1 rounded-lg px-2 py-1 text-xs font-medium transition-colors hover:bg-white/5"
+          className="flex items-center gap-1 rounded-lg px-2 py-1 text-xs font-medium transition-colors hover:bg-[#ebecf0]"
           style={{ color: 'var(--sf-accent)' }}
         >
           Tümünü Gör
@@ -53,7 +53,7 @@ export function RecentWorkOrders({ workOrders, loading = false }: RecentWorkOrde
             <button
               key={wo.id}
               onClick={() => router.push(`/work-orders/${wo.id}`)}
-              className="flex w-full items-center gap-3 px-5 py-3.5 text-left transition-colors hover:bg-white/[0.03]"
+              className="flex w-full items-center gap-3 px-5 py-3.5 text-left transition-colors hover:bg-[#f4f5f7]"
               style={{ borderTop: idx === 0 ? undefined : '1px solid var(--sf-border)' }}
             >
               <span

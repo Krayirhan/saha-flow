@@ -39,37 +39,38 @@
     @apply text-sm;
   }
 
-  /* Dark theme base applied to the whole app */
+  /* App base — light theme */
   .dark-app {
-    @apply bg-[#0A0A0B] text-white;
+    background: var(--sf-bg);
+    color: var(--sf-text);
   }
 
   /* Flow Line state CSS custom properties — DESIGN.md §5 */
   :root {
-    --sf-open:        #4f8cff;
-    --sf-assigned:    #7d6cff;
-    --sf-on-the-way:  #74b8ff;
-    --sf-in-progress: #ffaa4c;
-    --sf-completed:   #38d996;
-    --sf-sla-risk:    #ff5f6d;
-    --sf-offline:     #747d8d;
-    --sf-synced:      #3dd6d0;
+    --sf-open:        #0052cc;
+    --sf-assigned:    #5243aa;
+    --sf-on-the-way:  #0065ff;
+    --sf-in-progress: #ff8b00;
+    --sf-completed:   #00875a;
+    --sf-sla-risk:    #de350b;
+    --sf-offline:     #5e6c84;
+    --sf-synced:      #00b8d9;
 
-    --sf-bg:          #0f1117;
-    --sf-bg-2:        #131820;
-    --sf-surface:     #161c27;
-    --sf-surface-2:   #1d2535;
+    --sf-bg:          #f4f5f7;
+    --sf-bg-2:        #ebecf0;
+    --sf-surface:     #ffffff;
+    --sf-surface-2:   #f4f5f7;
 
-    --sf-text:        #e2e8f0;
-    --sf-text-2:      #94a3b8;
-    --sf-text-muted:  #64748b;
+    --sf-text:        #172b4d;
+    --sf-text-2:      #42526e;
+    --sf-text-muted:  #5e6c84;
 
-    --sf-border:      #1e2737;
-    --sf-border-strong: #263044;
+    --sf-border:      #dfe1e6;
+    --sf-border-strong: #c1c7d0;
 
-    --sf-accent:      #60a5fa;
-    --sf-accent-bg:   rgba(96, 165, 250, 0.1);
-    --sf-accent-dim:  #2563eb;
+    --sf-accent:      #0052cc;
+    --sf-accent-bg:   rgba(0, 82, 204, 0.08);
+    --sf-accent-dim:  #0065ff;
   }
 
   /* DESIGN.md §11 — Reduced motion support.
@@ -102,7 +103,7 @@
   .sf-card {
     background: var(--sf-surface);
     border: 1px solid var(--sf-border);
-    border-radius: 10px;
+    border-radius: 4px;
     padding: 1.5rem;
   }
 
@@ -132,7 +133,7 @@
   .sf-field:focus {
     outline: none;
     border-color: var(--sf-accent);
-    box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.12);
+    box-shadow: 0 0 0 2px rgba(0, 82, 204, 0.2);
   }
   .sf-field:disabled {
     opacity: 0.45;
@@ -142,7 +143,7 @@
     border-color: var(--sf-sla-risk) !important;
   }
   .sf-field-error:focus {
-    box-shadow: 0 0 0 3px rgba(255, 95, 109, 0.15) !important;
+    box-shadow: 0 0 0 2px rgba(222, 53, 11, 0.2) !important;
   }
 
   /* Keep .sf-input as alias for backwards compat */
@@ -167,26 +168,31 @@
   }
 
   .sf-button-primary {
-    @apply inline-flex items-center justify-center gap-2 rounded-xl bg-white px-4 py-2.5 text-sm font-semibold text-[#0A0A0B] shadow-lg shadow-white/10 transition-all hover:bg-white/90 hover:shadow-white/20 disabled:cursor-not-allowed disabled:opacity-60;
+    @apply inline-flex items-center justify-center gap-2 rounded px-4 py-2.5 text-sm font-semibold text-white transition-all disabled:cursor-not-allowed disabled:opacity-60;
+    background: var(--sf-accent);
+  }
+  .sf-button-primary:hover:not(:disabled) {
+    background: var(--sf-accent-dim);
   }
 
   .sf-button-secondary {
-    @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-medium transition-all disabled:cursor-not-allowed disabled:opacity-60;
-    background: var(--sf-surface-2);
+    @apply inline-flex items-center justify-center gap-2 rounded px-4 py-2.5 text-sm font-medium transition-all disabled:cursor-not-allowed disabled:opacity-60;
+    background: var(--sf-surface);
     border: 1px solid var(--sf-border);
     color: var(--sf-text-2);
   }
   .sf-button-secondary:hover {
     border-color: var(--sf-border-strong);
     color: var(--sf-text);
+    background: var(--sf-bg-2);
   }
 
   .sf-button-ghost {
-    @apply inline-flex items-center justify-center gap-2 rounded-xl px-3 py-2 text-sm font-medium transition-all;
+    @apply inline-flex items-center justify-center gap-2 rounded px-3 py-2 text-sm font-medium transition-all;
     color: var(--sf-text-muted);
   }
   .sf-button-ghost:hover {
-    background: rgba(255, 255, 255, 0.06);
+    background: var(--sf-bg-2);
     color: var(--sf-text);
   }
 
@@ -232,16 +238,16 @@
 .sf-gradient-card-purple {
   background: var(--sf-surface);
   border: 1px solid var(--sf-border);
-  border-radius: 10px;
+  border-radius: 4px;
 }
 
-/* Solid primary button */
+/* Solid primary button alias */
 .sf-btn-shimmer {
-  background: var(--sf-accent-dim);
+  background: var(--sf-accent);
   color: #ffffff;
 }
 .sf-btn-shimmer:hover:not(:disabled) {
-  background: var(--sf-accent);
+  background: var(--sf-accent-dim);
 }
 
 /* Fade-up: instant, no motion */
@@ -266,7 +272,7 @@
 @layer utilities {
   .scrollbar-thin {
     scrollbar-width: thin;
-    scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+    scrollbar-color: var(--sf-border-strong) transparent;
   }
 
   .scrollbar-thin::-webkit-scrollbar {
@@ -278,12 +284,12 @@
   }
 
   .scrollbar-thin::-webkit-scrollbar-thumb {
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: var(--sf-border-strong);
     border-radius: 3px;
   }
 
   .scrollbar-thin::-webkit-scrollbar-thumb:hover {
-    background-color: rgba(255, 255, 255, 0.3);
+    background-color: var(--sf-text-muted);
   }
 }
 

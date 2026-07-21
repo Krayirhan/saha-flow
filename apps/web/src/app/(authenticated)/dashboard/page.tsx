@@ -32,7 +32,7 @@ export default function DashboardPage() {
           value={stats?.totalToday ?? 0}
           subtitle="Bugün oluşturulan"
           icon={<Wrench className="h-5 w-5" />}
-          accentColor="#60a5fa"
+          accentColor="#0052cc"
           gradientClass="sf-gradient-card"
         />
         <StatsCard
@@ -40,7 +40,7 @@ export default function DashboardPage() {
           value={stats?.pending ?? 0}
           subtitle="Atanmayı bekliyor"
           icon={<Clock className="h-5 w-5" />}
-          accentColor="#ffaa4c"
+          accentColor="#ff8b00"
           gradientClass="sf-gradient-card-amber"
         />
         <StatsCard
@@ -48,7 +48,7 @@ export default function DashboardPage() {
           value={stats?.completedThisMonth ?? 0}
           subtitle="Bu ay tamamlanan"
           icon={<CheckCircle className="h-5 w-5" />}
-          accentColor="#38d996"
+          accentColor="#00875a"
           gradientClass="sf-gradient-card-green"
         />
         <StatsCard
@@ -60,7 +60,7 @@ export default function DashboardPage() {
           }
           subtitle="Bu ay toplam"
           icon={<Banknote className="h-5 w-5" />}
-          accentColor="#7d6cff"
+          accentColor="#5243aa"
           gradientClass="sf-gradient-card-purple"
         />
       </div>
