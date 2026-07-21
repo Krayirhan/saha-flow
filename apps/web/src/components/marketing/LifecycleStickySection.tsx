@@ -1,13 +1,11 @@
 /**
  * LifecycleStickySection — Faz 2
- * LANDING_REDESIGN_PLAN.md §4.5
- * LANDING_CONTENT.md §6
  *
  * Desktop: sticky product panel sol, scroll adımları sağ.
- * Mobile: dikey adım kartları, her adımın üstünde ilgili panel.
- * Animasyon 2 (Aceternity sticky scroll davranışından uyarlandı):
- * - IntersectionObserver ile aktif adım değişir.
- * - prefers-reduced-motion: tüm adımlar görünür, transition yok.
+ * Scroll pozisyonu bazlı aktif adım hesaplama (IntersectionObserver yerine).
+ * Her adım py-14 → section ~1900px → scroll alanı ~1100px → adım başı ~220px.
+ *
+ * Mobile: dikey adım kartları, her adımın altında panel.
  */
 
 'use client';
@@ -71,33 +69,34 @@ function useReducedMotion() {
 
 export function LifecycleStickySection() {
   const [activeStep, setActiveStep] = useState(0);
-  const stepRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const sectionRef = useRef<HTMLElement>(null);
   const reducedMotion = useReducedMotion();
 
   useEffect(() => {
     if (reducedMotion) return;
 
-    const observers = stepRefs.current.map((el, i) => {
-      if (!el) return null;
-      const observer = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) setActiveStep(i);
-        },
-        { rootMargin: '-30% 0px -50% 0px', threshold: 0 },
-      );
-      observer.observe(el);
-      return observer;
-    });
-
-    return () => {
-      observers.forEach((obs) => obs?.disconnect());
+    const onScroll = () => {
+      const el = sectionRef.current;
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+      const scrollable = rect.height - window.innerHeight;
+      if (scrollable <= 0) return;
+      // progress: 0 when section top hits viewport top → 1 when section bottom hits viewport bottom
+      const progress = Math.max(0, Math.min(1, -rect.top / scrollable));
+      const idx = Math.min(Math.floor(progress * STEPS.length), STEPS.length - 1);
+      setActiveStep(idx);
     };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener('scroll', onScroll);
   }, [reducedMotion]);
 
   const currentStep = STEPS[activeStep];
 
   return (
     <section
+      ref={sectionRef}
       id="how-it-works"
       className="mkt-section"
       aria-labelledby="lifecycle-heading"
@@ -137,6 +136,7 @@ export function LifecycleStickySection() {
                   minHeight: '340px',
                 }}
               >
+                {/* Panel header */}
                 <div
                   className="border-b px-5 py-3.5"
                   style={{ borderColor: 'var(--sf-border)' }}
@@ -151,27 +151,37 @@ export function LifecycleStickySection() {
                     </span>
                   </div>
                 </div>
-                <div
-                  className="p-6"
-                  style={{
-                    opacity: 1,
-                    transition: reducedMotion ? 'none' : 'opacity 0.25s ease',
-                  }}
-                >
+                {/* key triggers re-mount → CSS animation fires on step change */}
+                <div key={activeStep} className="lc-panel-enter p-6">
                   {currentStep.panel}
                 </div>
+              </div>
+
+              {/* Step indicator dots */}
+              <div className="mt-5 flex items-center justify-center gap-2" aria-hidden="true">
+                {STEPS.map((_, i) => (
+                  <div
+                    key={i}
+                    className="rounded-full transition-all duration-300"
+                    style={{
+                      width:  i === activeStep ? '20px' : '6px',
+                      height: '6px',
+                      background: i === activeStep ? '#4f8cff' : 'rgba(255,255,255,0.15)',
+                    }}
+                  />
+                ))}
               </div>
             </div>
           </div>
 
-          {/* Right: scrollable steps */}
+          {/* Right: scrollable steps — py-14 gives ~220px scroll room per step */}
           <div className="space-y-0">
             {STEPS.map((step, i) => (
-              <div
-                key={step.number}
-                ref={(el) => { stepRefs.current[i] = el; }}
-              >
-                <div className="flex gap-5 py-8">
+              <div key={step.number}>
+                <div
+                  className="flex gap-5 py-20 transition-opacity duration-300"
+                  style={{ opacity: reducedMotion ? 1 : i === activeStep ? 1 : 0.4 }}
+                >
                   {/* Flow node + connector */}
                   <div className="flex flex-col items-center">
                     <WorkflowNode
@@ -188,13 +198,13 @@ export function LifecycleStickySection() {
                   {/* Content */}
                   <div className="pb-4 pt-0.5">
                     <span
-                      className="font-mono text-xs font-bold tracking-widest"
+                      className="font-mono text-xs font-bold tracking-widest transition-colors duration-300"
                       style={{ color: i === activeStep ? '#4f8cff' : 'var(--sf-text-muted)' }}
                     >
                       {step.number}
                     </span>
                     <h3
-                      className="mt-1 text-lg font-semibold leading-tight transition-colors"
+                      className="mt-1 text-lg font-semibold leading-tight"
                       style={{
                         color: i === activeStep ? 'var(--sf-text)' : 'var(--sf-text-muted)',
                         transition: reducedMotion ? 'none' : 'color 0.3s ease',
@@ -213,9 +223,8 @@ export function LifecycleStickySection() {
               </div>
             ))}
 
-            {/* CTA at bottom of steps */}
-            <div className="pt-4">
-              {/* TODO: Update href when trial flow is ready */}
+            {/* CTA */}
+            <div className="pb-4 pt-2">
               <Link
                 href="/login"
                 className="mkt-focus inline-flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold text-[#080a0f] transition-opacity hover:opacity-90"
@@ -275,7 +284,7 @@ export function LifecycleStickySection() {
   );
 }
 
-// ── Step panels — minimal mock UI, same work order story ─────────────────────
+// ── Step panels ───────────────────────────────────────────────────────────────
 
 function PanelRow({ label, value, accent }: { label: string; value: string; accent?: boolean }) {
   return (
@@ -431,18 +440,12 @@ function StepPanel05() {
           </span>
         </div>
         <div className="mt-3 space-y-1 border-t pt-3" style={{ borderColor: 'rgba(255,255,255,0.06)' }}>
-          <div className="flex items-center gap-1.5">
-            <div className="h-1 w-1 rounded-full" style={{ background: '#38d996' }} aria-hidden="true" />
-            <span className="text-[10px]" style={{ color: 'var(--sf-text-muted)' }}>Müşteri imzası alındı</span>
-          </div>
-          <div className="flex items-center gap-1.5">
-            <div className="h-1 w-1 rounded-full" style={{ background: '#38d996' }} aria-hidden="true" />
-            <span className="text-[10px]" style={{ color: 'var(--sf-text-muted)' }}>4 fotoğraf eklendi</span>
-          </div>
-          <div className="flex items-center gap-1.5">
-            <div className="h-1 w-1 rounded-full" style={{ background: '#38d996' }} aria-hidden="true" />
-            <span className="text-[10px]" style={{ color: 'var(--sf-text-muted)' }}>Kontrol listesi tamamlandı</span>
-          </div>
+          {['Müşteri imzası alındı', '4 fotoğraf eklendi', 'Kontrol listesi tamamlandı'].map((item) => (
+            <div key={item} className="flex items-center gap-1.5">
+              <div className="h-1 w-1 rounded-full" style={{ background: '#38d996' }} aria-hidden="true" />
+              <span className="text-[10px]" style={{ color: 'var(--sf-text-muted)' }}>{item}</span>
+            </div>
+          ))}
         </div>
       </div>
     </div>
