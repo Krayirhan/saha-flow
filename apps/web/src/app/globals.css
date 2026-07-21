@@ -16,6 +16,54 @@
   .dark-app {
     @apply bg-[#0A0A0B] text-white;
   }
+
+  /* Flow Line state CSS custom properties — DESIGN.md §5 */
+  :root {
+    --sf-open:        #4f8cff;
+    --sf-assigned:    #7d6cff;
+    --sf-on-the-way:  #74b8ff;
+    --sf-in-progress: #ffaa4c;
+    --sf-completed:   #38d996;
+    --sf-sla-risk:    #ff5f6d;
+    --sf-offline:     #747d8d;
+    --sf-synced:      #3dd6d0;
+
+    --sf-bg:          #080a0f;
+    --sf-bg-2:        #0d1118;
+    --sf-surface:     #111722;
+    --sf-surface-2:   #151d2a;
+
+    --sf-text:        #f5f7fa;
+    --sf-text-2:      #a8b0bf;
+    --sf-text-muted:  #747d8d;
+
+    --sf-border:      rgba(255, 255, 255, 0.08);
+    --sf-border-strong: rgba(255, 255, 255, 0.14);
+  }
+
+  /* DESIGN.md §11 — Reduced motion support.
+     All animations must show final state immediately.
+     No information should be removed, only motion disabled. */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+
+    /* Flow reveal: instantly show */
+    .animate-flow-reveal {
+      opacity: 1 !important;
+      transform: none !important;
+    }
+
+    /* Node pulse: no pulse */
+    .animate-node-pulse {
+      opacity: 1 !important;
+    }
+  }
 }
 
 @layer components {
@@ -55,6 +103,31 @@
   .sf-button-danger {
     @apply inline-flex items-center justify-center gap-2 rounded-xl bg-danger-500 px-4 py-2.5 text-sm font-medium text-white transition-all hover:bg-danger-700 disabled:cursor-not-allowed disabled:opacity-60;
   }
+
+  /* Marketing section container — DESIGN.md §7 */
+  .mkt-container {
+    @apply mx-auto w-full max-w-[1280px] px-5 sm:px-8 lg:px-12;
+  }
+
+  /* Marketing section vertical rhythm — DESIGN.md §7 */
+  .mkt-section {
+    @apply py-[72px] sm:py-[96px] lg:py-[120px];
+  }
+
+  /* Flow Line node base — consistent across sections */
+  .flow-node {
+    @apply flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full border-2 font-mono text-xs font-bold;
+  }
+
+  /* Marketing surface card */
+  .mkt-card {
+    @apply rounded-[18px] border border-[var(--sf-border)] bg-[var(--sf-surface)] p-6;
+  }
+
+  /* Focus visible for all interactive elements — DESIGN.md §12 */
+  .mkt-focus {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--sf-open)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--sf-bg)];
+  }
 }
 
 @layer utilities {
@@ -80,3 +153,4 @@
     background-color: rgba(255, 255, 255, 0.3);
   }
 }
+
