@@ -34,6 +34,7 @@ const TRUST_ITEMS = [
 export function HeroOperationsFlow() {
   return (
     <section
+      id="product"
       className="relative overflow-hidden bg-[#080a0f] pt-[96px] lg:pt-[112px]"
       aria-label="Saha Flow — Saha operasyonu yönetimi"
     >

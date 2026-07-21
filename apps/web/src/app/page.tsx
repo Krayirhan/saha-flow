@@ -18,7 +18,6 @@ import { HeroOperationsFlow } from '@/components/marketing/HeroOperationsFlow';
 import { TrustStrip } from '@/components/marketing/TrustStrip';
 import { OperationsBeforeAfter } from '@/components/marketing/OperationsBeforeAfter';
 import { LifecycleStickySection } from '@/components/marketing/LifecycleStickySection';
-import { WebMobileSyncShowcase } from '@/components/marketing/WebMobileSyncShowcase';
 import { OperationalFeatureBento } from '@/components/marketing/OperationalFeatureBento';
 import { TrustAndSecuritySection } from '@/components/marketing/TrustAndSecuritySection';
 import { PilotProgramSection } from '@/components/marketing/PilotProgramSection';
@@ -40,7 +39,6 @@ export default function LandingPage() {
       <LifecycleStickySection />
 
       {/* Faz 3 */}
-      <WebMobileSyncShowcase />
       <OperationalFeatureBento />
       <TrustAndSecuritySection />
 

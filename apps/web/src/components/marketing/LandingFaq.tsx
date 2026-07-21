@@ -134,7 +134,7 @@ export function LandingFaq() {
                   aria-labelledby={`faq-question-${i}`}
                   className="overflow-hidden"
                   style={{
-                    maxHeight: open === i ? '200px' : '0',
+                    maxHeight: open === i ? '1000px' : '0',
                     transition: 'max-height 0.3s ease',
                   }}
                 >
