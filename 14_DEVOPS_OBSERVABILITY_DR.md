@@ -1,6 +1,6 @@
 # DevOps, Gozlemlenebilirlik ve Felaket Kurtarma
 
-> Proje: Saha Flow
+> Proje: İşAkış
 > Dokuman: DevOps, Gozlemlenebilirlik ve Felaket Kurtarma (DevOps, Observability & Disaster Recovery)
 > Durum: Draft
 > Uretim tarihi: 2026-07-21
@@ -415,13 +415,13 @@ export function register() {
 
 | Dashboard | Icerik | Veri Kaynagi |
 |---|---|---|
-| **Saha Flow - Genel Durum** | API yanit sureleri, hata orani, throughput, CPU/memory | Prometheus |
-| **Saha Flow - Is Emri Analitigi** | Olusturulan/tamamlanan is emri sayisi, durum dagilimi, user aktivitesi | Prometheus (custom metrics) |
-| **Saha Flow - API Detay** | Endpoint bazli latency, hata orani, request rate | Prometheus + Tempo |
-| **Saha Flow - Veri Tabani** | Connection pool, slow queries, deadlocks, replication lag | Prometheus + PostgreSQL exporter |
-| **Saha Flow - Tenant Analitigi** | Tenant bazli request sayisi, storage kullanimi, error rate | Prometheus + Loki |
-| **Saha Flow - Guvenlik** | Failed login, rate limit hits, 403/401 rate, suspicious IP | Prometheus + Loki |
-| **Saha Flow - Altyapi** | Host CPU, RAM, disk, network, container health | Prometheus + Node Exporter |
+| **İşAkış - Genel Durum** | API yanit sureleri, hata orani, throughput, CPU/memory | Prometheus |
+| **İşAkış - Is Emri Analitigi** | Olusturulan/tamamlanan is emri sayisi, durum dagilimi, user aktivitesi | Prometheus (custom metrics) |
+| **İşAkış - API Detay** | Endpoint bazli latency, hata orani, request rate | Prometheus + Tempo |
+| **İşAkış - Veri Tabani** | Connection pool, slow queries, deadlocks, replication lag | Prometheus + PostgreSQL exporter |
+| **İşAkış - Tenant Analitigi** | Tenant bazli request sayisi, storage kullanimi, error rate | Prometheus + Loki |
+| **İşAkış - Guvenlik** | Failed login, rate limit hits, 403/401 rate, suspicious IP | Prometheus + Loki |
+| **İşAkış - Altyapi** | Host CPU, RAM, disk, network, container health | Prometheus + Node Exporter |
 
 ### 7.2 Alarm Listesi
 

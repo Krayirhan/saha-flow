@@ -1,0 +1,27 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "jq -r '.tool_input.command // \"\"' | grep -q 'git commit' && C:/Users/Acer/AppData/Local/Programs/Python/Python311/python.exe -m graphify update D:/saha-flow > /dev/null 2>&1 & true",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "C:/Users/Acer/AppData/Local/Programs/Python/Python311/python.exe -m graphify update D:/saha-flow > /dev/null 2>&1 & echo '{\"systemMessage\": \"[graphify] Knowledge graph updating in background.\"}'",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}

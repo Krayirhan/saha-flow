@@ -8,13 +8,13 @@ void main() {
       const MaterialApp(
         home: Scaffold(
           body: Center(
-            child: Text('Saha Flow'),
+            child: Text('İşAkış'),
           ),
         ),
       ),
     );
 
-    expect(find.text('Saha Flow'), findsOneWidget);
+    expect(find.text('İşAkış'), findsOneWidget);
   });
 
   testWidgets('AppBar title should be visible',
@@ -23,14 +23,14 @@ void main() {
       MaterialApp(
         home: Scaffold(
           appBar: AppBar(
-            title: const Text('Saha Flow'),
+            title: const Text('İşAkış'),
           ),
           body: Container(),
         ),
       ),
     );
 
-    expect(find.text('Saha Flow'), findsOneWidget);
+    expect(find.text('İşAkış'), findsOneWidget);
     expect(find.byType(AppBar), findsOneWidget);
   });
 }

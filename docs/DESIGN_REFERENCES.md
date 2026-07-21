@@ -1,6 +1,6 @@
-# Saha Flow — Tasarım Referansları
+# İşAkış — Tasarım Referansları
 
-> Bu doküman, Saha Flow'un UI/UX tasarımında ilham alınan ve bileşen/sayfa geliştirirken başvurulacak referans siteleri listeler.
+> Bu doküman, İşAkış'ın UI/UX tasarımında ilham alınan ve bileşen/sayfa geliştirirken başvurulacak referans siteleri listeler.
 
 ---
 

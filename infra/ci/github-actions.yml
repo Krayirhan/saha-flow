@@ -1,5 +1,5 @@
 # ============================================================
-# Saha Flow - CI/CD Pipeline (GitHub Actions)
+# İşAkış - CI/CD Pipeline (GitHub Actions)
 # ============================================================
 # Triggers: push to main, pull requests to main
 # Jobs: lint, test (backend/web/mobile), security scan,

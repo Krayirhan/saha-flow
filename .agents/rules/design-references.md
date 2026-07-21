@@ -1,6 +1,6 @@
 # Tasarım Referans Kuralları
 
-Saha Flow'un UI geliştirmesinde aşağıdaki 4 referans site kullanılır.
+İşAkış'ın UI geliştirmesinde aşağıdaki 4 referans site kullanılır.
 Yeni bir sayfa, bileşen veya animasyon tasarlanırken önce bu sitelerden ilham alınmalı, sonra Tailwind CSS + shadcn/ui ile implement edilmelidir.
 
 ## Referans Siteler

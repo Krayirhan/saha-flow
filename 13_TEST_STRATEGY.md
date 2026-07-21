@@ -1,6 +1,6 @@
 # Test Stratejisi
 
-> Proje: Saha Flow
+> Proje: İşAkış
 > Dokuman: Test Stratejisi (Test Strategy)
 > Durum: Draft
 > Uretim tarihi: 2026-07-21

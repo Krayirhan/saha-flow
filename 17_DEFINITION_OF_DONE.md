@@ -1,6 +1,6 @@
-> Proje: Saha Flow / > Doküman: Definition of Done / > Durum: Draft / > Üretim tarihi: 2026-07-21 / > Kaynak girdi: templates/01_PROJE_GIRDI_FORMU.yaml
+> Proje: İşAkış / > Doküman: Definition of Done / > Durum: Draft / > Üretim tarihi: 2026-07-21 / > Kaynak girdi: templates/01_PROJE_GIRDI_FORMU.yaml
 
-# Saha Flow — Definition of Done
+# İşAkış — Definition of Done
 
 Bu doküman, her kullanıcı hikâyesi, görev ve release için tamamlanmışlık kriterlerini tanımlar. "Done" ifadesi, aşağıdaki kategorilerdeki tüm ilgili maddelerin karşılanması anlamına gelir. Kategoriler her iş tipi için uyarlanabilir; örneğin salt altyapı işinde "kullanıcı kabul kriteri" aranmaz.
 

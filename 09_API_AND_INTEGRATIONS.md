@@ -1,6 +1,6 @@
-# Saha Flow — 09: API ve Entegrasyonlar
+# İşAkış — 09: API ve Entegrasyonlar
 
-> Proje: Saha Flow
+> Proje: İşAkış
 > Doküman: API ve Entegrasyonlar
 > Durum: Draft
 > Üretim tarihi: 2026-07-21
@@ -31,7 +31,7 @@
 
 ### Mimari Stil
 
-Saha Flow, RESTful API mimarisini kullanır. Richardson Maturity Model seviye 2 hedeflenir (HTTP fiilleri + kaynak odaklı URL). HATEOAS (seviye 3) MVP aşamasında uygulanmaz.
+İşAkış, RESTful API mimarisini kullanır. Richardson Maturity Model seviye 2 hedeflenir (HTTP fiilleri + kaynak odaklı URL). HATEOAS (seviye 3) MVP aşamasında uygulanmaz.
 
 ### URL Tasarım Kuralları
 
@@ -94,7 +94,7 @@ Kurallar:
 
 ## 2. Endpoint Kataloğu
 
-Aşağıda Saha Flow REST API'sinin tam endpoint kataloğu yer almaktadır. Tüm endpoint'lerde `{tenantId}` path parametresi zorunludur (auth endpoint'leri hariç).
+Aşağıda İşAkış REST API'sinin tam endpoint kataloğu yer almaktadır. Tüm endpoint'lerde `{tenantId}` path parametresi zorunludur (auth endpoint'leri hariç).
 
 ### 2.1 Kimlik Doğrulama (Auth)
 
@@ -214,7 +214,7 @@ Aşağıda Saha Flow REST API'sinin tam endpoint kataloğu yer almaktadır. Tüm
 
 ### SpringDoc OpenAPI 3.0 (springdoc-openapi-starter-webmvc-ui)
 
-Saha Flow, SpringDoc ile otomatik OpenAPI 3.0 spesifikasyonu üretir.
+İşAkış, SpringDoc ile otomatik OpenAPI 3.0 spesifikasyonu üretir.
 
 ```java
 @Configuration
@@ -224,10 +224,10 @@ public class OpenApiConfig {
     public OpenAPI sahaFlowOpenAPI() {
         return new OpenAPI()
             .info(new Info()
-                .title("Saha Flow API")
+                .title("İşAkış API")
                 .description("Saha servis yönetimi SaaS platformu REST API'si")
                 .version("v1")
-                .contact(new Contact().name("Saha Flow").email("api@sahaflow.com"))
+                .contact(new Contact().name("İşAkış").email("api@sahaflow.com"))
                 .license(new License().name("Proprietary"))
             )
             .addSecurityItem(new SecurityRequirement().addList("BearerAuth"))
@@ -632,7 +632,7 @@ public class WorkOrderControllerV2 {
 
 ### Giden Webhook (Outbound) — Gelecek Özelliği
 
-Saha Flow, dış sistemlere webhook gönderirken aşağıdaki güvenlik önlemlerini uygular:
+İşAkış, dış sistemlere webhook gönderirken aşağıdaki güvenlik önlemlerini uygular:
 
 ```json
 // Webhook payload örneği
@@ -672,7 +672,7 @@ signature = HMAC-SHA256(
 
 ### Gelen Webhook (Inbound) — MVP'de Yok
 
-Üçüncü parti sistemlerden (ERP, muhasebe) Saha Flow'a webhook alınması durumunda:
+Üçüncü parti sistemlerden (ERP, muhasebe) İşAkış'a webhook alınması durumunda:
 
 | Kontrol | Uygulama |
 |---------|----------|
@@ -754,7 +754,7 @@ public void sendEmail(EmailRequest request) {
 
 ```java
 // Spring transaction timeout (varsayılan: veritabanı varsayılanı, -1 = sonsuz)
-// Saha Flow'da 30 saniye olarak ayarlanır
+// İşAkış'ta 30 saniye olarak ayarlanır
 spring:
   transaction:
     default-timeout: 30s
@@ -766,7 +766,7 @@ spring:
 
 ### Pact ile Sözleşme Testi
 
-Saha Flow'da consumer-driven contract testing için Pact kullanılır.
+İşAkış'ta consumer-driven contract testing için Pact kullanılır.
 
 ```mermaid
 graph LR

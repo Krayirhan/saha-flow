@@ -1,6 +1,6 @@
-# Saha Flow — 08: Veritabanı ve Veri Güvenliği
+# İşAkış — 08: Veritabanı ve Veri Güvenliği
 
-> Proje: Saha Flow
+> Proje: İşAkış
 > Doküman: Veritabanı ve Veri Güvenliği
 > Durum: Draft
 > Üretim tarihi: 2026-07-21
@@ -28,7 +28,7 @@
 
 ## 1. Veri Sınıflandırması
 
-KVKK kapsamında Saha Flow'da işlenen tüm veriler aşağıdaki gibi sınıflandırılır:
+KVKK kapsamında İşAkış'ta işlenen tüm veriler aşağıdaki gibi sınıflandırılır:
 
 | Sınıf | Etiket | Örnek Veriler | Saklama | Şifreleme | Erişim |
 |-------|--------|---------------|---------|-----------|--------|
@@ -42,12 +42,12 @@ KVKK kapsamında Saha Flow'da işlenen tüm veriler aşağıdaki gibi sınıflan
 
 ### KVKK Uyum Matrisi
 
-| KVKK Yükümlülüğü | Saha Flow Karşılığı |
+| KVKK Yükümlülüğü | İşAkış Karşılığı |
 |-------------------|---------------------|
 | **Aydınlatma yükümlülüğü** | Kayıt sayfasında ve uygulama içinde KVKK Aydınlatma Metni |
 | **Açık rıza** | Hesap oluşturma sırasında checkbox (opt-in, önceden işaretli DEĞİL) |
 | **Veri minimizasyonu** | Sadece gerekli alanlar toplanır. İş emri için TCKN veya doğum tarihi istenmez |
-| **VERBIS kaydı** | Saha Flow (operatör sıfatıyla) VERBIS'e kayıtlı olmalı |
+| **VERBIS kaydı** | İşAkış (operatör sıfatıyla) VERBIS'e kayıtlı olmalı |
 | **Erişim hakkı** | Kullanıcı, profil sayfasından tüm kişisel verilerini görüntüleyebilir ve JSON/CSV olarak dışa aktarabilir |
 | **Düzeltme hakkı** | Kullanıcı profil bilgilerini düzenleyebilir |
 | **Silme hakkı** | Hesap silme → 30 gün soft-delete → 90 gün sonra kalıcı silme (backup'lardan da temizleme) |
@@ -60,7 +60,7 @@ KVKK kapsamında Saha Flow'da işlenen tüm veriler aşağıdaki gibi sınıflan
 
 ### Shared Database / Shared Schema
 
-Saha Flow, **shared database + shared schema** tenant modelini kullanır.
+İşAkış, **shared database + shared schema** tenant modelini kullanır.
 
 ```
 ┌─────────────────────────────────────────────┐
@@ -886,7 +886,7 @@ UPDATE customer SET tax_number = pgp_sym_encrypt(tax_number, 'ENCRYPTION_KEY')
 WHERE tenant_id = '...';
 ```
 
-**Not**: pgcrypto, uygulama seviyesindeki şifrelemeye göre daha az esneklik sunar (indeksleme, arama zor). Saha Flow'da uygulama seviyesinde şifreleme (JPA Attribute Converter) birincil yöntemdir.
+**Not**: pgcrypto, uygulama seviyesindeki şifrelemeye göre daha az esneklik sunar (indeksleme, arama zor). İşAkış'ta uygulama seviyesinde şifreleme (JPA Attribute Converter) birincil yöntemdir.
 
 ### Bağlantı Şifreleme (TLS)
 

@@ -21,11 +21,11 @@ public class OpenApiConfig {
         var securitySchemeName = "bearerAuth";
         return new OpenAPI()
             .info(new Info()
-                .title("Saha Flow API")
+                .title("İşAkış API")
                 .version("1.0.0")
                 .description("Saha servis yonetimi SaaS platformu REST API")
                 .contact(new Contact()
-                    .name("Saha Flow Team")
+                    .name("İşAkış Team")
                     .email("dev@sahaflow.local"))
                 .license(new License()
                     .name("Proprietary")

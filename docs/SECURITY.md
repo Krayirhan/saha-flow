@@ -1,8 +1,8 @@
-# Saha Flow - Guvenlik Dokumani
+# İşAkış - Guvenlik Dokumani
 
 ## Guvenlik Modeli Ozeti
 
-Saha Flow, coklu tenant yapisina sahip bir SaaS platformu olarak katmanli bir guvenlik yaklasimi uygular:
+İşAkış, coklu tenant yapisina sahip bir SaaS platformu olarak katmanli bir guvenlik yaklasimi uygular:
 
 ```
 ┌─────────────────────────────────────────┐
@@ -199,7 +199,7 @@ CREATE POLICY tenant_isolation ON bookings
 
 ## KVKK Uyumlulugu (Turkiye)
 
-Saha Flow, 6698 sayili Kisisel Verilerin Korunmasi Kanunu'na (KVKK) uygun olarak tasarlanmistir:
+İşAkış, 6698 sayili Kisisel Verilerin Korunmasi Kanunu'na (KVKK) uygun olarak tasarlanmistir:
 
 - **VERBIS kaydi**: Veri sorumlusu olarak yukumluluk
 - **Aydinlatma metni**: Kayit ve giris ekranlarinda zorunlu onay

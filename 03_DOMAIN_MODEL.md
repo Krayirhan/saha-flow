@@ -1,10 +1,10 @@
-> Proje: Saha Flow
+> Proje: İşAkış
 > Doküman: 03 Domain Modeli
 > Durum: Draft
 > Üretim tarihi: 2026-07-21
 > Kaynak girdi: templates/01_PROJE_GIRDI_FORMU.yaml
 
-# 03 Domain Modeli — Saha Flow
+# 03 Domain Modeli — İşAkış
 
 ---
 
@@ -14,7 +14,7 @@ Aşağıdaki bounded context'ler, domain'in karmaşıklığını yönetmek ve ek
 
 ```mermaid
 graph TD
-    subgraph "Saha Flow Domain"
+    subgraph "İşAkış Domain"
         ID[Identity Context]
         TN[Tenant Context]
         CM[Customer Context]
@@ -427,7 +427,7 @@ graph TD
 
 | Terim | İngilizce Karşılığı | Açıklama |
 |---|---|---|
-| **Tenant** | Tenant | Saha Flow'u kullanan her bir servis firması. Kendi kullanıcıları, müşterileri ve verileri vardır. |
+| **Tenant** | Tenant | İşAkış'ı kullanan her bir servis firması. Kendi kullanıcıları, müşterileri ve verileri vardır. |
 | **Müşteri** | Customer | Servis firmasının hizmet verdiği son tüketici (birey veya kurum). İş emrinin yönlendirildiği taraftır. |
 | **Cihaz** | Asset | Müşteriye ait, üzerinde servis işlemi yapılan fiziksel ekipman (klima, kombi, alarm paneli vb.). |
 | **İş Emri** | WorkOrder | Müşteri ve cihaz bazında açılan, bir teknisyen tarafından yerine getirilmesi beklenen servis talebi. |

@@ -1,6 +1,6 @@
 # KVKK Uyumluluk ve Gizlilik Dokumani
 
-> Proje: Saha Flow
+> Proje: İşAkış
 > Dokuman: KVKK Uyumluluk ve Gizlilik (Privacy & KVKK)
 > Durum: Draft
 > Uretim tarihi: 2026-07-21
@@ -16,8 +16,8 @@
 
 | Rol | Taraf | Aciklama |
 |---|---|---|
-| **Veri Sorumlusu** | Saha Flow'u kullanan Teknik Servis Firmasi (Musteri/Tenant) | Kendi musteri ve personel verilerinin islenme amacini ve yontemini belirler. Saha Flow, musteri firmalarinin veri sorumlusudur. |
-| **Veri Isleyen** | Saha Flow (Platform Saglayici) | Veri sorumlusunun talimatlari dogrultusunda, sozlesme kapsaminda veriyi isler. Kendi basina veri isleme amaci belirlemez. |
+| **Veri Sorumlusu** | İşAkış'ı kullanan Teknik Servis Firmasi (Musteri/Tenant) | Kendi musteri ve personel verilerinin islenme amacini ve yontemini belirler. İşAkış, musteri firmalarinin veri sorumlusudur. |
+| **Veri Isleyen** | İşAkış (Platform Saglayici) | Veri sorumlusunun talimatlari dogrultusunda, sozlesme kapsaminda veriyi isler. Kendi basina veri isleme amaci belirlemez. |
 
 **Alt Isleyenler:**
 | Alt Isleyen | Hizmet | Veri Islenen Konum |
@@ -51,7 +51,7 @@
 
 ### 2.2 Islenmeyen Veriler
 
-- **Kredi karti / odeme bilgisi:** Odemeler harici odeme saglayici (Iyzico, Stripe vb.) uzerinden yapilir. Saha Flow kendi sunucusunda kredi karti bilgisi SAKLAMAZ.
+- **Kredi karti / odeme bilgisi:** Odemeler harici odeme saglayici (Iyzico, Stripe vb.) uzerinden yapilir. İşAkış kendi sunucusunda kredi karti bilgisi SAKLAMAZ.
 - **TC Kimlik Numarasi:** Zorunlu ise sifreli ayri tabloda saklanir, loglanmaz, maskelenir. MVP kapsaminda toplanmamasi onerilir.
 - **Saglik verisi, biyometrik veri, irk/etnik koken, sendika uyeligi, siyasi gorus:** Toplanmaz ve islenmez.
 - **Cocuk verisi:** 18 yas alti kullanicisi yoktur; kayit sirasinda yas dogrulamasi yapilmalidir.
@@ -92,7 +92,7 @@
 |---|---|---|
 | Musteri Firmasi (Veri Sorumlusu) | Sozlesme eki olarak "Veri Isleme Sozlesmesi" (DPA) | Sozlesme imzasi oncesi |
 | Musteri Firmasi Calisani / Teknisyen | Mobil uygulama ilk acilista tam ekran aydinlatma metni, Web'de KVKK sayfasi | Veri isleme baslamadan once |
-| Musterinin Musterisi (son kullanici / servis alan) | Is emri oncesi kisa aydinlatma (mobil uygulamada "Is emri olusturulurken adiniz, adresiniz ve telefon numaraniz Saha Flow tarafindan..." metni) | Is emri olusturulmadan once |
+| Musterinin Musterisi (son kullanici / servis alan) | Is emri oncesi kisa aydinlatma (mobil uygulamada "Is emri olusturulurken adiniz, adresiniz ve telefon numaraniz İşAkış tarafindan..." metni) | Is emri olusturulmadan once |
 
 ### 5.2 Riza Degerlendirmesi
 
@@ -271,7 +271,7 @@ Eger ileride yurt disi aktarim gerekirse, KVKK m.9 kapsaminda:
 4. **Alt isleyen sozlesmeleri:** KVKK m. 12/5 kapsaminda alt isleyen bildirimleri ve sozlesmeleri
 5. **Saklama sureleri:** Ticari defterler icin 10 yil saklama suresinin yasal dayanagi, diger veriler icin belirlenen surelerin orantili olup olmadigi
 6. **Yurt disi aktarim degerlendirmesi:** E-posta ve CDN servislerinin veri isleme konumu
-7. **VERBIS kaydi:** Saha Flow'un VERBIS'e (Veri Sorumlulari Sicili) kayit yukumlulugu (calisan sayisi ve mali bilanco esikleri degerlendirilerek)
+7. **VERBIS kaydi:** İşAkış'ın VERBIS'e (Veri Sorumlulari Sicili) kayit yukumlulugu (calisan sayisi ve mali bilanco esikleri degerlendirilerek)
 8. **DPIA (Veri Koruma Etki Degerlendirmesi):** Konum takibi icin DPIA'nin zorunlu olup olmadigi, icerigi
 9. **KVKK Kurulu'na bildirim yukumlulukleri:** Hangi ihlallerin KVKK Kurulu'na bildirilmesi gerektigi
 10. **Cerez (cookie) politikasi:** Web arayuzunde kullanilan cerezlerin KVKK ve eski Ceres Rehberi kapsaminda degerlendirilmesi

@@ -1,6 +1,6 @@
-# Saha Flow — 06: Frontend Mimari ve Güvenlik
+# İşAkış — 06: Frontend Mimari ve Güvenlik
 
-> Proje: Saha Flow
+> Proje: İşAkış
 > Doküman: Frontend Mimari ve Güvenlik
 > Durum: Draft
 > Üretim tarihi: 2026-07-21
@@ -32,7 +32,7 @@
 
 ## 1. Mimari Genel Bakış
 
-Saha Flow frontend mimarisi, Next.js 14 App Router üzerine inşa edilmiş çok panelli bir web uygulamasıdır. BFF (Backend For Frontend) modeliyle çalışır; tüm API çağrıları Next.js sunucu tarafından yapılır ve hassas token'lar istemci JavaScript'ine hiç erişmez.
+İşAkış frontend mimarisi, Next.js 14 App Router üzerine inşa edilmiş çok panelli bir web uygulamasıdır. BFF (Backend For Frontend) modeliyle çalışır; tüm API çağrıları Next.js sunucu tarafından yapılır ve hassas token'lar istemci JavaScript'ine hiç erişmez.
 
 ```mermaid
 graph TB
@@ -196,7 +196,7 @@ Middleware'de ağır session doğrulama yapılmaz; sadece cookie varlığı ve t
 
 ## 4. Server/Client Sınırı
 
-Saha Flow'un en kritik mimari kararlarından biri, hangi kodun sunucuda (server component), hangi kodun istemcide (client component) çalışacağıdır.
+İşAkış'ın en kritik mimari kararlarından biri, hangi kodun sunucuda (server component), hangi kodun istemcide (client component) çalışacağıdır.
 
 ### Server Components (Varsayılan)
 
@@ -280,7 +280,7 @@ Client Component ('use client')
 
 ## 5. State Yönetimi
 
-Saha Flow'da karmaşık global state yönetimi (Redux, Zustand, MobX) kullanılmaz. 2 kişilik ekip ve orta karmaşıklıkta bir uygulama için React Context + SWR yeterlidir.
+İşAkış'ta karmaşık global state yönetimi (Redux, Zustand, MobX) kullanılmaz. 2 kişilik ekip ve orta karmaşıklıkta bir uygulama için React Context + SWR yeterlidir.
 
 ### State Katmanları
 
@@ -859,7 +859,7 @@ Tüm beklenmeyen hatalar için global toast bildirimi:
 
 ## 14. Erişilebilirlik
 
-Saha Flow, WCAG 2.1 AA seviyesini hedefler.
+İşAkış, WCAG 2.1 AA seviyesini hedefler.
 
 | Kriter | Uygulama |
 |--------|----------|

@@ -1,16 +1,16 @@
-> Proje: Saha Flow
+> Proje: İşAkış
 > Doküman: 02 Ürün Gereksinimleri Dokümanı (PRD)
 > Durum: Draft
 > Üretim tarihi: 2026-07-21
 > Kaynak girdi: templates/01_PROJE_GIRDI_FORMU.yaml
 
-# 02 Ürün Gereksinimleri Dokümanı (PRD) — Saha Flow
+# 02 Ürün Gereksinimleri Dokümanı (PRD) — İşAkış
 
 ---
 
 ## 1. Ürün Vizyonu
 
-**Saha Flow**, teknik servis firmalarının saha operasyonlarını kağıtsız, şeffaf ve verimli hale getiren; teknisyenin işe başlamasından müşteri onayına ve tahsilata kadar tüm süreci tek bir platformda birleştiren, mobil öncelikli SaaS çözümüdür.
+**İşAkış**, teknik servis firmalarının saha operasyonlarını kağıtsız, şeffaf ve verimli hale getiren; teknisyenin işe başlamasından müşteri onayına ve tahsilata kadar tüm süreci tek bir platformda birleştiren, mobil öncelikli SaaS çözümüdür.
 
 İlk 12 ayda 50 firma, 500 aktif teknisyen ve aylık 250.000 TL yinelenen gelir hedeflenir.
 

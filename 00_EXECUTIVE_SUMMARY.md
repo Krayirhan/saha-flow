@@ -1,10 +1,10 @@
-> Proje: Saha Flow
+> Proje: İşAkış
 > Doküman: 00 Executive Summary
 > Durum: Draft
 > Üretim tarihi: 2026-07-21
 > Kaynak girdi: templates/01_PROJE_GIRDI_FORMU.yaml
 
-# 00 Executive Summary — Saha Flow
+# 00 Executive Summary — İşAkış
 
 ---
 
@@ -37,7 +37,7 @@ Mevcut genel çözümler (saha satış/çatı sistemleri) ya çok büyük ölçe
 
 ## 3. Değer Önerisi
 
-Saha Flow, **teknik servis firmalarının saha operasyonlarını uçtan uca dijitalleştiren**, mobil öncelikli, offline çalışabilen ve teknisyen başına uygun aylık ücretle sunulan bir SaaS ürünüdür.
+İşAkış, **teknik servis firmalarının saha operasyonlarını uçtan uca dijitalleştiren**, mobil öncelikli, offline çalışabilen ve teknisyen başına uygun aylık ücretle sunulan bir SaaS ürünüdür.
 
 **Üç temel fayda:**
 1. **Operasyonel verimlilik:** İş emri oluşturma, atama, takip ve raporlama tek platformda; saha-ofis arası anlık haberleşme.
@@ -102,7 +102,7 @@ Saha Flow, **teknik servis firmalarının saha operasyonlarını uçtan uca diji
 1. **Ürün-pazar uyumu sağlanamaması:** Hedef segmentin mevcut alışkanlıklarını (WhatsApp, kağıt) terk etmek istememesi. MVP'nin yeterince basit ve alışkanlıklara yakın olmaması.
 2. **Fiyat itirazı:** Teknisyen başına aylık ücret modelinin küçük firmalarca yüksek bulunması ve rakip fiyat baskısı.
 3. **Saha kullanım direnci:** Teknisyenlerin mobil uygulamayı kullanmayı angarya olarak görmesi; ofis personelinin çift veri girişi yapmak zorunda kalması.
-4. **Veri taşıma zorluğu:** Firmaların mevcut müşteri/cihaz verilerini Saha Flow'a aktarmak istememesi veya aktarımın manuel kalması.
+4. **Veri taşıma zorluğu:** Firmaların mevcut müşteri/cihaz verilerini İşAkış'a aktarmak istememesi veya aktarımın manuel kalması.
 5. **Segment kayması:** Ürünün, talep üzerine büyük ölçekli firmalara (50+ teknisyen) kayması ve MVP'nin bu segment için yetersiz kalarak kötü referans oluşması.
 
 ---
@@ -137,7 +137,7 @@ Saha Flow, **teknik servis firmalarının saha operasyonlarını uçtan uca diji
 1. **Fiyatlandırma:** Teknisyen başına aylık ücret TL cinsinden ne olmalı? (Varsayım: 500-750 TL/teknisyen/ay)
 2. **Şirket yapısı:** Hangi ülkede kurulacak? Fatura muhatabı neresi olacak?
 3. **Pilot firma seçimi:** Hangi firmalarla pilot yapılacak? Ücretsiz pilot mu, ücretli mi?
-4. **Marka tescili:** "Saha Flow" marka tescili yapılacak mı?
+4. **Marka tescili:** "İşAkış" marka tescili yapılacak mı?
 5. **Veri saklama bölgesi:** Üretim ortamı Türkiye'de mi (KVKK uyumu), yoksa AB'de mi barındırılacak?
 6. **Açık kaynak stratejisi:** Mobil uygulama veya belirli modüller açık kaynak yapılacak mı?
 7. **Yatırım stratejisi:** Bootstrapped mi, yatırım alınacak mı?

@@ -1,4 +1,4 @@
-# Saha Flow Landing Reference Guide
+# İşAkış Landing Reference Guide
 
 > Purpose: Define how external design references may be used without creating a copied or fragmented interface.
 
@@ -8,7 +8,7 @@
 
 External references are used to improve decision quality, not to assemble a page from unrelated templates.
 
-The final landing must feel like one coherent Saha Flow product system.
+The final landing must feel like one coherent İşAkış product system.
 
 Do not create “Frankenstein UI” by combining:
 
@@ -18,7 +18,7 @@ Do not create “Frankenstein UI” by combining:
 - several animation libraries
 - inconsistent typography and radii
 
-Every borrowed idea must pass through the Saha Flow design system.
+Every borrowed idea must pass through the İşAkış design system.
 
 ---
 
@@ -150,9 +150,9 @@ No more than three distinctive animation behaviors across the full landing page.
 
 Every adapted component must:
 
-- use Saha Flow colors
-- use Saha Flow typography
-- use Saha Flow radius and border tokens
+- use İşAkış colors
+- use İşAkış typography
+- use İşAkış radius and border tokens
 - support reduced motion
 - preserve keyboard accessibility
 - work on mobile
@@ -240,7 +240,7 @@ Score each direction on:
 - mobile behavior
 - accessibility
 - performance
-- consistency with Saha Flow
+- consistency with İşAkış
 
 Do not combine all three equally.
 
@@ -277,7 +277,7 @@ Before accepting a section, confirm:
 - Does it use the shared design tokens?
 - Does it use the same typography hierarchy?
 - Does it support the Flow Line system?
-- Does it show a real Saha Flow concept?
+- Does it show a real İşAkış concept?
 - Does it use the same corner and border language?
 - Does it fit the selected main direction?
 - Does it work in reduced-motion mode?

@@ -1,6 +1,6 @@
-> Proje: Saha Flow / > Doküman: Proje Yapısı / > Durum: Draft / > Üretim tarihi: 2026-07-21 / > Kaynak girdi: templates/01_PROJE_GIRDI_FORMU.yaml
+> Proje: İşAkış / > Doküman: Proje Yapısı / > Durum: Draft / > Üretim tarihi: 2026-07-21 / > Kaynak girdi: templates/01_PROJE_GIRDI_FORMU.yaml
 
-# Saha Flow — Proje Yapısı
+# İşAkış — Proje Yapısı
 
 ## 1. Monorepo Kararı ve Gerekçesi
 

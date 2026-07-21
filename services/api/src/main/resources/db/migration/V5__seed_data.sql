@@ -59,7 +59,7 @@ ON CONFLICT DO NOTHING;
 
 -- DEFAULT TENANT (only if not exists)
 INSERT INTO tenant (id, name, slug, plan, active)
-VALUES ('tenant-default', 'Saha Flow Demo', 'demo', 'FREE', TRUE)
+VALUES ('tenant-default', 'İşAkış Demo', 'demo', 'FREE', TRUE)
 ON CONFLICT (slug) DO NOTHING;
 
 -- DEFAULT ADMIN USER

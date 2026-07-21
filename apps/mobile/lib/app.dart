@@ -155,7 +155,7 @@ class _SahaFlowAppState extends ConsumerState<SahaFlowApp> {
     final router = ref.watch(routerProvider);
 
     return MaterialApp.router(
-      title: 'Saha Flow',
+      title: 'İşAkış',
       theme: AppTheme.lightTheme,
       debugShowCheckedModeBanner: false,
       routerConfig: router,

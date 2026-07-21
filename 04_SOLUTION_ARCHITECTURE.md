@@ -1,10 +1,10 @@
-> Proje: Saha Flow
+> Proje: İşAkış
 > Doküman: 04 Çözüm Mimarisi
 > Durum: Draft
 > Üretim tarihi: 2026-07-21
 > Kaynak girdi: templates/01_PROJE_GIRDI_FORMU.yaml
 
-# 04 Çözüm Mimarisi — Saha Flow
+# 04 Çözüm Mimarisi — İşAkış
 
 ---
 
@@ -12,14 +12,14 @@
 
 ```mermaid
 C4Context
-    title Saha Flow - Sistem Bağlam Diyagramı
+    title İşAkış - Sistem Bağlam Diyagramı
 
     Person(ofis, "Ofis Personeli", "Web tarayıcı üzerinden iş emirlerini yönetir")
     Person(teknisyen, "Saha Teknisyeni", "Mobil uygulama ile işleri takip eder")
     Person(musteri, "Müşteri", "Mobil uygulamada imza atar")
     Person(admin, "Admin", "Firma ve kullanıcı yönetimi yapar")
 
-    System(sahaflow, "Saha Flow", "Saha servis yönetimi SaaS platformu")
+    System(sahaflow, "İşAkış", "Saha servis yönetimi SaaS platformu")
 
     System_Ext(email, "E-posta Servisi", "İş atama ve tamamlanma bildirimleri")
     System_Ext(s3, "S3 Uyumlu Depolama", "Fotoğraf, imza, PDF rapor saklama")
@@ -40,12 +40,12 @@ C4Context
 
 ```mermaid
 C4Container
-    title Saha Flow - Container Mimarisi
+    title İşAkış - Container Mimarisi
 
     Person(ofis, "Ofis Personeli")
     Person(teknisyen, "Teknisyen")
 
-    System_Boundary(sahaflow, "Saha Flow Platform") {
+    System_Boundary(sahaflow, "İşAkış Platform") {
         Container(web, "Web Panel", "Next.js 14 + TypeScript", "Ofis personeli ve admin için yönetim arayüzü")
         Container(api, "Backend API", "Spring Boot 3 + Java 21", "REST API, iş mantığı, kimlik doğrulama")
         Container(mobile, "Mobil Uygulama", "Flutter 3 + Dart", "iOS ve Android saha uygulaması")

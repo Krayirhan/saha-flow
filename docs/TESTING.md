@@ -1,8 +1,8 @@
-# Saha Flow - Test Dokumani
+# İşAkış - Test Dokumani
 
 ## Test Stratejisi Ozeti
 
-Saha Flow, test piramidi yaklasimiyla katmanli bir test stratejisi uygular:
+İşAkış, test piramidi yaklasimiyla katmanli bir test stratejisi uygular:
 
 ```
         ╱  E2E   ╲          Playwright (web), integration_test (mobil)

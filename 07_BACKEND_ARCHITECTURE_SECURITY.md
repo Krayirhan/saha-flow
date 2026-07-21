@@ -1,6 +1,6 @@
-# Saha Flow — 07: Backend Mimari ve Güvenlik
+# İşAkış — 07: Backend Mimari ve Güvenlik
 
-> Proje: Saha Flow
+> Proje: İşAkış
 > Doküman: Backend Mimari ve Güvenlik
 > Durum: Draft
 > Üretim tarihi: 2026-07-21
@@ -33,7 +33,7 @@
 
 ## 1. Mimari Genel Bakış
 
-Saha Flow backend'i, modüler monolit olarak tasarlanmış Spring Boot 3.3 uygulamasıdır. Her iş alanı kendi paketinde (module) izole edilmiş olup, ileride mikroservis olarak ayrılabilecek şekilde paket sınırları korunur.
+İşAkış backend'i, modüler monolit olarak tasarlanmış Spring Boot 3.3 uygulamasıdır. Her iş alanı kendi paketinde (module) izole edilmiş olup, ileride mikroservis olarak ayrılabilecek şekilde paket sınırları korunur.
 
 ```mermaid
 graph TB
@@ -415,7 +415,7 @@ public TokenPair refreshAccessToken(String refreshTokenValue) {
 
 ### RBAC + Deny-by-Default
 
-Saha Flow, rol tabanlı erişim kontrolü (RBAC) kullanır. Temel prensip **önce reddet, sonra izin ver** (deny-by-default):
+İşAkış, rol tabanlı erişim kontrolü (RBAC) kullanır. Temel prensip **önce reddet, sonra izin ver** (deny-by-default):
 
 ```java
 // Method-level authorization
@@ -1012,7 +1012,7 @@ public class IdempotencyFilter extends OncePerRequestFilter {
 }
 ```
 
-**Not**: GET, PUT, DELETE zaten idempotent'tir. PATCH'ın idempotent olması tasarıma bağlıdır — Saha Flow'da PATCH tam kaynak güncellemesi olarak değil, kısmi güncelleme olarak kullanılır ve idempotent kabul edilmez.
+**Not**: GET, PUT, DELETE zaten idempotent'tir. PATCH'ın idempotent olması tasarıma bağlıdır — İşAkış'ta PATCH tam kaynak güncellemesi olarak değil, kısmi güncelleme olarak kullanılır ve idempotent kabul edilmez.
 
 ---
 

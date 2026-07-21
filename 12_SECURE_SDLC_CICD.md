@@ -1,6 +1,6 @@
 # Guvenli SDLC ve CI/CD Dokumani
 
-> Proje: Saha Flow
+> Proje: İşAkış
 > Dokuman: Guvenli SDLC ve CI/CD (Secure SDLC & CI/CD)
 > Durum: Draft
 > Uretim tarihi: 2026-07-21

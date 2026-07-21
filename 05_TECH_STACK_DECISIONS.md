@@ -1,6 +1,6 @@
-# Saha Flow — 05: Teknoloji Yığını Kararları
+# İşAkış — 05: Teknoloji Yığını Kararları
 
-> Proje: Saha Flow
+> Proje: İşAkış
 > Doküman: Teknoloji Yığını Kararları
 > Durum: Draft
 > Üretim tarihi: 2026-07-21
@@ -20,7 +20,7 @@
 
 ## 1. Karar Matrisi
 
-Aşağıdaki tabloda, Saha Flow projesinin her teknoloji alanı için verilen karar, gerekçesi, alternatifleri ve doğrulama kriterleri yer almaktadır.
+Aşağıdaki tabloda, İşAkış projesinin her teknoloji alanı için verilen karar, gerekçesi, alternatifleri ve doğrulama kriterleri yer almaktadır.
 
 ### 1.1 Web Frontend
 
@@ -278,7 +278,7 @@ Aşağıdaki tabloda, Saha Flow projesinin her teknoloji alanı için verilen ka
 
 ## 2. Kullanılmayan Teknolojiler
 
-Aşağıda, Saha Flow projesinde **bilinçli olarak kullanılmayan** teknolojiler ve gerekçeleri yer almaktadır.
+Aşağıda, İşAkış projesinde **bilinçli olarak kullanılmayan** teknolojiler ve gerekçeleri yer almaktadır.
 
 ### 2.1 Redis
 
@@ -324,7 +324,7 @@ Aşağıda, Saha Flow projesinde **bilinçli olarak kullanılmayan** teknolojile
 
 | Kriter | Açıklama |
 |--------|----------|
-| **Neden kullanılmıyor?** | Saha Flow MVP'sinde gerçek zamanlı özellik (canlı konum takibi, anlık bildirim, chat) yok. İş emri durumu polling ile yenilenebilir (mobil uygulama zaten offline-first). Gerçek zamanlı bildirim için SSE (Server-Sent Events) daha basit bir alternatif. |
+| **Neden kullanılmıyor?** | İşAkış MVP'sinde gerçek zamanlı özellik (canlı konum takibi, anlık bildirim, chat) yok. İş emri durumu polling ile yenilenebilir (mobil uygulama zaten offline-first). Gerçek zamanlı bildirim için SSE (Server-Sent Events) daha basit bir alternatif. |
 | **Ne zaman eklenir?** | Canlı teknisyen konum takibi; anlık push notification; saha içi chat/iletişim eklendiğinde. |
 | **Maliyet karşılaştırması** | WebSocket, uzun ömürlü bağlantılar için ek bellek ve connection pool yönetimi gerektirir. |
 

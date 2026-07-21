@@ -1,6 +1,6 @@
 # Mimari Karar Kayitlari (ADR)
 
-> Proje: Saha Flow
+> Proje: İşAkış
 > Dokuman: Mimari Karar Kayitlari (Architecture Decision Records - ADR)
 > Durum: Draft
 > Uretim tarihi: 2026-07-21
@@ -131,7 +131,7 @@ Dusuk butce ile 2 kisi yonetim yapacak. Ayri veri tabani/sema yonetimi operasyon
 
 - Basit veri tabani yonetimi
 - Tek connection pool, etkin kaynak kullanimi
-- Cross-tenant raporlama (Saha Flow'a ozgu degil ama admin paneli icin kolay)
+- Cross-tenant raporlama (İşAkış'a ozgu degil ama admin paneli icin kolay)
 - Backup ve PITR tek noktada
 
 ### Olumsuz Sonuclar
@@ -497,7 +497,7 @@ ALTER TABLE work_orders ADD COLUMN status VARCHAR(20) NOT NULL DEFAULT 'OPEN';
 
 ### Baglam
 
-Saha Flow'da fotograf, imza ve PDF raporlari gibi dosyalar MinIO (S3 uyumlu) uzerinde saklanacak. Dosyalarin dogrudan S3'ten, API uzerinden proxy olmadan indirilmesi performans ve bant genisligi acisindan tercih edilir. Ancak yetkisiz erisimi onlemek gerekir.
+İşAkış'ta fotograf, imza ve PDF raporlari gibi dosyalar MinIO (S3 uyumlu) uzerinde saklanacak. Dosyalarin dogrudan S3'ten, API uzerinden proxy olmadan indirilmesi performans ve bant genisligi acisindan tercih edilir. Ancak yetkisiz erisimi onlemek gerekir.
 
 ### Karar
 

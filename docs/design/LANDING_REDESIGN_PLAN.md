@@ -1,4 +1,4 @@
-# Saha Flow Landing Page Redesign Plan
+# İşAkış Landing Page Redesign Plan
 
 > Target: `apps/web` marketing landing page  
 > Goal: Replace the generic dark-SaaS appearance with a product-specific field-operations narrative.  
@@ -59,7 +59,7 @@ The landing should feel like a live field-operation command surface:
 1. Navbar
 2. Split Hero — live operation
 3. Trust strip — product assurances
-4. Before / After — WhatsApp and manual operations vs Saha Flow
+4. Before / After — WhatsApp and manual operations vs İşAkış
 5. Work-order lifecycle — sticky scroll story
 6. Web + mobile synchronization showcase
 7. Problem-focused feature bento
@@ -115,7 +115,7 @@ Actions:
 
 Answer immediately:
 
-- What is Saha Flow?
+- What is İşAkış?
 - Who is it for?
 - What operational result does it create?
 
@@ -214,7 +214,7 @@ Only claim features verified in the repository or product scope.
 
 `WhatsApp ve kâğıt formlardan izlenebilir saha operasyonuna`
 
-### Left: Without Saha Flow
+### Left: Without İşAkış
 
 - WhatsApp messages
 - paper service forms
@@ -224,7 +224,7 @@ Only claim features verified in the repository or product scope.
 - missing signatures
 - delayed reports
 
-### Right: With Saha Flow
+### Right: With İşAkış
 
 - standardized work order
 - technician assignment record
@@ -287,7 +287,7 @@ Use the same work order:
 
 - VibeUI scroll-triggered reveal
 - Aceternity sticky scroll reveal behavior
-- custom implementation using Saha Flow tokens
+- custom implementation using İşAkış tokens
 
 ---
 
@@ -511,7 +511,7 @@ Answers must be verified before production.
 
 ### Title
 
-`Bir sonraki iş emrinizi WhatsApp’tan değil, Saha Flow’dan yönetin.`
+`Bir sonraki iş emrinizi WhatsApp’tan değil, İşAkış’dan yönetin.`
 
 ### Copy
 
@@ -675,4 +675,4 @@ The redesign is accepted when:
 13. All interactive controls are keyboard accessible.
 14. Build and typecheck pass.
 15. Unverified pricing, feature, compliance, and trial claims are marked TODO or omitted.
-16. The final result visibly reflects the Saha Flow design system.
+16. The final result visibly reflects the İşAkış design system.

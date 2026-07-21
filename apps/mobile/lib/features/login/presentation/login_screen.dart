@@ -17,18 +17,10 @@ class LoginScreen extends ConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 const SizedBox(height: 40),
-                Icon(
-                  Icons.engineering,
-                  size: 80,
-                  color: Theme.of(context).colorScheme.primary,
-                ),
-                const SizedBox(height: 16),
-                Text(
-                  'Saha Flow',
-                  style: Theme.of(context).textTheme.headlineLarge?.copyWith(
-                        color: Theme.of(context).colorScheme.primary,
-                      ),
-                  textAlign: TextAlign.center,
+                Image.asset(
+                  'assets/images/isakis-logo.png',
+                  height: 92,
+                  fit: BoxFit.contain,
                 ),
                 const SizedBox(height: 8),
                 Text(

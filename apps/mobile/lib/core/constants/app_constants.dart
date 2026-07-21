@@ -4,10 +4,10 @@ class AppConstants {
   AppConstants._();
 
   // App
-  static const String appName = 'Saha Flow';
+  static const String appName = 'İşAkış';
   static const String appVersion = '1.0.0';
   static const String appBuildNumber = '1';
-  static const String companyName = 'Saha Flow Teknoloji';
+  static const String companyName = 'İşAkış Teknoloji';
 
   // API
   static const String baseUrlDev = 'http://10.0.2.2:8080/api';

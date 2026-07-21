@@ -1,4 +1,4 @@
-# Saha Flow
+# İşAkış
 
 Saha spor tesisleri yonetimi ve randevu sistemi SaaS platformu. Tenis kortlari, futbol sahalari, yuzme havuzlari ve diger spor tesisleri icin coklu tenant (cok musteri) mimarisi ile calisan, web ve mobil uygulamalariyla tam kapsamli bir cozum.
 
@@ -93,7 +93,7 @@ cd services/api
 ### Frontend (ayri calistirma)
 
 ```bash
-cd web
+cd apps/web
 npm install
 npm run dev
 ```
@@ -101,7 +101,7 @@ npm run dev
 ### Mobil (ayri calistirma)
 
 ```bash
-cd mobile
+cd apps/mobile
 flutter pub get
 flutter run
 ```
@@ -114,11 +114,11 @@ cd services/api
 ./gradlew test
 
 # Web testleri
-cd web
+cd apps/web
 npm test
 
 # Mobil testler
-cd mobile
+cd apps/mobile
 flutter test
 ```
 
